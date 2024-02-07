@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+        "baseUrl": "."
+    },
+    "include": ["src", "../server/app/http/controller/home/tagController.js"]
+}

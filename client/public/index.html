@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"  class="scroll-smooth" >
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;600;700;800;900&family=PT+Sans&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script>
+      // console.log(localStorage)
+
+      if(localStorage.theme === 'system'){
+
+        if ( ( window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+        
+      } else if (localStorage.theme === 'dark' ) {
+        document.documentElement.classList.add('dark')
+      } else if(localStorage.theme === 'light') {
+        document.documentElement.classList.remove('dark')
+      }
+
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      // if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      //   document.documentElement.classList.add('dark')
+      // } else {
+      //   document.documentElement.classList.remove('dark')
+      // }
+
+      // // Whenever the user explicitly chooses light mode
+      // localStorage.theme = 'light'
+
+      // // Whenever the user explicitly chooses dark mode
+      // localStorage.theme = 'dark'
+
+      // // Whenever the user explicitly chooses to respect the OS preference
+      // localStorage.removeItem('theme')
+    </script>
+    <title>Weblog</title>
+    <style>
+      /* width */
+      ::-webkit-scrollbar {
+        width: 5px;
+        scroll-behavior: smooth;
+        transition: all 1s ease-out;      
+      
+      }
+
+      ::grammar-error{
+        text-underline-offset: blue;
+      }
+      
+      :window-inactive{
+        scroll-behavior: smooth;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 10px;
+      }
+      
+       
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: rgb(164, 142, 142); 
+        border-radius: 10px;
+      }
+      
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #665b5b; 
+      }
+
+      /* ::-webkit-scrollbar-button {
+        height: 20px;
+      } */
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

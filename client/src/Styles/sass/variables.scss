@@ -1,0 +1,70 @@
+// Color Variables
+
+$green-1 : #eceff4;
+$green-2 : #6b8c8c;
+
+$text-unactive : #bcb7ba;
+$text-black : #080808;
+$text-white : #ffffff;
+
+$card-1 : #b96954;
+$card-2 : #6b8c8c;
+$card-3 : #c9854a;
+$card-4 : #8d0e08;
+
+
+//inputs varibales
+
+$input-p : 10px 12px;
+$input-b : 1px solid rgba(0 , 0 , 0 , .1);
+
+
+//buttons variables
+
+$button-p : 10px 12px 10px 12px;
+$button-back-color : #142430;
+$button-text-color : #fff;
+$button-b-r : 2px ; 
+
+
+//Colors
+
+    //background-colors
+    $footer-backcolor : #03586c;
+
+    //text-colors
+    $footer-color : #fff ;
+
+    //default-colors
+    $gray : #333;
+    $absolute-white : #fff;
+    
+
+//Sizes
+
+    $border-width : 1px ;
+    $border-style : solid ;
+
+
+//Distances And Borders
+
+    $padding-short : 10px;
+    $padding-medium : 20px;
+    $padding-long : 30px ;
+
+    $margin-short : 10px;
+    $margin-medium : 20px;
+    $margin-long : 30px ;
+
+    $border-thin : 1px solid rgba(0 , 0 , 0 , .1);
+    $border-regular : 1px solid rgba(0 , 0 , 0 , .3);
+
+// break points
+
+    $xxs : 375px;
+    $xs : 425px;
+    $sm : 640px;
+    $md : 768px;
+    $lg : 1024px;
+    $xl : 1280px;
+    $xxl : 1536px;

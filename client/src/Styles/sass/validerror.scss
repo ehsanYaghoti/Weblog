@@ -1,0 +1,39 @@
+.validErrors {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    line-height: 1.8;
+    align-self: center;
+    text-align: center;
+    // width: 80%;
+    background-color: #ff7979;
+    @include border('all' , $border-thin);
+    border-radius: 2px;
+    padding: 15px;
+    margin: 20px 0;
+    color: white;
+    .close {
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: white;
+        padding: 10px;
+    }
+    .close:hover {
+        background-color: rgba($color: #ff7979, $alpha: .1);
+        opacity: .7;
+    }
+    .close:focus {
+        color: black;
+    }
+}
+
+.closed {
+    display:  none;
+}
+
+

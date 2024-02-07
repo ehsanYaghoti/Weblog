@@ -1,0 +1,92 @@
+@import './variables.scss';
+
+a {
+    text-align: none;
+}
+
+.home-dashboard {
+    font-family: 'Vazir';
+    // display: flex;
+    direction: rtl;
+    width: 100%;
+    height: 100%;
+    // z-index: 1301;
+    // height: max-content;
+    // @import './navbar.scss';
+    .not-found {
+        width: 600px;
+        height: 150px;
+        // background-color: rgb(112, 99, 99);
+        line-height: 1.9;
+        font-size: 3rem;
+        color: aliceblue;
+        background-color: #080808;
+        display: flex;
+        direction: ltr;
+        align-items: center;
+        justify-items: center;
+        justify-content: center;
+        align-self: center;
+        justify-self: center;
+        text-align: center;
+        margin: auto;
+        // margin-top: 50px;
+    }
+    .dashboard  {
+        background-color: $green-1;
+        padding-right: 250px;
+        flex-basis: 90%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: fixed;
+        overflow-y: auto;
+        overflow-x: auto;
+        width: 100%;
+        .cards {
+            display: grid;
+            grid-template-columns: 15% 15% 15% 15% 15% 15%;
+            gap: 30px;
+            
+            justify-content: space-between;
+            // margin-top: 10px;
+            .card {
+                width : 150px;
+                display: flex;
+                flex-direction: column;
+                // flex-basis: calc(20%);
+                
+                margin: 50px 0;
+                padding: 15px;
+                height: 250px;
+                border-radius: 15px;
+                color: $text-white;
+                
+                span {
+                    margin-bottom: 20px;
+                }
+                .card-icon {
+                    align-self:flex-end;
+                    margin-top: 90px;
+                }
+            }
+            .users {
+                background-color: $card-1;
+            }
+            .active-users {
+                background-color: $card-2;
+                color: #080808;
+            }
+            .payments {
+                background-color: $card-3;
+                color: #080808;
+                
+            }
+            .viewers {
+                background-color: $card-4;
+            }
+        }
+    }
+
+}

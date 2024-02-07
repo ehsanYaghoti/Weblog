@@ -1,0 +1,46 @@
+@mixin border($side , $value) {
+    @if $side == 'all' {
+        border : $value ;
+    } 
+    @else {
+        border-#{$side} : $value ;
+    }
+}
+
+@mixin padding($side , $value) {
+    @if $side == 'all' {
+        padding : $value ;
+    } 
+    @else {
+        padding-#{$side} : $value ;
+    }
+}
+
+@mixin margin($side , $value) {
+    @if $side == 'all' {
+        margin : $value ;
+    } 
+    @else {
+        margin-#{$side} : $value ;
+    }
+}
+
+
+@mixin MediaQueryMin($point){
+    @media only screen and (min-width : $point) {
+        @content
+    }
+}
+
+
+@mixin MediaQueryMax($point){
+    @media only screen and (max-width : $point) {
+        @content
+    }
+}
+
+@mixin MediaQueryMinAndMax($point1 , $point2){
+    @media only screen and (min-width : $point1) and (max-width : $point2) {
+        @content
+    }
+}
