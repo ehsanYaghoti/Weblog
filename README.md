@@ -47,8 +47,6 @@ $ npm  start // this will run the files in docs
 
 run the script at the first level:
 
-(You need to add a JWT_SECRET in .env to connect to MongoDB)
-
 ```terminal
 // in the root level
 $ cd server
