@@ -60,7 +60,7 @@ open another terminal and run the script:
 ```terminal
 $ cd server   // go to server folder
 $ npm i       // npm install packages
-$ npm start dev // run it locally(if there is timeout conection to mongodb error save a js file in server folder)
+$ npm start  // run it locally(if there is timeout conection to mongodb error save a js file in server folder to restart with nodemon )
 ```
 # Dependencies and devDependencies
 Server-side | Client-side
