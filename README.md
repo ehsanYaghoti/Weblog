@@ -9,6 +9,7 @@ MongoDB, Expressjs, React, Nodejs
 > Weblog is a fullstack implementation in MongoDB, Expressjs, React , Nodejs.
 
 Weblog is the website  using Javascript/Node for fullstack web development.
+Weblog is the single page application with Reactjs and for styles Tailwindcss is used.
 
 ## clone or download
 ```terminal
