@@ -36,7 +36,8 @@ passport.use('local.register' , new localStrategy({
 
         const newUser = new User({
             username : req.body.username,
-            email
+            email,
+            admin : true
         })
 
 

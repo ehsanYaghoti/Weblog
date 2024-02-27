@@ -292,7 +292,7 @@ function Header(props) {
                         )
                         :  
                         (
-                        <div className='h-fit  flex-col md:flex-row items-center gap-4 md:gap-6' >
+                        <div className='h-fit flex flex-col md:flex-row items-center gap-4 md:gap-6' >
                             <a href="/auth/login">Login</a>
                             <a href="/auth/register">Register</a>
                         </div>

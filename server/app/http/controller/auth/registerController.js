@@ -26,40 +26,12 @@ class registerController extends controller {
     async register(req , res , next ){
         try {
 
-             
-
-
-
             passport.authenticate('local.register' , {
                 failureRedirect : '/auth/register',
                 successRedirect : '/auth/login',
                 successFlash : true,
-                // successReturnToOrRedirect : '/',
                 failureFlash : true,
             } )(req  , res , next)
-
-            // const token  = JWT.sign({id : req.user._id} , config.jsonwebtoken.secret_key , { expiresIn : '90d'})
-            // console.log(token)
-            // res.cookie('api_token' , 'token'  , {sameSite : false , maxAge : 1000 * 60 * 60 * 24 * 30 * 3 , httpOnly : true , signed : true})
-
-            // res.redirect('/auth/login')
-            // req.login(req.user , err => { 
-            //     if(err){console.log(err)}
-
-            // })
-
-            // return this.back(req , res)
-
-
-            // res.redirect('/auth/login')
-            // return res.redirect('/')
-            // res.redirect('/')
-            // return console.log('register completed')
-            // console.log()
-            // return res.json({
-            //     data : 'success',
-            //     response : 'res'
-            // })
 
         } catch (err) {
             throw err;
