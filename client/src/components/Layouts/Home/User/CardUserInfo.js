@@ -77,9 +77,11 @@ function CardUserInfo(props){
                     </div>
                 </div> 
                 {/* A button to follow a user or edit profile */}
+                {authenticatedUser.isAuthenticated &&
                 <div className='text-gray-600 h-fit' >
                     {
-                        userstate.user._id === authenticatedUser.user._id ?
+                        
+                        userstate.user._id === authenticatedUser?.user?._id ?
                         <button className='border border-solid border-blue-300 rounded-md px-6 py-3 text-blue-600  hover:bg-blue-400 hover:text-white font-[600]' >
                             <a href={`/user/panel/profile`}>
                                 Edit profile
@@ -96,7 +98,7 @@ function CardUserInfo(props){
                             }
                         </button>
                     }
-                </div>
+                </div>}
             </div>
             {/* user info row 2 */}
             <div className='flex flex-col gap-6 lg:flex-row  items-center justify-between w-full py-8 border-b border-solid border-gray-300' >
@@ -127,7 +129,7 @@ function CardUserInfo(props){
                         </NavLink>
                     </button> 
                     {
-                        userRolesNames.includes('article writer') || userRolesNames.includes('writer') ?
+                        userRolesNames.includes('article writer') || userRolesNames.includes('writer') || userRolesNames.includes('manager') ?
                         <button>
                             <NavLink to={`/user/dashboard/${userstate.user._id}/articles` }  activeClassName='text-cyan-600 target:text-cyan-600'>
                                 Articles

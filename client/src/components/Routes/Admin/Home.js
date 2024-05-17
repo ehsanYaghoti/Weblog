@@ -15,6 +15,8 @@ import 'src/Styles/sass/home.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUsers , faBook , faQuoteRight , faDollarSign , faFile } from "@fortawesome/free-solid-svg-icons";
+import SpinnerOnTop from 'src/components/Layouts/Home/Loadings/SpinnerOnTop';
+import isAdmin from 'src/Logics/isAdmin';
 library.add(faUsers , faBook , faQuoteRight , faDollarSign , faFile)
 
 function Home(props){
@@ -80,18 +82,13 @@ function Home(props){
 
     } , [])
     
-    
     return (
     <div className='home-dashboard  '>
         <AuthenticatedUserContext.Provider  value={dashboardData.user}  >
         <Navbar />
 
-        {
-            loading ? ('') : ('')
-        }
-        {
-            success ? ('') : ('')
-        }
+        {success && ''}
+        { loading && <SpinnerOnTop /> }
         <div className='dashboard !pr-0 lg:!pr-[250px] dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:!border-none dark:from-gray-700 dark:via-gray-900 dark:to-black dark:text-gray-50'>
             
             <AdminrPanelHeader />
@@ -163,4 +160,4 @@ function Home(props){
     )
 }
 
-export default Home;
+export default isAdmin(Home);

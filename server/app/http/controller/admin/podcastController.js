@@ -1,6 +1,7 @@
 const Controller = require('../controller');
 const Podcast = require('app/models/podcast');
 const Category = require('app/models/category');
+const Comment = require('app/models/comment');
 const Tag = require('app/models/tag');
 const mm = require('music-metadata');
 const util = require('util');
@@ -266,6 +267,7 @@ class podcastController extends Controller {
             if(! podcast){ this.error(404 , 'چنین پادکست ای یافت نشد')};
     
             await podcast.deleteOne()    
+            await Comment.deleteMany({podcast : podcast._id })
             
 
             return res.json({

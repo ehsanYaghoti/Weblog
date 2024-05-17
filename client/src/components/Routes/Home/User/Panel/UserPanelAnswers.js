@@ -16,9 +16,10 @@ import NodejsApi from 'src/Api/NodejsApi';
 // import icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle  } from '@fortawesome/free-solid-svg-icons';
+import isAuthenticated from 'src/Logics/isAuthenticated';
 
 
-function User(props){
+function UserPanelAnswers(props){
     
     const [authenticatedUser , setAuthenticatedUser ]  = useState({
         isAuthenticated : false,
@@ -171,4 +172,4 @@ function User(props){
     )
 }
 
-export default User; 
+export default isAuthenticated(UserPanelAnswers , 'panel'); 

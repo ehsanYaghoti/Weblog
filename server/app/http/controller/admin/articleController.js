@@ -1,6 +1,7 @@
 const Controller = require('../controller');
 const Article = require('app/models/article');
 const Category = require('app/models/category');
+const Comment = require('app/models/comment');
 const Tag = require('app/models/tag');
 const uniqueString = require('unique-string');
 
@@ -243,6 +244,7 @@ class articleController extends Controller {
             if(! article){ this.apiError(404 , 'چنین مقاله ای یافت نشد')};
     
             await article.deleteOne()    
+            await Comment.deleteMany({article : article._id })
             
 
             return res.json({

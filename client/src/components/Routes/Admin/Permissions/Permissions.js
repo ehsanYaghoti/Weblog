@@ -1,5 +1,5 @@
 import React , { useState , useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //import Api
 import NodejsApi from 'src/Api/NodejsApi'; 
@@ -19,9 +19,10 @@ import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 
 //import Styles
 import  Spinner  from 'react-bootstrap/Spinner';
+import isAdmin from 'src/Logics/isAdmin';
 
 function Permissions(props) {
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const [authenticatedUser , setAuthenticatedUser ] = useState({
         isAuthenticated : false,
@@ -149,7 +150,7 @@ function Permissions(props) {
             console.log(err)
 
             if(err.response.status === 403){
-                history.push('/admin')
+                navigate('/admin')
 
                 setSuccess(prevState => {
                     return {
@@ -166,7 +167,7 @@ function Permissions(props) {
             })
         })
 
-    } , [history])
+    } , [navigate])
 
     let deleteHandler = (e , id) =>{
         
@@ -246,4 +247,4 @@ function Permissions(props) {
 
 }
 
-export default Permissions;
+export default isAdmin( Permissions);

@@ -21,6 +21,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faExclamationCircle, faMicrophone } from '@fortawesome/free-solid-svg-icons';
 import { faFileLines } from '@fortawesome/free-regular-svg-icons';
 import UserPanelNavbar from 'src/components/Layouts/Home/User/UserPanelNavbar';
+import isAuthenticated from 'src/Logics/isAuthenticated';
 
 
 function UserPanelSaves(props) {
@@ -608,4 +609,4 @@ function UserPanelSaves(props) {
     )
 }
 
-export default UserPanelSaves;
+export default isAuthenticated(UserPanelSaves , 'panel');

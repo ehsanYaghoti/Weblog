@@ -1,6 +1,6 @@
 // Modules
 import React ,{  useEffect  , useState , }   from 'react';
-import { useParams , useHistory } from 'react-router-dom';
+import { useParams , useNavigate } from 'react-router-dom';
 import NodejsApi from 'src/Api/NodejsApi';
 
 // layouts
@@ -20,6 +20,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import FormUser from 'src/components/Layouts/Admin/User/FormUser';
+import isAdmin from 'src/Logics/isAdmin';
 library.add(faTimes)
 
 
@@ -48,18 +49,18 @@ function UserEdit(props) {
     // const [formData , setFormData] = useState([])
 
     let params = useParams();
-    const history = useHistory()
+    const navigate = useNavigate()
 
     useEffect(function() {
         console.log(props)
 
         if(props.location.state === undefined){
-            history.push('/admin/users')
+            navigate('/admin/users')
         } else {
             setAuthenticatedUser(props.location.state)
         }
 
-    } , [history , props])
+    } , [navigate , props])
 
     useEffect(function(){
         console.log('edit')
@@ -219,4 +220,4 @@ function UserEdit(props) {
     )
 }
 
-export default UserEdit;
+export default isAdmin( UserEdit);

@@ -1,6 +1,6 @@
 import React , { useState }  from 'react';
 import { Link } from 'react-router-dom';
-import { NavLink , useHistory } from 'react-router-dom';
+import { NavLink , useNavigate } from 'react-router-dom';
 import moment from 'jalali-moment';
 
 // import Api
@@ -20,7 +20,7 @@ function UserPanelHeader(props) {
     let userProp = props.user
     let user = props.userNavbar
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
 
     const [loading , setLoading] = useState(false)
@@ -142,7 +142,7 @@ function UserPanelHeader(props) {
                 })
             }else if(response.data.success){
                 setLoading(false)
-                history.push('/')
+                navigate('/')
             }
         })
         .catch(err => {
@@ -188,7 +188,7 @@ function UserPanelHeader(props) {
                 <div className='h-fit relative  hidden lg:flex'  >
                     <input lang='en' onChange={e => console.log(e)} onKeyDown={e => {
                         if(e.key === 'Enter'){
-                            history.push(`/search/${e.target.value}`)
+                            navigate(`/search/${e.target.value}`)
                         } 
                     
                     }}  type="text" name='search' className='pl-8 pr-4 py-2 outline-none rounded-md bg-gray-200 text-gray-700 font-["Nunito"]' placeholder='search here' style={{textAlign : 'left'}} />
@@ -263,7 +263,7 @@ function UserPanelHeader(props) {
                 <div className='h-fit w-full  flex relative border-b border-solid border-gray-700/70 dark:border-gray-200/80 pb-6 '  >
                     <input lang='en' onKeyDown={e => {
                         if(e.key === 'Enter'){
-                            history.push(`/search/${e.target.value}`)
+                            navigate(`/search/${e.target.value}`)
                         }
                     
                     }}  type="text" name='search' className='pl-8 pr-4 py-2 w-full outline-none rounded-md bg-gray-300 dark:bg-gray-600 dark:text-gray-50  text-gray-900 font-["Nunito"]' placeholder='search here' style={{textAlign : 'left'}} />

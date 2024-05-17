@@ -77,9 +77,24 @@ class userController extends Controller {
        
     }
 
+    async checkAuth(req , res , next){
+        try {
+            
+            return res.status(200).json({
+                authenticatedUser : req.user,
+                isAuthenticated : req.isAuthenticated(),
+                success : true 
+            })
+
+        } catch (err) {
+            console.log(err);
+            next();
+        }
+    }
+
     async panel(req , res , next){
         try {
-            const id = req.user.id
+            const id = req?.user?.id
             this.isMongoId(id)
 
             let query = req.query

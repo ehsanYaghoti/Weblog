@@ -1,9 +1,10 @@
 import React , { useState }   from "react";
-import { useHistory }  from 'react-router-dom'; 
+import { Link, useNavigate }  from 'react-router-dom'; 
 import Axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faEye , faEyeSlash , faBlog , faSpinner, faClose } from '@fortawesome/free-solid-svg-icons'
+import isAuthenticated from "src/Logics/isAuthenticated";
 // import NodejsApi from 'src/Api/NodejsApi'; 
 
 
@@ -11,7 +12,7 @@ import { faEye , faEyeSlash , faBlog , faSpinner, faClose } from '@fortawesome/f
 
 function RegisterComponent(props) {
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const  [ userState , setUserState ] = useState({
         username : '',
@@ -63,7 +64,7 @@ function RegisterComponent(props) {
                         messages : []
                     })
                     setLoading(false)
-                    history.push('/')
+                    navigate('/')
 
                 }
             })
@@ -79,7 +80,7 @@ function RegisterComponent(props) {
     }
 
     // const redirectHandler = () => {
-    //     history.push('/')
+    //     navigate('/')
     // }
 
     // let validationhandler = () => {
@@ -307,8 +308,8 @@ function RegisterComponent(props) {
 
                 <div className="flex flex-col w-full items-center p-4" >
                     <span>Already have account ?</span>
-                    <button type="submit" className="w-full mt-4 hover:opacity-70  text-lg drop-shadow-lg bg-white text-cyan-600 border border-solid  border-cyan-500 py-3 px-4 rounded-md self-center" >
-                        <a href="/auth/login" >login</a>
+                    <button type="button" className="w-full mt-4 hover:opacity-70  text-lg drop-shadow-lg bg-white text-cyan-600 border border-solid  border-cyan-500 py-3 px-4 rounded-md self-center" >
+                        <Link to="/auth/login" >login</Link>
                     </button>
 
                 </div>
@@ -324,4 +325,4 @@ function RegisterComponent(props) {
 }
 
 
-export default RegisterComponent;
+export default isAuthenticated(RegisterComponent , 'auth');

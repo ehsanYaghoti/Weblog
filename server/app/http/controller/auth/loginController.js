@@ -37,6 +37,7 @@ class loginController extends controller {
 
 
                 req.login(user , async err => { 
+
                     if(err){console.log(err)}
                     if(req.body.rememberme){
                         user.setRememberToken(res , 90);
@@ -44,6 +45,17 @@ class loginController extends controller {
                         // const token  = JWT.sign({id : user._id} , config.jsonwebtoken.secret_key , { expiresIn : '90d'})
                         // res.cookie('api_token' , token , {sameSite : false , maxAge : 1000 * 60 * 60 * 24 * 30 * 3 , path : '/' , httpOnly : true , signed : true})
                     }
+
+                    // if(user.email === process.env.MANAGER_EMAIL ){
+                    //     console.log(user.email)
+                    //     console.log(process.env.MANAGER_EMAIL)
+
+                    //     user.admin = true
+                    //     user.roles = [
+                    //         'manager'
+                    //     ]
+                    // }
+
                     if(user.admin){
                         const token  = JWT.sign({id : user._id} , config.jsonwebtoken.secret_key , { expiresIn : '180d'})
                         res.cookie('api_admin_token' , token , {sameSite : false , maxAge : 1000 * 60 * 60 * 24 * 30 * 6 , path : '/admin' , httpOnly : true , signed : true})

@@ -16,6 +16,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {faTimes } from "@fortawesome/free-solid-svg-icons";
+import isAdmin from 'src/Logics/isAdmin';
 
 library.add(faTimes)
 
@@ -45,7 +46,7 @@ class CategoryCreate extends React.Component {
 
     componentDidMount(){
         if(this.props.location.state === undefined){
-            this.props.history.push('/admin/tags')
+            this.props.navigate('/admin/tags')
         }
         this.setState(prevState => {
             return {
@@ -259,4 +260,4 @@ class CategoryCreate extends React.Component {
     }
 }
 
-export default CategoryCreate;
+export default isAdmin( CategoryCreate);

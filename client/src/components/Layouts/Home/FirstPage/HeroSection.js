@@ -5,9 +5,9 @@ import ImageSlider from 'src/components/Layouts/Home/FirstPage/ImageSlider';
 
 
 // images
-import L1 from './../../../../public/sunrise.jpg'
-import L2 from './../../../../public/landscape2.jpg'
-import L3 from './../../../../public/landscape.jpg'
+import L1 from './../../../../Public/sunrise.jpg'
+import L2 from './../../../../Public/landscape2.jpg'
+import L3 from './../../../../Public/landscape.jpg'
 
 
 function HeroSectoin(props) {

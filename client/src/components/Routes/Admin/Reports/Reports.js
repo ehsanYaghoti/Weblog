@@ -1,5 +1,5 @@
 import React , { useState , useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //import Api
 import NodejsApi from 'src/Api/NodejsApi'; 
@@ -19,9 +19,10 @@ import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 
 //import Styles
 import  Spinner  from 'react-bootstrap/Spinner';
+import isAdmin from 'src/Logics/isAdmin';
 
 function Reports(props) {
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const [authenticatedUser , setAuthenticatedUser ] = useState({
         isAuthenticated : false,
@@ -154,7 +155,7 @@ function Reports(props) {
             console.log(err)
 
             if(err.response.status === 403){
-                history.push('/admin')
+                navigate('/admin')
 
                 setSuccess(prevState => {
                     return {
@@ -171,7 +172,7 @@ function Reports(props) {
             })
         })
 
-    } , [history])
+    } , [navigate])
 
     let deleteHandler = (e , bb) =>{
         
@@ -255,4 +256,4 @@ function Reports(props) {
 
 }
 
-export default Reports;
+export default isAdmin( Reports);

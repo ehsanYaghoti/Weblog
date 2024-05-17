@@ -17,6 +17,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {faTimes } from "@fortawesome/free-solid-svg-icons";
+import isAdmin from 'src/Logics/isAdmin';
 
 library.add(faTimes)
 
@@ -46,7 +47,7 @@ class ReportEdit extends React.Component {
 
     componentDidMount(){
         if(this.props.location.state === undefined){
-            this.props.history.push('/admin/reports')
+            this.props.navigate('/admin/reports')
         }
         this.setState(prevState => {
             return {
@@ -221,4 +222,4 @@ class ReportEdit extends React.Component {
     }
 }
 
-export default ReportEdit;
+export default isAdmin( ReportEdit);

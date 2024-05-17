@@ -1,12 +1,13 @@
 import React , { useEffect, useState }   from "react";
-import { useHistory , useLocation }  from 'react-router-dom'; 
+import { useNavigate , useLocation, useParams }  from 'react-router-dom'; 
 import Axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBlog , faSpinner, faClose  } from '@fortawesome/free-solid-svg-icons'
+import isAuthenticated from "src/Logics/isAuthenticated";
 
 function ForgotPasswordComponent(props) {
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const  [ userState , setUserState ] = useState({
         email : '',
@@ -21,10 +22,15 @@ function ForgotPasswordComponent(props) {
     })
 
     const search = useLocation().search
-    // const searchParams = new URLSearchParams(search)
+    const prams = useParams()
 
+    // const searchParams = new URLSearchParams(search)
+    console.log(search)
     useEffect(() => {
-        
+
+
+        console.log(prams)
+
         const searchParams = new URLSearchParams(search)
 
         setUserState({
@@ -82,7 +88,7 @@ function ForgotPasswordComponent(props) {
                         messages : []
                     })
                     setLoading(false)
-                    history.push('/auth/login')
+                    navigate('/auth/login')
 
                 }
             })
@@ -187,4 +193,4 @@ function ForgotPasswordComponent(props) {
 }
 
 
-export default ForgotPasswordComponent;
+export default  isAuthenticated(ForgotPasswordComponent , 'auth');

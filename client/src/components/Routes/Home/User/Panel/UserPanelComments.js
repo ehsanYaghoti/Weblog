@@ -16,6 +16,7 @@ import NodejsApi from 'src/Api/NodejsApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle  } from '@fortawesome/free-solid-svg-icons';
 import CardComment from 'src/components/Layouts/Home/Cards/CardComment';
+import isAuthenticated from 'src/Logics/isAuthenticated';
 
 
 function UserPanelComments(props){
@@ -277,4 +278,4 @@ function UserPanelComments(props){
     )
 }
 
-export default UserPanelComments; 
+export default isAuthenticated(UserPanelComments , 'panel'); 

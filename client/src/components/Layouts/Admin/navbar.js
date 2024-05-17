@@ -22,31 +22,30 @@ function Navbar(props){
     // console.log(userState)
     
     let userRolesNames = []
-    if(userState.isAuthenticated && userState.user.roles.length !== 0 && userState.user.roles !== undefined ){
-        userState.user.roles.forEach(role => {
+    if(userState?.isAuthenticated && userState?.user?.roles.length !== 0 && userState?.user?.roles !== undefined ){
+        userState?.user?.roles.forEach(role => {
             return userRolesNames.push(role.name) 
         })
     }
 
     console.log(userRolesNames )
-
+    // return <h2>navbar</h2>
     return (
     <div className='navbar !hidden lg:!flex overflow-x-hidden dark:!border-none dark:bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black dark:text-gray-50'>
-        <NavLink to='/' exact className='nav-icon' >
+        <NavLink to='/'  className='nav-icon' >
             <div className='flex items-center w-fit text-gray-400 dark:text-gray-50 text-4xl' dir='ltr' >
                 <FontAwesomeIcon icon={faBlog} className=' '  />
                 <span className='h-fit ml-2 font-["PT_Sans"] font-semibold ' >Weblog</span>
             </div>
         </NavLink>
-        <NavLink to='/admin' exact className='nav-link ' activeClassName='active-link'><FontAwesomeIcon icon={faHome} /><span>Admin Home</span></NavLink>
+        <NavLink to='/admin'  className='nav-link ' activeClassName='active-link'><FontAwesomeIcon icon={faHome} /><span>Admin Home</span></NavLink>
         {
-            userRolesNames.includes('manager') ?
+            userRolesNames.includes('manager') &&
             <>
-            <NavLink to='/admin/users' className='dark:text-gray-50 nav-link ' activeClassName='active-link'><FontAwesomeIcon icon='users' /><span> مدیریت کاربران </span></NavLink>
-            <NavLink to='/admin/permissions' className='nav-link' activeClassName='active-link'><FontAwesomeIcon icon='users' /><span> مدیریت مجوز ها </span></NavLink>
-            <NavLink to='/admin/roles' className='nav-link' activeClassName='active-link'><FontAwesomeIcon icon='users' /><span> مدیریت نقش ها </span></NavLink>
-            </> 
-            : ''
+                <NavLink to='/admin/users' className='dark:text-gray-50 nav-link ' activeClassName='active-link'><FontAwesomeIcon icon='users' /><span> مدیریت کاربران </span></NavLink>
+                <NavLink to='/admin/permissions' className='nav-link' activeClassName='active-link'><FontAwesomeIcon icon='users' /><span> مدیریت مجوز ها </span></NavLink>
+                <NavLink to='/admin/roles' className='nav-link' activeClassName='active-link'><FontAwesomeIcon icon='users' /><span> مدیریت نقش ها </span></NavLink>
+                </> 
         }
         {
             userRolesNames.includes('article writer') || userRolesNames.includes('writer') || userRolesNames.includes('manager') ?

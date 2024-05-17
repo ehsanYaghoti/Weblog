@@ -1,5 +1,5 @@
 import React , { useState , useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //import Api
 import NodejsApi from 'src/Api/NodejsApi'; 
@@ -20,9 +20,10 @@ import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 
 //import Styles
 import  Spinner  from 'react-bootstrap/Spinner';
+import isAdmin from 'src/Logics/isAdmin';
 
 function Articles(props) {
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const [authenticatedUser , setAuthenticatedUser ] = useState({
         isAuthenticated : false,
@@ -60,9 +61,9 @@ function Articles(props) {
         
         NodejsApi.get(`/admin/articles?${queryString}`)
         .then(response => {
-            if(! response.data.success){
+            if(! response?.data?.success){
                 setLoading(false)
-                if(response.status === 403){
+                if(response?.status === 403){
                     return setSuccess(prevState => {
                         return {
                          state : response.data.success ,
@@ -87,18 +88,18 @@ function Articles(props) {
             })
 
 
-            let data = response.data.data
-            let articles = data.docs
+            let data = response?.data?.data
+            let articles = data?.docs
             setArticles(articles);
             setPagination({
-                page : data.page ,
-                hasNextPage : data.hasNextPage ,
-                hasPrevPage : data.hasPrevPage ,
-                limit : data.limit ,
-                nextPage : data.nextPage ,
-                prevPage : data.prevPage ,
-                totalDocs : data.totalDocs,
-                totalPages : data.totalPages
+                page : data?.page ,
+                hasNextPage : data?.hasNextPage ,
+                hasPrevPage : data?.hasPrevPage ,
+                limit : data?.limit ,
+                nextPage : data?.nextPage ,
+                prevPage : data?.prevPage ,
+                totalDocs : data?.totalDocs,
+                totalPages : data?.totalPages
             })
         } )
         .catch(err => console.log(err))
@@ -109,21 +110,21 @@ function Articles(props) {
         setLoading(true)
         NodejsApi.get(`/admin/articles` )
         .then(response => {
-            if(! response.data.success){
-                console.log(response.data)
+            if(! response?.data?.success){
+                // console.log(response.data)
                 setLoading(false)
-                if(response.status === 403){
+                if(response?.status === 403){
                     return setSuccess(prevState => {
                         return {
-                            state : response.data.success ,
-                            message : response.data.message
+                            state : response.data?.success ,
+                            message : response.data?.message
                         }
                     })
                 }
                 return  setSuccess(prevState => {
                    return {
-                    state : response.data.success ,
-                    message : response.data.data
+                    state : response.data?.success ,
+                    message : response.data?.data
                     }
                 })
               
@@ -139,8 +140,8 @@ function Articles(props) {
 
 
             console.log(response.data)
-            let data = response.data.data
-            let articles = data.docs
+            let data = response?.data?.data
+            let articles = data?.docs
 
             setAuthenticatedUser({
                 isAuthenticated : response.data.isAuthenticated,
@@ -149,14 +150,14 @@ function Articles(props) {
 
             setArticles(articles);
             setPagination({
-                page : data.page ,
-                hasNextPage : data.hasNextPage ,
-                hasPrevPage : data.hasPrevPage ,
-                limit : data.limit ,
-                nextPage : data.nextPage ,
-                prevPage : data.prevPage ,
-                totalDocs : data.totalDocs,
-                totalPages : data.totalPages
+                page : data?.page ,
+                hasNextPage : data?.hasNextPage ,
+                hasPrevPage : data?.hasPrevPage ,
+                limit : data?.limit ,
+                nextPage : data?.nextPage ,
+                prevPage : data?.prevPage ,
+                totalDocs : data?.totalDocs,
+                totalPages : data?.totalPages
             })
 
             setLoading(false);
@@ -165,8 +166,8 @@ function Articles(props) {
             setLoading(false)
             console.log(err)
 
-            if(err.response.status === 403){
-                history.push('/admin')
+            if(err?.response?.status === 403){
+                navigate('/admin')
 
                 setSuccess(prevState => {
                     return {
@@ -183,7 +184,7 @@ function Articles(props) {
             })
         })
 
-    } , [history])
+    } , [navigate])
 
     let deleteHandler = (e , id) =>{
         
@@ -224,13 +225,13 @@ function Articles(props) {
             }
         })
     }
-    console.log(articles)
+    // console.log(articles)
     return (
         <div className='home-dashboard'>
             <AuthenticatedUserContext.Provider  value={authenticatedUser}  >
-            <Navbar userState={authenticatedUser}  />
+            {/* <Navbar userState={authenticatedUser}  /> */}
             <div className='dashborad-body dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black'>
-                <AdminrPanelHeader user={authenticatedUser} />
+                {/* <AdminrPanelHeader user={authenticatedUser} /> */}
                 <h2 className='dashborad-body-title text-gray-50'>مدیریت مقاله ها</h2>
                 <QueryContext.Provider value={{  queries , inputHandler }}>
                     <FilterArticleRow  />
@@ -262,4 +263,4 @@ function Articles(props) {
 
 }
 
-export default Articles;
+export default isAdmin( Articles);

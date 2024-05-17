@@ -23,7 +23,7 @@ function TableAnswerRow(props){
     answer.reports.forEach(report => {
         return reportsNames.push(report.title)
     })
-    // console.log(reportsNames)
+    console.log(answer.post)
 
     // console.log(user)
     return (
@@ -31,8 +31,8 @@ function TableAnswerRow(props){
             <td>{answer.user.username }</td>
             <td>{answer.statement }</td>
             <td>
-                <a href={`http://localhost:3000/posts/${answer.post.slug}`}>
-                    {answer.post.title }
+                <a href={`http://localhost:3000/posts/${answer?.post?.slug}`}>
+                    {answer?.post?.title }
                 </a>
             </td>
             <td>{answer.answers.length }</td>

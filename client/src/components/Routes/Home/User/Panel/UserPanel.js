@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle, faClose } from '@fortawesome/free-solid-svg-icons';
 import { faUserCircle  } from '@fortawesome/free-regular-svg-icons';
 import GoTopBtn from 'src/components/Layouts/Home/General/GoTopBtn';
+import isAuthenticated from 'src/Logics/isAuthenticated';
 
 function User(props){
     
@@ -474,4 +475,4 @@ function User(props){
     )
 }
 
-export default User; 
+export default isAuthenticated(User , 'panel'); 

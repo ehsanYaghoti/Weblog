@@ -17,6 +17,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {faTimes } from "@fortawesome/free-solid-svg-icons";
+import isAdmin from 'src/Logics/isAdmin';
 library.add(faTimes)
 
 class PermissionCreate extends React.Component {
@@ -42,7 +43,7 @@ class PermissionCreate extends React.Component {
 
     componentDidMount(){
         if(this.props.location.state === undefined){
-            this.props.history.push('/admin/permissions')
+            this.props.navigate('/admin/permissions')
         }
  
         this.setState(prevState => {
@@ -172,4 +173,4 @@ class PermissionCreate extends React.Component {
     }
 }
 
-export default PermissionCreate;
+export default isAdmin( PermissionCreate);

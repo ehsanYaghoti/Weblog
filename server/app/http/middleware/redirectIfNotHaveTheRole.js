@@ -33,8 +33,12 @@ const User = require('app/models/user');
                     });
                 }
 
+            } else if(user.roles.length === 0){
+                return res.status(403).json({ 
+                    message: 'Access denied. Insufficient permissions.' ,
+                    success : false
+                });
             } else {
-
                 return res.redirect('/')
             }
     }

@@ -80,6 +80,8 @@ router.put('/tags/follow/:id' , CORS(corsOptions) , tagController.followTag)
 router.put('/tags/unfollow/:id' , CORS(corsOptions) , tagController.unFollowTag)
 
 // user routeds
+router.get('/user' , CORS(corsOptions) , userController.checkAuth )
+
 router.get('/user/dashboard/:id' , CORS(corsOptions) , userController.dashboard )
 router.get('/user/panel' , CORS(corsOptions) , userController.panel )
 router.put('/user/panel/profile/:id/update' , CORS(corsOptions) , upload.single('avatar') , convertFileToFieldUser.handle , userValidator.handle()  , userController.updateInfo )

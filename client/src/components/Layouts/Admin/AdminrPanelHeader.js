@@ -167,14 +167,14 @@ function AdminrPanelHeader(props) {
                     {/* Auth links */}
                     <div className='h-fit flex items-center font-["Ubuntu"] justify-self-end ' >
                         {
-                            userProp.isAuthenticated ? 
+                            userProp?.isAuthenticated ? 
                             ( 
-                                <Link to={`/user/dashboard/${userProp.user._id}`} className='flex items-center gap-2' >
-                                    <span className=' whitespace-nowrap hidden md:flex'  >{ userProp.user.username }</span>
+                                <Link to={`/user/dashboard/${userProp?.user?._id}`} className='flex items-center gap-2' >
+                                    <span className=' whitespace-nowrap hidden md:flex'  >{ userProp?.user?.username }</span>
                                     {
-                                        userProp.user.avatar !== null ?
+                                        userProp?.user?.avatar !== null ?
                                         <div className='h-12 w-12 ring-2 ring-green-400 overflow-hidden rounded-full my-4   hover:scale-110 transition-all ' >
-                                            <img src={`http://localhost:5000/${userProp.user.avatarpath}`} alt="avatar" className='object-cover scale-105' />
+                                            <img src={`http://localhost:5000/${userProp.user?.avatarpath}`} alt="avatar" className='object-cover scale-105' />
                                         </div>                                :
                                         <FontAwesomeIcon icon={faUser} />
                                     }
@@ -240,7 +240,7 @@ function AdminrPanelHeader(props) {
                 {/* Navigation Menu */}
                 <nav dir='rtl' className='h-fit w-full flex flex-col self-start  items-start justify-between gap-5 font-["Nunito"] overflow-y-auto '>
 
-                    <NavLink to='/admin' exact className='nav-link  ' activeClassName='active-link'>
+                    <NavLink to='/admin'  className='nav-link  ' activeClassName='active-link'>
                         <FontAwesomeIcon icon={faHome} /><span>Admin Home</span>
                     </NavLink>
                     <NavLink to='/admin/users' className='dark:text-gray-50 nav-link ' activeClassName='active-link'>

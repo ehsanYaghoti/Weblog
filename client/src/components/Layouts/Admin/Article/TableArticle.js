@@ -60,9 +60,9 @@ function TableArticle(props){
             </thead>
             <tbody className='table-body'>
                 {
-                    Articles.length === '0'  
+                    Articles?.length === '0'  
                     ? <span>There is no Information</span> 
-                    : Articles.map(article => {
+                    : Articles?.map(article => {
                         return (
                             <TableArticleRow key={article._id}  article={article} />
                         )

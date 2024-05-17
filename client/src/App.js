@@ -1,10 +1,14 @@
 // Styles
-// import 'bootstrap/dist/css/bootstrap.css'
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import 'src/Styles/fonts/font-face.css'
+
+
 import React from 'react';
 
-import { Route , BrowserRouter as Router , Switch } from 'react-router-dom';
+import { Route , BrowserRouter as Router , Routes } from 'react-router-dom';
+
+import { ToastContainer } from 'react-toastify';
 
 
 // import Authentication Routes
@@ -98,7 +102,6 @@ import Reports from 'src/components/Routes/Admin/Reports/Reports';
 import ReportCreate from 'src/components/Routes/Admin/Reports/ReportCreate';
 import ReportEdit from 'src/components/Routes/Admin/Reports/ReportEdit';
 
-
 import NotFound from 'src/components/Routes/NotFound';
 
 
@@ -106,103 +109,109 @@ import NotFound from 'src/components/Routes/NotFound';
 
 function App() {
   return (
-    <Router>
       <div className="App">
-        <Switch>
+      <Router>
+        <Routes>
+        
           {/* Home Routes */}
-          <Route path='/' exact  component={LandingPage} />
+          <Route path='/' exact  Component={LandingPage} />
 
-          <Route path='/articles' exact  component={HomeArticles} />
-          <Route path='/articles/:slug'  component={HomeArticle} />
+          <Route path='/articles'  Component={HomeArticles} />
+          <Route path='/articles/:slug'  Component={HomeArticle} />
 
-          <Route path='/podcasts' exact  component={HomePodcasts} />
-          <Route path='/podcasts/:slug'  component={HomePodcast} />
+          <Route path='/podcasts' exact  Component={HomePodcasts} />
+          <Route path='/podcasts/:slug'  Component={HomePodcast} />
 
-          <Route path='/posts' exact  component={HomePosts} />
-          <Route path='/posts/:slug'  component={HomePost} />
+          <Route path='/posts' exact  Component={HomePosts} />
+          <Route path='/posts/:slug'  Component={HomePost} />
 
-          <Route path='/tags' exact  component={HomeTags} />
-          <Route path='/tag/:slug' exact  component={HomeTag} />
+          <Route path='/tags' exact  Component={HomeTags} />
+          <Route path='/tag/:slug' exact  Component={HomeTag} />
 
-          <Route path='/user/dashboard/:id' exact component={UserDashboard} />
-          <Route path='/user/dashboard/:id/articles' component={UserDashboardArticles} />
-          <Route path='/user/dashboard/:id/posts' component={UserDashboardPosts} />
-          <Route path='/user/dashboard/:id/followed-tags' component={UserDashboardTags} />
+          <Route path='/user/dashboard/:id' exact Component={UserDashboard} />
+          <Route path='/user/dashboard/:id/articles' Component={UserDashboardArticles} />
+          <Route path='/user/dashboard/:id/posts' Component={UserDashboardPosts} />
+          <Route path='/user/dashboard/:id/followed-tags' Component={UserDashboardTags} />
 
-          <Route path='/user/panel' exact component={UserPanel} />
-          <Route path='/user/panel/profile'  component={UserPanelProfile} />
-          <Route path='/user/panel/articles'  component={UserPanelArticles} />
-          <Route path='/user/panel/podcasts'  component={UserPanelPodcasts} />
-          <Route path='/user/panel/posts'  component={UserPanelPosts} />
-          <Route path='/user/panel/answers'  component={UserPanelAnswers} />
-          <Route path='/user/panel/comments'  component={UserPanelComments} />
-          <Route path='/user/panel/saves'  component={UserPanelSaves} />
-          <Route path='/user/panel/likes'  component={UserPanelLikes} />
-          <Route path='/user/panel/followed'  component={UserPanelFollowing} />
+          <Route path='/user/panel' exact Component={UserPanel} />
+          <Route path='/user/panel/profile'  Component={UserPanelProfile} />
+          <Route path='/user/panel/articles'  Component={UserPanelArticles} />
+          <Route path='/user/panel/podcasts'  Component={UserPanelPodcasts} />
+          <Route path='/user/panel/posts'  Component={UserPanelPosts} />
+          <Route path='/user/panel/answers'  Component={UserPanelAnswers} />
+          <Route path='/user/panel/comments'  Component={UserPanelComments} />
+          <Route path='/user/panel/saves'  Component={UserPanelSaves} />
+          <Route path='/user/panel/likes'  Component={UserPanelLikes} />
+          <Route path='/user/panel/followed'  Component={UserPanelFollowing} />
 
-
-          <Route path='/search/:search' exact  component={Search} />
+          {/* search Route */}
+          <Route path='/search/:search' exact  Component={Search} />
 
           
 
           {/* Authentication Routes */}
-          <Route path='/auth/register' exact  component={Register} />
-          <Route path='/auth/login' exact  component={Login} />
-          <Route path='/auth/forgotPassword' exact  component={ForgotPassword} />
-          <Route path='/auth/password/reset'   component={ResetPassword} />
+          <Route path='/auth/register' exact  Component={Register} />
+          <Route path='/auth/login' exact  Component={Login} />
+          <Route path='/auth/forgotPassword' exact  Component={ForgotPassword} />
+          <Route path='/auth/password/reset'   Component={ResetPassword} />
 
 
           {/* Admin Routes */}
-          <Route path='/admin' exact  component={Home} />
+          <Route path='/admin' exact  Component={Home} />
 
-          <Route path='/admin/users' exact component={Users} />
-          <Route path='/admin/users/create' component={UserCreate} />
-          <Route path='/admin/users/edit/:id' component={UserEdit}  />
+          <Route path='/admin/users' exact Component={Users} />
+          <Route path='/admin/users/create' Component={UserCreate} />
+          <Route path='/admin/users/edit/:id' Component={UserEdit}  />
 
-          <Route path='/admin/categories' exact component={Categories} />
-          <Route path='/admin/categories/create' component={CategoryCreate} />
-          <Route path='/admin/categories/edit/:id' component={CategoryEdit}  />
+          <Route path='/admin/categories' exact Component={Categories} />
+          <Route path='/admin/categories/create' Component={CategoryCreate} />
+          <Route path='/admin/categories/edit/:id' Component={CategoryEdit}  />
 
-          <Route path='/admin/tags' exact component={Tags} />
-          <Route path='/admin/tags/create' component={TagCreate} />
-          <Route path='/admin/tags/edit/:id' component={TagEdit}  />
+          <Route path='/admin/tags' exact Component={Tags} />
+          <Route path='/admin/tags/create' Component={TagCreate} />
+          <Route path='/admin/tags/edit/:id' Component={TagEdit}  />
 
-          <Route path='/admin/reports' exact component={Reports} />
-          <Route path='/admin/reports/create' component={ReportCreate} />
-          <Route path='/admin/report/edit/:id' component={ReportEdit}  />
+          <Route path='/admin/reports' exact Component={Reports} />
+          <Route path='/admin/reports/create' Component={ReportCreate} />
+          <Route path='/admin/report/edit/:id' Component={ReportEdit}  />
 
-          <Route path='/admin/posts' exact component={Posts} />
-          <Route path='/admin/posts/create'  component={PostCreate} />
-          <Route path='/admin/posts/edit/:id'  component={PostEdit} />
+          <Route path='/admin/posts' exact Component={Posts} />
+          <Route path='/admin/posts/create'  Component={PostCreate} />
+          <Route path='/admin/posts/edit/:id'  Component={PostEdit} />
 
-          <Route path='/admin/articles' exact component={Articles} />
-          <Route path='/admin/articles/create'  component={ArticleCreate} />
-          <Route path='/admin/articles/edit/:id'  component={ArticleEdit} />
+          <Route path='/admin/articles' exact Component={Articles} />
+          <Route path='/admin/articles/create'  Component={ArticleCreate} />
+          <Route path='/admin/articles/edit/:id'  Component={ArticleEdit} />
           
-          <Route path='/admin/podcasts' exact component={Podcasts} />
-          <Route path='/admin/podcasts/create'  component={PodcastCreate} />
-          <Route path='/admin/podcasts/edit/:id'  component={PodcastEdit} />
+          <Route path='/admin/podcasts' exact Component={Podcasts} />
+          <Route path='/admin/podcasts/create'  Component={PodcastCreate} />
+          <Route path='/admin/podcasts/edit/:id'  Component={PodcastEdit} />
 
-          <Route path='/admin/permissions' exact component={Permissions} />
-          <Route path='/admin/permissions/create'  component={PermissionCreate} />
-          <Route path='/admin/permissions/edit/:id'  component={PermissionEdit} />
+          <Route path='/admin/permissions' exact Component={Permissions} />
+          <Route path='/admin/permissions/create'  Component={PermissionCreate} />
+          <Route path='/admin/permissions/edit/:id'  Component={PermissionEdit} />
 
-          <Route path='/admin/roles' exact component={Roles} />
-          <Route path='/admin/roles/create'  component={RoleCreate} />
-          <Route path='/admin/roles/edit/:id'  component={RoleEdit} />
+          <Route path='/admin/roles' exact Component={Roles} />
+          <Route path='/admin/roles/create'  Component={RoleCreate} />
+          <Route path='/admin/roles/edit/:id'  Component={RoleEdit} />
 
-          <Route path='/admin/comments' exact component={Comments} />
-          <Route path='/admin/answers' exact component={Answers} />
-          <Route path='/admin/likes' exact component={Likes} />
-          <Route path='/admin/saves' exact component={Saves} />
-
-
+          <Route path='/admin/comments' exact Component={Comments} />
+          <Route path='/admin/answers' exact Component={Answers} />
+          <Route path='/admin/likes' exact Component={Likes} />
+          <Route path='/admin/saves' exact Component={Saves} />
 
 
-          <Route path='' component={NotFound}/>
-        </Switch>
+
+
+          <Route path='' element={<NotFound />}/>
+        </Routes>
+
+        </Router>
+        
+        <ToastContainer style={{height : 'fit-content'}} />
+        
       </div>
-    </Router>
+
   );
 }
 

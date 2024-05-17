@@ -16,6 +16,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {faTimes } from "@fortawesome/free-solid-svg-icons";
+import isAdmin from 'src/Logics/isAdmin';
 library.add(faTimes)
 
 
@@ -40,7 +41,7 @@ class createUser extends React.Component {
 
     componentDidMount(){
         if(this.props.location.state === undefined){
-            this.props.history.push('/admin/users')
+            this.props.navigate('/admin/users')
         }
  
         this.setState(prevState => {
@@ -189,4 +190,4 @@ class createUser extends React.Component {
     }
 }
 
-export default createUser;
+export default isAdmin( createUser);

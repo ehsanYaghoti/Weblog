@@ -21,10 +21,11 @@ import NodejsApi from 'src/Api/NodejsApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faExclamationCircle, faMicrophone , faCommentAlt } from '@fortawesome/free-solid-svg-icons';
 import { faFileLines } from '@fortawesome/free-regular-svg-icons';
+import isAuthenticated from 'src/Logics/isAuthenticated';
 
 
 
-function UserPanelSaves(props) {
+function UserPanelLikes(props) {
 
     const [userstate , setUserState ]  = useState({
         isAuthenticated : false,
@@ -642,4 +643,4 @@ function UserPanelSaves(props) {
     )
 }
 
-export default UserPanelSaves;
+export default isAuthenticated(UserPanelLikes , 'panel');

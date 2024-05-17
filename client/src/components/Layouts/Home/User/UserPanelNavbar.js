@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink , useHistory } from 'react-router-dom';
+import { NavLink , useNavigate } from 'react-router-dom';
 import moment from 'jalali-moment';
 
 // import icons
@@ -15,12 +15,14 @@ function UserPanelNavbar(props) {
     
     //props
     let user = props.user
-    const history = useHistory()
+    const navigate = useNavigate()
 
     let userRolesNames = []
     if(user.roles.length !== 0 && user.roles !== undefined ){
         user.roles.forEach(role => {
             return userRolesNames.push(role.name) 
+            // return userRolesNames(role.name) 
+
         })
     }
 
@@ -49,7 +51,7 @@ function UserPanelNavbar(props) {
                 })
             }else if(response.data.success){
                 setLoading(false)
-                history.push('/')
+                navigate('/')
             }
         })
         .catch(err => {

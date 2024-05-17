@@ -1,6 +1,6 @@
 //import Modules
 import React , { useState , useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //import Api
 import NodejsApi from 'src/Api/NodejsApi'; 
@@ -20,9 +20,10 @@ import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 
 //import Styles
 import  Spinner  from 'react-bootstrap/Spinner';
+import isAdmin from 'src/Logics/isAdmin';
 
 function Comments(props) {
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const [authenticatedUser , setAuthenticatedUser ] = useState({
         isAuthenticated : false,
@@ -150,7 +151,7 @@ function Comments(props) {
             console.log(err)
 
             if(err.response.status === 403){
-                history.push('/admin')
+                navigate('/admin')
 
                 setSuccess(prevState => {
                     return {
@@ -167,7 +168,7 @@ function Comments(props) {
             })
         })
 
-    } , [history])
+    } , [navigate])
 
     let deleteHandler = (e , id) =>{
         
@@ -228,7 +229,7 @@ function Comments(props) {
             <Navbar userState={authenticatedUser}  />
             <div className='dashborad-body dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black'>
                 <AdminrPanelHeader user={authenticatedUser} />
-                <h2 className='dashborad-body-title text-gray-50'>مدیریت محصولات</h2>
+                <h2 className='dashborad-body-title text-gray-50'>مدیریت کامنت ها</h2>
                 <QueryContext.Provider value={{  queries , inputHandler }}>
                     <FilterCommentRow  />
                 {
@@ -259,4 +260,4 @@ function Comments(props) {
 
 }
 
-export default Comments;
+export default isAdmin(Comments);

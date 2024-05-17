@@ -1,14 +1,15 @@
 import React , {useState , useEffect}   from "react";
-import { useHistory , useLocation }  from 'react-router-dom'; 
+import { useNavigate , useLocation }  from 'react-router-dom'; 
 import Axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye , faEyeSlash , faBlog , faSpinner, faClose } from '@fortawesome/free-solid-svg-icons'
+import isAuthenticated from "src/Logics/isAuthenticated";
 
 
 
 function ResetPasswordComponent(props) {
 
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const  [ userState , setUserState ] = useState({
         email : '',
@@ -156,7 +157,7 @@ function ResetPasswordComponent(props) {
                     }
                     setTimeout(() => {
                         setLoading(false)
-                        history.push('/auth/login')    
+                        navigate('/auth/login')    
                     }, 5000);
 
                 }
@@ -309,4 +310,4 @@ function ResetPasswordComponent(props) {
 }
 
 
-export default ResetPasswordComponent;
+export default isAuthenticated(ResetPasswordComponent , 'auth');

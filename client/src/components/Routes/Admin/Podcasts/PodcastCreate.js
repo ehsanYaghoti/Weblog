@@ -19,6 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {faTimes } from "@fortawesome/free-solid-svg-icons";
 import GoTopBtn from 'src/components/Layouts/Home/General/GoTopBtn';
+import isAdmin from 'src/Logics/isAdmin';
 
 library.add(faTimes)
 
@@ -66,7 +67,7 @@ class PodcastCreate extends React.Component {
 
     componentDidMount(){
         if(this.props.location.state === undefined){
-            this.props.history.push('/admin/podcasts')
+            this.props.navigate('/admin/podcasts')
         }
 
         this.setState(prevState => {
@@ -445,4 +446,4 @@ class PodcastCreate extends React.Component {
     }
 }
 
-export default PodcastCreate;
+export default isAdmin( PodcastCreate);

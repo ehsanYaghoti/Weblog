@@ -1,5 +1,5 @@
 import React , { useState , useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 //import Api
 import NodejsApi from 'src/Api/NodejsApi'; 
@@ -20,9 +20,10 @@ import Table from 'src/components/Layouts/Admin/User/Table';
 //import Styles
 import  Spinner  from 'react-bootstrap/Spinner';
 import GoTopBtn from 'src/components/Layouts/Home/General/GoTopBtn';
+import isAdmin from 'src/Logics/isAdmin';
 
 function Users(props) {
-    const history = useHistory()
+    const navigate = useNavigate()
 
 
     const [authenticatedUser , setAuthenticatedUser ] = useState({
@@ -163,7 +164,7 @@ function Users(props) {
             console.log(err)
 
             if(err.response.status === 403){
-                history.push('/admin')
+                navigate('/admin')
 
                 setSuccess(prevState => {
                     return {
@@ -180,7 +181,7 @@ function Users(props) {
             })
         })
 
-    } , [history])
+    } , [navigate])
 
     let deleteHandler = (e , bb) =>{
         setLoading(true)
@@ -413,4 +414,4 @@ function Users(props) {
 
 }
 
-export default Users;
+export default isAdmin( Users);

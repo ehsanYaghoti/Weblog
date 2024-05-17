@@ -1,6 +1,7 @@
 const Controller = require('../controller');
 const Post = require('app/models/post');
 const Category = require('app/models/category');
+const Answer = require('app/models/answer');
 const Tag = require('app/models/tag');
 const uniqueString = require('unique-string');
 
@@ -186,7 +187,7 @@ class postController extends Controller {
             if(! post){ this.error(404 , 'چنین محصول ای یافت نشد')};
     
             await post.deleteOne()    
-            
+            await Answer.deleteMany({post : post._id})        
 
             return res.json({
                 data : 'deleted',

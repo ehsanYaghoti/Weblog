@@ -21,6 +21,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {faTimes } from "@fortawesome/free-solid-svg-icons";
 import GoTopBtn from 'src/components/Layouts/Home/General/GoTopBtn';
+import isAdmin from 'src/Logics/isAdmin';
 
 
 library.add(faTimes)
@@ -66,7 +67,7 @@ class ArticleCreate extends React.Component {
     componentDidMount(){
 
         if(this.props.location.state === undefined){
-            this.props.history.push('/admin/articles')
+            this.props.navigate('/admin/articles')
         }
         this.setState(prevState => {
             return {
@@ -418,4 +419,4 @@ class ArticleCreate extends React.Component {
     }
 }
 
-export default ArticleCreate;
+export default isAdmin( ArticleCreate);

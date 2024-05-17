@@ -1,5 +1,5 @@
 import React , { useState }   from "react";
-import { useHistory , Link }  from 'react-router-dom'; 
+import { useNavigate , Link }  from 'react-router-dom'; 
 
 // importing Api
 // import NodejsApi from 'src/Api/NodejsApi'; 
@@ -10,13 +10,15 @@ import Axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faEye , faEyeSlash , faBlog , faSpinner, faClose  } from '@fortawesome/free-solid-svg-icons'
+import isAuthenticated from "src/Logics/isAuthenticated";
 
 
 
 
-function LoginComponent(props) {
+function LoginComponent({isAuthenticated}) {
 
-    const history = useHistory()
+    const navigate = useNavigate()
+    // console.log(isAuthenticated)
 
     const  [ userState , setUserState ] = useState({
         email : '',
@@ -81,7 +83,7 @@ function LoginComponent(props) {
                         })
                     }
                     setLoading(false)
-                    history.push('/')
+                    navigate('/')
 
                 }
             })
@@ -277,7 +279,7 @@ function LoginComponent(props) {
                 <div className="flex flex-col w-full items-center p-4" >
                     <span>Does not have account ?</span>
                     <button type="submit" className="w-full mt-4 hover:opacity-70  text-lg drop-shadow-lg bg-white text-cyan-600 border border-solid  border-cyan-500 py-3 px-4 rounded-md self-center" >
-                        <a href="auth/register" >sign up</a>
+                        <Link to="/auth/register" >sign up</Link>
                     </button>
 
                 </div>
@@ -291,4 +293,4 @@ function LoginComponent(props) {
 }
 
 
-export default LoginComponent;
+export default isAuthenticated(LoginComponent , 'auth' ) ;

@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle, faClose, faW } from '@fortawesome/free-solid-svg-icons';
 import { faUserCircle  } from '@fortawesome/free-regular-svg-icons';
 import { faGithub, faInstagram, faLinkedin, faTelegram, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import isAuthenticated from 'src/Logics/isAuthenticated';
 
 function UserPanelProfile(props){
     
@@ -491,4 +492,4 @@ function UserPanelProfile(props){
     )
 }
 
-export default UserPanelProfile; 
+export default isAuthenticated(UserPanelProfile , 'panel'); 
