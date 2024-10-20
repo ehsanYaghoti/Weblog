@@ -39,6 +39,7 @@ passport.use('local.login' , new localStrategy({
         //     // console.log(userRolesName.includes(role) )
         //     return  user.roles.includes(role) 
         // } ))
+        
         if(user.email === process.env.MANAGER_EMAIL  ){
 
             console.log('manager')

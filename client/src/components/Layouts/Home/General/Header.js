@@ -99,6 +99,8 @@ function Header(props) {
         }
     }
 
+    window.addEventListener('load' , e => themeHandler(e , 'system'))
+
     let openHiddenMenuHandler = (e) => {
         const hiddenMenu = document.getElementById("hiddenMenu"),
         // openButten = document.getElementById("openButten"),

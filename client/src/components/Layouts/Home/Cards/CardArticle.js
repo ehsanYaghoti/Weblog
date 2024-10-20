@@ -22,7 +22,7 @@ function CardArticle(props) {
     
     return (
         // CardArticle
-        <div  key={article._id} className={`flex flex-col items-start gap-2 justify-center bg-gray-50 ltr:ml-3 rtl:mr-3  rounded-md w-full md:w-[400px] lg:w-full  h-fit p-4 dark:bg-slate-600/80 dark:text-white  ${ article.language === 'fa' ? 'font-["Vazir"]' : 'font-["Nunito"]'  } shadow-md shadow-slate-500/90 `} >
+        <div  key={article._id} className={`flex flex-col items-start gap-2 justify-center bg-white ltr:ml-3 rtl:mr-3  rounded-md w-full md:w-[400px] lg:w-full  h-fit p-4 dark:bg-slate-600/80 dark:text-white  ${ article.language === 'fa' ? 'font-["Vazir"]' : 'font-["Nunito"]'  } shadow-md shadow-slate-500/90 `} >
             <a href={`/articles/${article.slug}`} className='flex items-center justify-center w-full' >
                 <img src={`http://localhost:5000/${article.imagepath}`} alt={`${article.title}`} className='w-fit h-64 bg-white object-cover self-center  rounded-md shadow-sm hover:scale-105 transition-all' />
             </a>                                                    
@@ -47,7 +47,7 @@ function CardArticle(props) {
                     }
                     <span className='dark:text-gray-50 hover:text-opacity-80' >{article.author.username}</span>
                 </a>
-                <a href={`/articles?category=${article.categories[0].slug}`} className='flex items-center gap-2 text-gray-50 hover:text-opacity-80' >
+                <a href={`/articles?category=${article.categories[0].slug}`} className='flex items-center gap-2 text-gray-800 dark:text-gray-50 hover:text-opacity-80' >
                     <FontAwesomeIcon icon={faFolderClosed} />
                     <span className='h-fit font-[400]' >{article.categories[0].name}</span>
                 </a>

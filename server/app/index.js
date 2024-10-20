@@ -6,11 +6,9 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv').config()
 const helmet = require('helmet');
 const cors = require('cors'); 
 const config = require('../config')
-const helper = require('./helper')
 
 // Middlewares
 const rememberMiddleware = require('app/http/middleware/loginMiddleware')
@@ -76,21 +74,12 @@ module.exports = class Application {
         app.use(passport.session());
         app.use(rememberMiddleware.handle)
 
-        //Helpers
-        // app.use((req , res , next)=>{
-        //     app.locals = new helper(req , res).getObject();
-        //     next();
-        // })
-
-
-
     }
 
     setupRoutes(){
 
         //Routes Midllewares
         app.use(require('./routes/api'))
-        // app.use(require('./routes/web'))
 
     }
 

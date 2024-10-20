@@ -54,7 +54,7 @@ router.post('/login'  , CORS(corsOptions) , loginValidator.handle() , loginContr
 
 // register routes
 router.options('/register' , CORS(corsOptions))
-router.get('/register' ,  CORS(corsOptions) , redirectIfAuthenticated.handle ,  authController.showRegisterForm);
+router.get('/register-email' ,  CORS(corsOptions) , redirectIfAuthenticated.handle ,  authController.showRegisterForm);
 
 router.options('/register' , CORS(corsOptions))
 router.post('/register' , CORS(corsOptions)  , registerValidator.handle() , registerController.registerProcess);

@@ -34,6 +34,7 @@ class registerController extends controller {
             } )(req  , res , next)
 
         } catch (err) {
+            console.log(err)
             throw err;
         }
 

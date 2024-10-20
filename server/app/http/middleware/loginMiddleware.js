@@ -34,7 +34,7 @@ class RememberLogin extends middleware {
             // console.log(user)
 
             if(user){
-                req.login(user , err=> {
+                req.login(user , (err)=> {
                     if(err){next(err)};
                     console.log('cookie is working')
                     next();
@@ -53,13 +53,14 @@ class RememberLogin extends middleware {
             next(err)
         })
     }
+
     findUserApi( apitoken , req , res  , next){
         apiAuthJWT.handle(req , res , next)
         User.findOne({apitoken : apitoken})
         .then(user => {
             console.log(user)
             if(user){
-                req.login(user , err=> {
+                req.login(user , (err)=> {
                     if(err){next(err)};
                     console.log('cookie is working')
                     next();
@@ -86,7 +87,7 @@ class RememberLogin extends middleware {
         .then(user => {
             // console.log(user)
             if(user){
-                req.login(user , err=> {
+                req.login(user , (err) => {
                     if(err){next(err)};
                     console.log('cookie is working')
                     next();

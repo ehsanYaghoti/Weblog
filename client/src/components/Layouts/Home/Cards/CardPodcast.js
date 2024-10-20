@@ -21,7 +21,7 @@ function CardPodcast(props) {
 
     return (
         // CardPodcast
-        <div key={podcast._id} className='flex flex-col md:flex-row  items-center   rounded-lg w-full h-fit md:w-[500px] lg:max-w-[600px] xl:max-w-[750px] lg:w-full md:h-[200px]    shadow-md shadow-slate-500/90 font-["Vazir"] bg-neutral-200 dark:bg-slate-600/80  dark:text-white ' >
+        <div key={podcast._id} className='flex flex-col md:flex-row  items-center   rounded-lg w-full h-fit md:w-[500px] lg:max-w-[600px] xl:max-w-[750px] lg:w-full md:h-[200px]    shadow-md shadow-slate-500/90 font-["Vazir"] bg-white dark:bg-slate-600/80  dark:text-white ' >
             
             {/* Card image */}
             <a href={`/podcasts/${podcast.slug}`} className='h-full' >
@@ -110,7 +110,7 @@ function CardPodcast(props) {
                 </div> */}
 
                 <div className='h-fit w-full flex justify-end px-6 py-2 border-t border-solid border-gray-300 text-right' >
-                    <a href={`/podcasts/${podcast.slug}`} className='h-fit text-lg flex items-center gap-2 text-blue-200  dark:hover:text-blue-400 ' >
+                    <a href={`/podcasts/${podcast.slug}`} className='h-fit text-lg flex items-center gap-2 text-blue-500 dark:text-blue-200  dark:hover:text-blue-400 ' >
                         <span className='font-[500] text-lg h-fit' >listen to podcast</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
