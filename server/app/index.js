@@ -18,8 +18,8 @@ const activeationMiddleware = require('app/http/middleware/activeationMiddleware
 
 module.exports = class Application {
     constructor() {
-        this.setupExpress();
         this.setupMongoose();
+        this.setupExpress();
         this.setupConfig();
         this.setupRoutes();
     }
@@ -37,6 +37,13 @@ module.exports = class Application {
     async setupMongoose(){
 
         await mongoose.connect(process.env.DATABASE_URI);
+
+        // mongoose.connect(process.env.DATABASE_URI).then(() => {
+        //     console.log('connected Mongodb')
+        // }).catch(e => {
+        //     console.log(e)
+        // })
+
     
     }
 
