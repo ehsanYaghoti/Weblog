@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors'); 
 const config = require('../config')
+const { MongoClient , ServerApiVersion } = require('mongodb');
 
 // Middlewares
 const rememberMiddleware = require('app/http/middleware/loginMiddleware')
