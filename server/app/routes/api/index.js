@@ -34,8 +34,8 @@ router.use('/auth' , CORS(corsOptions) , authRouter )
 
 
 // Admin Routes
-router.use('/admin'  , CORS(corsOptions) , redirectIfNotAdmin.handle , apiAuthJWT.handle , apiAuthAdminJWT.handle  , adminRouter )
-
+router.use('/admin'  , CORS(corsOptions) , redirectIfNotAdmin.handle  , apiAuthAdminJWT.handle  , adminRouter )
+// , apiAuthJWT.handle
 
 // Home routes
 router.use('/' , CORS(corsOptions) , homeRouter )

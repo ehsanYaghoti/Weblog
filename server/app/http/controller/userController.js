@@ -79,9 +79,13 @@ class userController extends Controller {
 
     async checkAuth(req , res , next){
         try {
+
+            const user = await User.findById(req.user._id).populate('roles')
+
+
             
             return res.status(200).json({
-                authenticatedUser : req.user,
+                authenticatedUser : user,
                 isAuthenticated : req.isAuthenticated(),
                 success : true 
             })

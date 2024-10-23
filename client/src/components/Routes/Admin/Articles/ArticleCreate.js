@@ -22,6 +22,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {faTimes } from "@fortawesome/free-solid-svg-icons";
 import GoTopBtn from 'src/components/Layouts/Home/General/GoTopBtn';
 import isAdmin from 'src/Logics/isAdmin';
+import { toast } from 'react-toastify';
 
 
 library.add(faTimes)
@@ -66,13 +67,14 @@ class ArticleCreate extends React.Component {
 
     componentDidMount(){
 
-        if(this.props.location.state === undefined){
-            this.props.navigate('/admin/articles')
-        }
         this.setState(prevState => {
             return {
                 ...prevState,
-                authenticatedUser : this.props.location.state
+                authenticatedUser : {
+                    isAuthenticated : true,
+                    user : this.props.user
+                }
+
             }
         })
 
@@ -80,9 +82,9 @@ class ArticleCreate extends React.Component {
             return {
                 ...prevState,
                 loading : true,
-                
             }
         })
+
         NodejsApi.get(`/admin/category`)
         .then(response => {
             console.log(response.data)
@@ -217,6 +219,7 @@ class ArticleCreate extends React.Component {
                             }
                         })
                     } else if(response.data.success){
+                        toast.success('اطلاعات با موفقیت ذخیره شد')
                         console.log('result = true')
                          this.setState((prevState) => {
                             return{
@@ -403,7 +406,7 @@ class ArticleCreate extends React.Component {
                                 </>                                
                                 :
                                 this.state.result 
-                                ?
+                                ? 
                                 <>
                                     <span className='success-true-messaeg' >اطلاعات با موفقیت ذخیره شد</span>
                                     <FormArticle editMode={false} imagePreviewUrl={this.state.imageInput.previewUrl} categories={this.state.categories} tags={this.state.tags}statementHandler={statementHandler} imageHandler={imageHandler} article={this.state.article} inputHandler={inputHandler} radioInputHandler={radioInputHandler} categorySelectHandler={categorySelectHandler} tagSelectHandler={tagSelectHandler} formHandler={formHandler}  />

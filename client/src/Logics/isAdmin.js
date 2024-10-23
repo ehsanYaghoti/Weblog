@@ -7,8 +7,11 @@ import SpinnerOnTop from 'src/components/Layouts/Home/Loadings/SpinnerOnTop';
 export default function isAdmin(Component, page) {
     return (props) => {
 
+        console.log(props)
         const [isAdmin, setIsAdmin] = useState(false)
         const [loading, setLoading] = useState(true)
+        const [user , setUser] = useState({})
+
         const navigate = useNavigate()
 
         useEffect(() => {
@@ -19,6 +22,7 @@ export default function isAdmin(Component, page) {
                 const res = await NodejsApi.get('/user')
 
                 const userStatus = res?.data?.authenticatedUser?.admin
+                setUser(res?.data?.authenticatedUser)
 
                 if (userStatus) {
                     setLoading(false)
@@ -30,7 +34,7 @@ export default function isAdmin(Component, page) {
 
                     setIsAdmin(false)
                     setLoading(false)
-                    toast.info(`You are not access to this route`)
+                    toast.info(`You can not access to this route`)
                     navigate('/')
 
                 }
@@ -52,7 +56,11 @@ export default function isAdmin(Component, page) {
 
         if (isAdmin) {
             console.log(isAdmin)
-            return <Component isAdmin={false} {...props} />
+            return <Component isAdmin={true} user={user} {...props} />
+        } else if(! isAdmin){
+            toast.info(`You can not access to this route`)
+
+            return navigate('/')
         }
 
 

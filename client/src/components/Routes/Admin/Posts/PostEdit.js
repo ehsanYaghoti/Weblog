@@ -55,13 +55,14 @@ class PostEdit extends React.Component {
     }
 
     componentDidMount(){
-        if(this.props.location.state === undefined){
-            this.props.navigate('/admin/posts')
-        }
         this.setState(prevState => {
             return {
                 ...prevState,
-                authenticatedUser : this.props.location.state
+                authenticatedUser : {
+                    isAuthenticated : true,
+                    user : this.props.user
+                }
+
             }
         })
 

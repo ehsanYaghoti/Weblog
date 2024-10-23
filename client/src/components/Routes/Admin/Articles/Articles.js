@@ -225,16 +225,18 @@ function Articles(props) {
             }
         })
     }
+
+    console.log(AuthenticatedUserContext)
     // console.log(articles)
     return (
         <div className='home-dashboard'>
             <AuthenticatedUserContext.Provider  value={authenticatedUser}  >
-            {/* <Navbar userState={authenticatedUser}  /> */}
+            <Navbar userState={authenticatedUser}  />
             <div className='dashborad-body dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black'>
-                {/* <AdminrPanelHeader user={authenticatedUser} /> */}
+                <AdminrPanelHeader user={authenticatedUser} />
                 <h2 className='dashborad-body-title text-gray-50'>مدیریت مقاله ها</h2>
                 <QueryContext.Provider value={{  queries , inputHandler }}>
-                    <FilterArticleRow  />
+                    <FilterArticleRow user={authenticatedUser}  />
                 {
                     loading 
                     ? <div  style={{ textAlign : 'center'}}>                       

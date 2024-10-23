@@ -3,7 +3,7 @@ import axios from 'axios';
 
 let instance = axios.create({
     baseURL : 'http://localhost:5000',
-    timeout : 10000,
+    timeout : 20000,
     timeoutErrorMessage : '500 Problem from server(time out error)'    ,
     withCredentials : true,
     // headers: {'Access-Control-Allow-Origin': '*'},

@@ -52,13 +52,8 @@ function UserEdit(props) {
     const navigate = useNavigate()
 
     useEffect(function() {
-        console.log(props)
 
-        if(props.location.state === undefined){
-            navigate('/admin/users')
-        } else {
-            setAuthenticatedUser(props.location.state)
-        }
+        setAuthenticatedUser(props.user)
 
     } , [navigate , props])
 

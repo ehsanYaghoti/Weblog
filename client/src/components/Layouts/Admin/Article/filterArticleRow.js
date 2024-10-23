@@ -22,19 +22,13 @@ function FilterArticleRow(props){
 
     const UserContext =  useContext(AuthenticatedUserContext);
     
+    console.log('user context' , UserContext)
     let authenticatedUser = UserContext
 
 
     return (
         <div className='filter-row'>
             <input className='input-search' name='name' value={queries.name}  placeholder='جستجو مقاله ...' type='text' onChange={inputHandler}/>      
-            {/* <label>
-                نوع دسته  : 
-                <select className='select' value={queries.parent } name='parent' onChange={inputHandler}>
-                    <option value='father'>دسته اصلی</option>
-                    <option value='child'>دسته فرزند</option>
-                </select>
-            </label> */}
 
         <Link className='new-user' to={{ pathname : '/admin/articles/create' , state : authenticatedUser  }}  > 
             <span> افزودن مقاله جدید</span> 

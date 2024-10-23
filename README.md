@@ -63,6 +63,9 @@ $ cd server   // go to server folder
 $ npm i       // npm install packages
 $ npm start  // run it locally(if there is timeout conection to mongodb error save a js file in server folder to restart with nodemon )
 ```
+
+notice : if you want to access to admin panel first register with MANAGER_EMAIL(ehsan.yaghoti@yahoo.com) in ./server/.env file then login with registered email and go to user panel then admin panel.
+
 # Dependencies and devDependencies
 Server-side | Client-side
 --- | ---
