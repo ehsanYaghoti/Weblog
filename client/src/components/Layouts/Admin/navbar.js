@@ -1,8 +1,8 @@
-import React , { useContext } from 'react';
+import React , { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 
 //import Context
-import  AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
+// import  AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,14 +11,16 @@ import { faUsers , faBook , faQuoteRight , faExclamationTriangle ,faBookmark  , 
 library.add(faUsers , faBook , faQuoteRight  , faDollarSign , faFile , faNewspaper )
 
 
-function Navbar(props){
+const Navbar = memo(function Navbar(props){
 
-    const UserContext =  useContext(AuthenticatedUserContext);
+    // const UserContext =  useContext(AuthenticatedUserContext);
 
     // let queries = queryContext.queries
     // let inputHandler = queryContext.inputHandler
 
-    let userState = UserContext
+    // let userState = UserContext
+    let userState = props?.user
+
     // console.log(userState)
     
     let userRolesNames = []
@@ -71,6 +73,6 @@ function Navbar(props){
         <NavLink to='/admin/reports' className='nav-link'  activeClassName='active-link'><FontAwesomeIcon icon={faExclamationTriangle} /><span>مدیریت گزارش ها </span></NavLink>
     </div>
     )
-};
+});
 
 export default Navbar;

@@ -215,7 +215,7 @@ function Categories(props) {
         <div className='home-dashboard'>
         <AuthenticatedUserContext.Provider  value={authenticatedUser}  >
 
-            <Navbar userState={authenticatedUser}   />
+            <Navbar user={authenticatedUser}   />
             <div className='dashborad-body dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black'>
                 <AdminrPanelHeader user={authenticatedUser} />
                 <h2 className='dashborad-body-title text-gray-50'>مدیریت دسته بندی ها</h2>

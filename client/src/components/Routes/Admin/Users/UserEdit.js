@@ -1,30 +1,28 @@
 // Modules
-import React ,{  useEffect  , useState , }   from 'react';
-import { useParams , useNavigate } from 'react-router-dom';
+import React ,{  useEffect  , useState }   from 'react';
+import { useParams } from 'react-router-dom';
 import NodejsApi from 'src/Api/NodejsApi';
+import { toast } from 'react-toastify';
 
 // layouts
 import Navbar from 'src/components/Layouts/Admin/navbar.js';
 import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
-
-// import contexts
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
+import FormUser from 'src/components/Layouts/Admin/User/FormUser';
 
 // Styles
 import 'src/Styles/sass/main.scss';
 import 'src/Styles/sass/forms.scss'
-import Spinner from 'react-bootstrap/Spinner'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {faTimes } from "@fortawesome/free-solid-svg-icons";
 
-import FormUser from 'src/components/Layouts/Admin/User/FormUser';
+// Components
 import isAdmin from 'src/Logics/isAdmin';
-library.add(faTimes)
+import Error500 from 'src/components/Layouts/Admin/General/Errors/500';
+import SpinnerLoading from 'src/components/Layouts/Admin/General/Loadings/spinner';
+import ValidationPanel from 'src/components/Layouts/Admin/General/Validation/validationPanel';
 
 
-function UserEdit(props) {
+
+
+const UserEdit = (props) => {
     
     const [userState , setUserState] = useState({
         username : '',
@@ -32,43 +30,57 @@ function UserEdit(props) {
         roles : [],
         password : ''
     });
-
+    const [roles , setRoles] = useState([]);
+    const [success , setSuccess] = useState({ state : true ,  message : ''})
+    const [loading , setLoading] = useState(false)
+    const [validation , setValidation] = useState(true)
+    const [ messages , setMessages] = useState([])
     const [authenticatedUser , setAuthenticatedUser] = useState({
         isAuthenticated : false,
         user : {}
-    });
+    })
 
-    const [roles , setRoles] = useState([]);
-
-    const [loading , setLoading] = useState(false);
-    const [validation , setValidation] = useState(true);
-    const [close , setClose] = useState(false);
-    const [successMessage , setSuccessMessage ]= useState(false);
-
-    const [messages , setMessages] = useState([])
-    // const [formData , setFormData] = useState([])
-
-    let params = useParams();
-    const navigate = useNavigate()
-
-    useEffect(function() {
-
-        setAuthenticatedUser(props.user)
-
-    } , [navigate , props])
+    let {id} = useParams();
 
     useEffect(function(){
-        console.log('edit')
-        NodejsApi.get(`/admin/user/edit/${params.id}`)
-            .then(response => { 
-                console.log(response.data.data)
-                let user = response.data.data
-                setUserState(user)
 
-                setRoles(response.data.roles)
+        setAuthenticatedUser({
+            isAuthenticated : true,
+            user : props?.user
+        })
+        setLoading(true)
+
+        NodejsApi.get(`/admin/user/edit/${id}`)
+        .then(response => { 
+
+            if(! response.data.success){
+                setLoading(false)
+                setSuccess({
+                    state : response.data.success ,
+                    message : response.data.data
+                })
+                return
+            }
+
+            setUserState(response.data.data)
+            setRoles(response.data.roles)
+            setSuccess({
+                state : response.data.success ,
+                message : ''
             })
-            .catch(err => console.log(err))
-    },[params.id])
+            setLoading(false)
+
+        })
+        .catch(err => {
+            console.log(err)
+            setSuccess({
+                state : false ,
+                message : err.message
+            })
+            setLoading(false)
+        })
+        
+    },[id , props.user])
 
     let formHandler = (e) => {
         e.preventDefault();
@@ -86,57 +98,40 @@ function UserEdit(props) {
             })
         }
 
-        console.log(roles)
-
         let user = {
             username : userState.username,
             email : userState.email,
             roles : roles,
         }
 
+        NodejsApi.put(`/admin/user/edit/${id}` , user)
+        .then(response =>  {
+            console.log(response)
 
+            if(! response.data.success){
 
-        NodejsApi.put(`/admin/user/edit/${params.id}` , user)
-            .then(response =>  {
-                console.log(response)
+                setValidation(false)
+                setLoading(false)
+                setMessages(response.data.messages)
+                return  
+            } 
 
-                if(! response.data.success){
-                    console.log('notsuccess')
+            setValidation(true)
+            setMessages([])
+            setLoading(false)
+            toast.success('information update was succesful')
 
-                    setValidation(false);
-                    setClose(false);
-                    setLoading(false);
-                    setMessages(response.data.messages);
-
-                    // const user = response.data.data
-                    // setUserState({
-                    //     username : user.username,
-                    //     email : user.email,
-                    //     roles : user.roles
-                    // })
-
-                    return;
-                } else if(response.data.success){
-                        console.log('success')
-                        // const user = response.data.data
-                        // setUserState(prevState => {
-                        //     return {
-                        //     ...prevState ,
-                        //     username : user.username,
-                        //     email : user.email
-                        // }})
-                        setValidation(true);
-                        setSuccessMessage(true);
-                        
-                }
-                setLoading(false);
+        })
+        .catch(err => { 
+            console.log(err)
+            setSuccess({
+                state : false ,
+                message : err.message
             })
-            .catch(err => { return console.log(err)})
+            setLoading(false)
+        })
 
-        console.log('submit')
     }
-
-    console.log(userState)
     
     let inputHandler = (e) => {
         e.preventDefault();
@@ -147,13 +142,7 @@ function UserEdit(props) {
             ...prevState ,
             [name] : value
         }})
-        // return setUserState({
-        //     [name] : value
-        // })
-    }
-
-    let closeController = (e) => {
-        setClose(true);
+        
     }
 
     let roleSelectHandler = selectedOption => {
@@ -161,9 +150,6 @@ function UserEdit(props) {
         selectedOption.map(option => {
            return values.push(option.value)
         })
-
-        console.log(selectedOption)
-        console.log(values)
 
         setUserState(prevState => {
             return {
@@ -173,44 +159,17 @@ function UserEdit(props) {
         })
     }
     
-    console.log(userState)
-
     return (
         <div className='home-dashboard'>
-            <AuthenticatedUserContext.Provider  value={authenticatedUser}  >
-            <Navbar />
+            <Navbar user={authenticatedUser} />
             <div className='dashborad-body dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black'>
-                <AdminrPanelHeader />
+                <AdminrPanelHeader user={authenticatedUser} />
                 <h2 className='dashborad-body-title dark:text-gray-50'>ویرایش کاربر</h2>
-                    {   
-                        loading 
-                        ? <Spinner animation='grow' style={{alignSelf : 'center'}} />
-                        : 
-                        ! validation 
-                        ?   <>
-                                <div className={ close ? 'closed' : "validErrors" }   >
-                                    <button type="button" id="close" onClick={closeController} className="close"><FontAwesomeIcon icon='times'  /> </button>
-                                    {   messages.map((error)=>{
-                                        return (<span>{error}</span>)   
-                                        })
-                                    }
-                                </div>                                                  
-                                <FormUser userState={userState} roleSelectHandler={roleSelectHandler} inputHandler={inputHandler} roles={roles} formHandler={formHandler} />
-                            </>                                
-                        : successMessage ?
-                        <>
-                            <div className='successMessage'>
-                                <span>عملیات با موفقیت انجام شد</span>
-                            </div>
-                            <FormUser userState={userState} roleSelectHandler={roleSelectHandler} inputHandler={inputHandler} roles={roles} formHandler={formHandler} />
-                        </>
-                        :
-                        (
-                            <FormUser userState={userState} roleSelectHandler={roleSelectHandler} inputHandler={inputHandler} roles={roles} formHandler={formHandler} />
-                        )
-                    }
+                {!success.state && <Error500 message={success.message} /> }
+                {loading && <SpinnerLoading /> }
+                {! validation && <ValidationPanel messages={messages} />}    
+                <FormUser userState={userState} roleSelectHandler={roleSelectHandler} inputHandler={inputHandler} roles={roles} formHandler={formHandler} />    
             </div>
-            </AuthenticatedUserContext.Provider>
         </div>
     )
 }

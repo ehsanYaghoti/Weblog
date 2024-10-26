@@ -1,5 +1,5 @@
 // Modules
-import React    from 'react';
+import React, { useEffect, useState }    from 'react';
 import NodejsApi from 'src/Api/NodejsApi'; 
 
 
@@ -9,360 +9,203 @@ import Navbar from 'src/components/Layouts/Admin/navbar.js';
 import FormPost from 'src/components/Layouts/Admin/Post/FormPost';
 import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 
-// import contexts
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
-
 // Styles
 import 'src/Styles/sass/main.scss';
 import 'src/Styles/sass/forms.scss'
 
 // Modules
-import Spinner from 'react-bootstrap/Spinner'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {faTimes } from "@fortawesome/free-solid-svg-icons";
 import isAdmin from 'src/Logics/isAdmin';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Error500 from 'src/components/Layouts/Admin/General/Errors/500';
+import SpinnerLoading from 'src/components/Layouts/Admin/General/Loadings/spinner';
+import ValidationPanel from 'src/components/Layouts/Admin/General/Validation/validationPanel';
 
-library.add(faTimes)
 
-class PostEdit extends React.Component {
+const PostEdit = (props) => {
     
-    state = { 
-        post : { 
-            title : '',
-            statement  : '',
-            language : 'en',
-            tags : [] ,
-        } ,
-        success : { state : true ,  message : ''},
-        imageInput : {
-            file : '',
-            previewUrl : ''
-        },
-        postTags : [],
-        tags : [],
-        loading : false ,
-        validation : true ,
-        messages : [],
-        formData : [],
-        close : false,
-        result : false,
-        authenticatedUser : {
-            isAuthenticated : false,
-            user : {}
-        }
-    }
+    const [post , setPost] = useState({ 
+        title : '',
+        statement  : '',
+        language : 'en',
+        tags : [] ,
+    })
+    const [success , setSuccess] = useState({ state : true ,  message : ''})
+    const [tags , setTags] = useState([])
+    const [validation , setValidation] = useState(true)
+    const [messages , setMessages] = useState([])
+    const [loading , setLoading] = useState(true)
+    const [authenticatedUser , setAuthenticatedUser] = useState({
+        isAuthenticated : false,
+        user : {}
+    })
+   
+    const {id} = useParams()
 
-    componentDidMount(){
-        this.setState(prevState => {
-            return {
-                ...prevState,
-                authenticatedUser : {
-                    isAuthenticated : true,
-                    user : this.props.user
-                }
-
-            }
+    useEffect(() => {
+        setAuthenticatedUser({
+            isAuthenticated : true,
+            user : props?.user
         })
+        setLoading(true)
 
-        this.setState(prevState => {
-            return {
-                ...prevState,
-                loading : true,
-                
-            }
-        })
-        let param =  this.props.match.params.id
-        NodejsApi.get(`/admin/posts/edit/${param}`)
+        NodejsApi.get(`/admin/posts/edit/${id}`)
         .then(response => {
-            console.log(response.data)
+
             if(! response.data.success){
-                return  this.setState(prevState => {
-                   return {
-                    ...prevState,
-                    success : {
-                        state : response.data.success ,
-                        message : response.data.messages
-                    },
-                    loading : false
-                    }
+
+                setSuccess({
+                    state : response.data.success ,
+                    message : response.data.messages
                 })
-              
+                setLoading(false)
+                return  
+
             }
 
-            this.setState(prevState => {
-                return {
-                ...prevState,
-                post : response.data.data ,
-                tags : response.data.tags,
-                param ,
-                success : {
-                    state : response.data.success ,
-                    message : ''
-                },
-                loading : false
-                }
+            setPost(response.data.data)
+            setTags(response.data.tags)
+            setSuccess({
+                state : response.data.success ,
+                message : ''
             })
+            setLoading(false)
 
         })
         .catch(err => {
             console.log(err)
-            return  this.setState(prevState => {
-                return {
-                    ...prevState,
-                    success : {
-                        state : false ,
-                        message : err.message
-                    },
-                    loading : false
-                }
-             })
-            
+            setSuccess({
+                state : false ,
+                message : err.message
+            })
+            setLoading(false)   
         })
 
 
-    }
+        
+    } , [id , props.user])
 
+    let formHandler = (e) => {
 
-    render(){
+        e.preventDefault();
+        setLoading(true)
 
-        let formHandler = (e) => {
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    loading : true
+        let tags = []
+        if(post.tags.length !== 0){
+            post.tags.forEach(tag => {
+                if(tag.name){
+                    return tags.push(tag.id)
+                } else if(tag.label){
+                    return tags.push(tag.value)
                 }
-            })
-
-            e.preventDefault();
-
-            let tags = []
-            if(this.state.post.tags.length !== 0){
-                this.state.post.tags.forEach(tag => {
-                    if(tag.name){
-                        return tags.push(tag.id)
-                    } else if(tag.label){
-                        return tags.push(tag.value)
-                    }
-                    
-                })
-            }
-
-            let post = {
-                title : this.state.post.title,
-                statement : this.state.post.statement,
-                language : this.state.post.language ,
-                tags : tags
-            }
-
-
-
-            NodejsApi.put(`/admin/posts/${this.state.param}/update` , post )
-                .then(response =>  {
-                    console.log(response.data)
-                    if(! response.data.success){
-                        return this.setState(prevState => {
-                            return {
-                                ...prevState,
-                                validation : false ,
-                                close : false,
-                                loading : false ,
-                                messages : response.data.messages,
-                            }
-                        })
-                    } else if(response.data.success){
-                        console.log('result = true')
-                         this.setState((prevState) => {
-                            return{
-                                ...prevState,
-                                messages : [],
-                                formData : [],
-                                validation : true,
-                                loading : false,
-                                result : true
-                                
-                            }
-                        })
-                    }
-
-                })
-                .catch(err => { 
-                    console.log(err)
-                    return  this.setState(prevState => {
-                        return {
-                            ...prevState,
-                            success : {
-                                state : false ,
-                                message : err.message
-                            },
-                            loading : false
-                        }
-                     })
                 
-                })
-                this.setState(prevState => {
-                    return {
-                        ...prevState,
-                        loading : false,
-                        
-                    }
-                })
-            console.log('submit')
-        }
-    
-        let inputHandler = (e) => {
-            e.preventDefault();
-            let name = e.target.name
-            let value = e.target.value
-
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    post : {
-                        ...prevState.post,
-                        [name] : value
-                    }
-                }
             })
         }
 
-        let radioInputHandler = (e) => {
-            let name = e.target.name
-            let value = e.target.value
-
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    post : {
-                        ...prevState.post,
-                        [name] : value
-                    }
-                }
-            })
+        let formData = {
+            title : post.title,
+            statement : post.statement,
+            language : post.language ,
+            tags : tags
         }
 
-        let closeController = (e) => {
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    close : true
-                }
+        NodejsApi.put(`/admin/posts/${id}/update` , formData )
+        .then(response =>  {
+            if(! response.data.success){
+                
+                if(response.status === 403) toast.validation('validation data error')
+                setValidation(false)
+                setLoading(false)
+                setMessages(response.data.messages)
+                return 
+
+            }
+            
+            setMessages([])
+            setValidation(true)
+            setLoading(false)
+            toast.success('information update was successful')
+
+        })
+        .catch(err => { 
+            console.log(err)
+            setSuccess({
+                state : false ,
+                message : err.message
             })
-        }
+            setLoading(false) 
+        })
 
-        let tagSelectHandler = selectedOption => {
-            const values = []
-            selectedOption.map(option => {
-               return values.push(option.value)
-            })
-
-            console.log(selectedOption)
-            console.log(values)
-
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    postTags : selectedOption,
-                    // postCategories : values,
-                    post : {
-                        ...prevState.post,
-                        tags : selectedOption
-                    }
-                }
-            })
-        }
-
-        // let imageHandler = (e) => {
-        //     e.preventDefault();
-        //     // let reader = new FileReader()
-        //     // let file = e.target.files[0]
-        //     console.log(e.target.files[0])
-
-        //     if (e.target.files && e.target.files[0]) {
-
-        //         let img = e.target.files[0];
-
-        //         this.setState(prevState => {
-        //             return {
-        //                 ...prevState,
-        //                 post : {
-        //                     ...prevState.post,
-        //                     image:  img
-                            
-        //                 }
-        //             }
-        //         });
-        //       }
-        //     // reader.onloadend = () => {
-        //     //     this.setState(prevState => {
-        //     //         return {
-        //     //             ...prevState,
-        //     //             imageInput : {
-        //     //                 file,
-        //     //                 previewUrl : reader.result
-        //     //             }
-        //     //         }
-        //     //     })
-        //     //     console.log(this.state)
-        //     // }
-        //     // console.log(reader)
-
-        // }
-
-        let statementHandler = (e , data) => {
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    post : {
-                        ...prevState.post,
-                        statement : data
-                    }
-                }
-            })
-        }
-
-
-        console.log(this.state)
-
-        return (
-            <div className='home-dashboard'>
-                <AuthenticatedUserContext.Provider  value={this.state.authenticatedUser}  >
-                <Navbar />
-                <div className='dashborad-body dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black'>
-                    <AdminrPanelHeader />
-                    <h2 className='dashborad-body-title dark:text-gray-50'>ویرایش پست</h2>
-                        {   
-                            this.state.loading 
-                            ? <Spinner animation='grow' style={{alignSelf : 'center'}} />
-                            : 
-                                ! this.state.validation 
-                                ?   
-                                <>
-                                    <div className={ this.state.close ? 'closed' : "validErrors" }   >
-                                    <button type="button" id="close" onClick={closeController} className="close"><FontAwesomeIcon icon='times'  /> </button>
-                                        {   this.state.messages.map((error)=>{
-                                            return (<span key={error}>{error}</span>)   
-                                            })
-                                        }
-                                    </div>                                                 
-                                    <FormPost editMode={true} tags={this.state.tags} post={this.state.post}  inputHandler={inputHandler} radioInputHandler={radioInputHandler} formHandler={formHandler}   tagSelectHandler={tagSelectHandler} statementHandler={statementHandler} />
-                                </>                                
-                                :
-                                this.state.result 
-                                ?
-                                <>
-                                    <span style={{alignSelf : 'center' , padding : '10px' ,  backgroundColor : 'green' , color : 'white' , borderRadius : '5px' ,  marginBottom : '20px'}}>اطلاعات با موفقیت ذخیره شد</span>
-                                    <FormPost editMode={true} tags={this.state.tags} post={this.state.post} inputHandler={inputHandler} radioInputHandler={radioInputHandler} formHandler={formHandler}  tagSelectHandler={tagSelectHandler} statementHandler={statementHandler}  />
-                                </>
-                            :
-                            <FormPost editMode={true} tags={this.state.tags} post={this.state.post} inputHandler={inputHandler} radioInputHandler={radioInputHandler} formHandler={formHandler}  tagSelectHandler={tagSelectHandler} statementHandler={statementHandler}  />
-                        }
-                </div>
-                </AuthenticatedUserContext.Provider>
-            </div>
-            )
     }
+
+    let inputHandler = (e) => {
+        e.preventDefault();
+        let name = e.target.name
+        let value = e.target.value
+
+        setPost(prevState => {
+            return {
+                ...prevState,
+                [name] : value
+            }
+        })
+        
+    }
+
+    let radioInputHandler = (e) => {
+        let name = e.target.name
+        let value = e.target.value
+
+        setPost(prevState => {
+            return {
+                ...prevState,
+                [name] : value
+            }
+        })
+        
+    }
+
+    let tagSelectHandler = selectedOption => {
+        const values = []
+        selectedOption.map(option => {
+            return values.push(option.value)
+        })
+
+        
+        setPost(prevState => {
+            return {
+                ...prevState,
+                tags : selectedOption
+            }
+        })
+
+    }
+
+    let statementHandler = (e , data) => {
+
+        setPost(prevState => {
+            return {
+                ...prevState,
+                statement : data
+            }
+        })
+        
+    }
+
+    return (
+        <div className='home-dashboard'>
+            <Navbar user={authenticatedUser} />
+            <div className='dashborad-body dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black'>
+                <AdminrPanelHeader user={authenticatedUser} />
+                <h2 className='dashborad-body-title dark:text-gray-50'>ویرایش پست</h2>
+                {!success.state && <Error500 message={success.message} /> }
+                {loading && <SpinnerLoading /> }
+                {! validation && <ValidationPanel messages={messages} />}
+                <FormPost editMode={true} tags={tags} post={post} inputHandler={inputHandler} radioInputHandler={radioInputHandler} formHandler={formHandler}  tagSelectHandler={tagSelectHandler} statementHandler={statementHandler}  />
+            </div>
+        </div>
+    )
+    
 }
 
-export default isAdmin( PostEdit);
+export default isAdmin(PostEdit);

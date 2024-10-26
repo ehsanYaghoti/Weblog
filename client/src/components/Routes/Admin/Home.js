@@ -3,9 +3,6 @@ import React , {useState , useEffect} from 'react';
 //import Api
 import NodejsApi from 'src/Api/NodejsApi'; 
 
-//import Contexts
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
 //import layouts
 import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 import Navbar from 'src/components/Layouts/Admin/navbar.js';
@@ -23,7 +20,11 @@ function Home(props){
 
     const [success , setSuccess] = useState({ state : true ,  message : ''})
     const [ loading , setLoading ] = useState(false)
-
+    const [authenticatedUser , setAuthenticatedUser] = useState({
+        isAuthenticated : false,
+        user : {}
+    })
+    
     const [dashboardData , setDashboardData] = useState({
         usersCount : '',
         usersAdminCount : '',
@@ -47,6 +48,13 @@ function Home(props){
     })
 
     useEffect(() => {
+
+        setAuthenticatedUser({
+            isAuthenticated : true,
+            user : props?.user
+        })
+
+
         NodejsApi.get(`/admin/dashboard` )
         .then(response => {
             if(! response.data.success){
@@ -80,18 +88,17 @@ function Home(props){
         } )
         .catch(err => console.log(err))
 
-    } , [])
+    } , [props.user])
     
     return (
     <div className='home-dashboard  '>
-        <AuthenticatedUserContext.Provider  value={dashboardData.user}  >
-        <Navbar />
+        <Navbar user={authenticatedUser} />
 
         {success && ''}
         { loading && <SpinnerOnTop /> }
         <div className='dashboard !pr-0 lg:!pr-[250px] dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:!border-none dark:from-gray-700 dark:via-gray-900 dark:to-black dark:text-gray-50'>
             
-            <AdminrPanelHeader />
+            <AdminrPanelHeader user={authenticatedUser} />
         
             <div className='cards !grid !grid-cols-1 sm:!grid-cols-2  md:!grid-cols-3 lg:!grid-cols-4 xl:!grid-cols-6 '>
                 <div className='card users'>
@@ -155,7 +162,6 @@ function Home(props){
             </div>
 
         </div>
-        </AuthenticatedUserContext.Provider>
     </div>
     )
 }

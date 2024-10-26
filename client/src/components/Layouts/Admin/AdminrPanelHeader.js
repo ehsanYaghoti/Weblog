@@ -1,9 +1,9 @@
-import React , { useContext } from 'react';
+import React , { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 // import contexts
-import  AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
+// import  AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
 
 
 // styles
@@ -17,15 +17,15 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUsers , faBook , faQuoteRight , faExclamationTriangle ,faBookmark  , faHeart , faDollarSign , faFile ,faNewspaper , faPlay, faHome , faAdjust  } from "@fortawesome/free-solid-svg-icons";
 library.add(faUsers , faBook , faQuoteRight  , faDollarSign , faFile , faNewspaper )
 
-function AdminrPanelHeader(props) { 
+const AdminrPanelHeader = memo(function AdminrPanelHeader(props) { 
     
-    const UserContext =  useContext(AuthenticatedUserContext);
-    let userProp = UserContext
+    // const UserContext =  useContext(AuthenticatedUserContext);
+    // let userProp = UserContext
 
-    console.log(UserContext)
+    // console.log(UserContext)
 
     //props
-    // let userProp = props.user
+    let userProp = props.user
 
 
 
@@ -270,6 +270,6 @@ function AdminrPanelHeader(props) {
             <div id='overlay' onClick={closeHiddenMenuHandler}  className='hidden w-screen h-screen fixed bg-gray-900 bg-opacity-50 z-40  ' ></div>
         </>
     )
-}
+})
 
 export default AdminrPanelHeader;

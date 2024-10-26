@@ -35,6 +35,7 @@ const postValidator = require('app/http/validator/postValidator');
 const reportValidator = require('app/http/validator/reportValidator');
 const categoryValidator = require('app/http/validator/categoryValidator');
 const tagValidator = require('app/http/validator/tagValidator');
+const tagValidatorCreatejs = require('../../http/validator/tagValidatorCreatejs');
 
 
 
@@ -184,12 +185,12 @@ router.delete('/saves/:id' , saveController.delete);
 // 
 router.get('/reports' , CORS(corsOptions) , reportController.index);
 
-router.post('/report/create' , CORS(corsOptions) , reportController.create);
+router.post('/report/create' , CORS(corsOptions) , reportValidator.handle() , reportController.create);
 
 router.get('/report/edit/:id' , CORS(corsOptions) , reportController.updateForm);
 
 router.options('/report/:id/update' , CORS(corsOptions) );
-router.put('/report/:id/update'  , CORS(corsOptions)  , reportController.update);
+router.put('/report/:id/update'  , CORS(corsOptions) , reportValidator.handle()  , reportController.update);
 
 router.options('/reports/:id' , CORS());
 router.delete('/reports/:id' , CORS(corsOptions) , reportController.delete);
@@ -212,7 +213,7 @@ router.post('/category/create' , CORS(corsOptions) , categoryValidator.handle() 
 router.get('/category/edit/:id' , CORS(corsOptions)   , categoryController.updateForm);
 
 router.options('/category/:id/update' , CORS() )
-router.put('/category/:id/update', CORS(corsOptions) , categoryController.update);
+router.put('/category/:id/update', CORS(corsOptions) , categoryValidator.handle() , categoryController.update);
 
 router.options('/category/:id', CORS())
 router.delete('/category/:id' , CORS(corsOptions) , categoryValidator.handle()  , categoryController.delete);
@@ -224,12 +225,12 @@ router.delete('/category/:id' , CORS(corsOptions) , categoryValidator.handle()  
 router.get('/tags'   , CORS(corsOptions) , tagController.index);
 
 router.options('/tag/create' , CORS())
-router.post('/tag/create' , CORS(corsOptions) , tagValidator.handle()  , tagController.create);
+router.post('/tag/create' , CORS(corsOptions) , tagValidatorCreatejs.handle()  , tagController.create);
 
 router.get('/tag/edit/:id' , CORS(corsOptions)   , tagController.updateForm);
 
 router.options('/tag/:id/update' , CORS() )
-router.put('/tag/:id/update', CORS(corsOptions) , tagController.update);
+router.put('/tag/:id/update', CORS(corsOptions) , tagValidator.handle() , tagController.update);
 
 router.options('/tag/:id', CORS())
 router.delete('/tag/:id' , CORS(corsOptions) , tagValidator.handle()  , tagController.delete);

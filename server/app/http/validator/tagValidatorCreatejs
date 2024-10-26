@@ -7,6 +7,12 @@ class tagValidator extends validator{
         return [
             check('name').not().isEmpty()
             .withMessage('فیلد عنوان نباید خالی باشد')
+            .custom(async (value , {req}) => {
+                const tag = await Tag.findOne({name : value})
+
+                if(tag) throw new Error('چنین تگی با این عنوان  وجود دارد نام دیگری انتخاب کنید')
+
+            })
         ]
     }
 }

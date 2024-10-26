@@ -62,26 +62,23 @@ class reportController extends Controller {
                 })
             }
                 
-        
+            const {
+                title ,
+            } = req.body
 
+            // console.log(req.body)
+            const newReport = await new Report({
+                title,
+                slug : this.slug(title) ,
+                user : req.user._id
+            })
 
-        const {
-            title ,
-        } = req.body
+            await newReport.save();
 
-        // console.log(req.body)
-        const newReport = await new Report({
-            title,
-            slug : this.slug(title) ,
-            user : req.user._id
-        })
-
-        await newReport.save();
-
-        return res.json({
-            data : newReport,
-            success : true
-        })
+            return res.json({
+                data : newReport,
+                success : true
+            })
 
         } catch (err) {
             console.log(err)

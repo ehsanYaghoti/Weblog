@@ -138,7 +138,7 @@ class roleController extends Controller {
                 user : req.user._id,
                 name , 
                 label,
-                permissions : req.body.postPermissions
+                permissions
             }})
 
 

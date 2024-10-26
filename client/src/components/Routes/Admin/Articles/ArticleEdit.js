@@ -1,30 +1,24 @@
 // Modules
 import React, { useEffect, useState }    from 'react';
 import NodejsApi from 'src/Api/NodejsApi'; 
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 // layouts
 import Navbar from 'src/components/Layouts/Admin/navbar.js';
 import FormArticle from '../../../Layouts/Admin/Article/FormArticle'
 import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 
-// import contexts
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
 // Styles
 import 'src/Styles/sass/main.scss';
 import 'src/Styles/sass/forms.scss'
 
-// Modules
-import Spinner from 'react-bootstrap/Spinner'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {faClose, faTimes } from "@fortawesome/free-solid-svg-icons";
+// Components
 import GoTopBtn from 'src/components/Layouts/Home/General/GoTopBtn';
 import isAdmin from 'src/Logics/isAdmin';
-import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-
-library.add(faTimes)
+import Error500 from 'src/components/Layouts/Admin/General/Errors/500';
+import SpinnerLoading from 'src/components/Layouts/Admin/General/Loadings/spinner';
+import ValidationPanel from 'src/components/Layouts/Admin/General/Validation/validationPanel';
 
 const ArticleEdit  = (props) => {
 
@@ -51,11 +45,7 @@ const ArticleEdit  = (props) => {
 
     const [loading , setLoading] = useState(false)
     const [messages , setMessages] = useState([])
-    // const [formData , setFormData] = useState([])
     const [validation , setValidation] = useState(true)
-    const [close , setClose] = useState(false)
-    const [result , setResult] = useState(false)
-    const [resultClose , setResultClose ] = useState(false)
     const [authenticatedUser , setAuthenticatedUser] = useState({
         isAuthenticated : false,
         user : {}
@@ -153,18 +143,14 @@ const ArticleEdit  = (props) => {
             if(! response.data.success){
                 setLoading(false)
                 setValidation(false)
-                setClose(false)
                 setMessages(response.data.messages)
                 return toast.error('validation is not successful')
 
             }
             
             setMessages([])
-            // setFormData([])
             setValidation(true)
             setLoading(false)
-            setResult(true)
-            setResultClose(true)
             toast.success('اطلاعات با موفقیت ذخیره شد')
 
         })
@@ -204,10 +190,6 @@ const ArticleEdit  = (props) => {
             }
         })
 
-    }
-
-    let closeController = (e) => {
-        setClose(true)
     }
 
     let categorySelectHandler = selectedOption => {
@@ -272,51 +254,16 @@ const ArticleEdit  = (props) => {
 
     return (
         <div className='home-dashboard'>
-            <AuthenticatedUserContext.Provider  value={authenticatedUser}  >
-            <Navbar />
+            <Navbar user={authenticatedUser}  />
             <div className='dashborad-body dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black'>
-                <AdminrPanelHeader />
+                <AdminrPanelHeader user={authenticatedUser}  />
                 <h2 className='dashborad-body-title dark:text-gray-50'>ویرایش مقاله</h2>
-                    {   
-                        loading 
-                        ?  <div className='fixed h-screen w-screen bg-gray-500 bg-opacity-30 flex items-center justify-center z-50' ><Spinner animation='grow' style={{alignSelf : 'center'}} /></div>
-                        :   ! success.state ?
-                                (
-                                    <span>{success.message}</span>
-                                )
-                                :
-                            ! validation 
-                            ?   
-                            <>
-                                <div className={ close ? 'closed' : "validErrors" }   >
-                                <button type="button" id="close" onClick={closeController} className="close"><FontAwesomeIcon icon='times'  /> </button>
-                                    {   messages.map((error)=>{
-                                        return (<span key={error}>{error}</span>)   
-                                        })
-                                    }
-                                </div>                                                 
-                                <FormArticle editMode={true} imagePreviewUrl={imageInput.previewUrl} categories={categories} tags={tags} article={article}  inputHandler={inputHandler} radioInputHandler={radioInputHandler} formHandler={formHandler}  categorySelectHandler={categorySelectHandler} tagSelectHandler={tagSelectHandler} imageHandler={imageHandler} statementHandler={statementHandler} />
-                            </>                                
-                            :
-                            result 
-                            ? 
-                            <>
-                                {resultClose ??
-                                    <div id='overlay' className='fixed h-screen w-screen bg-gray-500 bg-opacity-30 flex items-center justify-center z-50' onClick={e => this.setState(prevState => { return { ...prevState , resultClose :false } }) } >
-                                        <div className='h-fit flex items-start gap-6 p-6  bg-green-600 text-white rounded-lg'>
-                                            <FontAwesomeIcon icon={faClose} className='text-lg hover:opacity-50 cursor-pointer' />
-                                            <span className='mt-6 text-xl' >اطلاعات با موفقیت ذخیره شد</span>
-                                        </div>
-                                    </div>
-                                }
-                                <FormArticle editMode={true} imagePreviewUrl={imageInput.previewUrl} categories={categories} tags={tags} article={article} inputHandler={inputHandler} radioInputHandler={radioInputHandler} formHandler={formHandler} categorySelectHandler={categorySelectHandler} tagSelectHandler={tagSelectHandler} imageHandler={imageHandler} statementHandler={statementHandler}  />
-                            </> 
-                        :
-                        <FormArticle editMode={true} imagePreviewUrl={imageInput.previewUrl} categories={categories} tags={tags} article={article} inputHandler={inputHandler} radioInputHandler={radioInputHandler} formHandler={formHandler} categorySelectHandler={categorySelectHandler} tagSelectHandler={tagSelectHandler} imageHandler={imageHandler} statementHandler={statementHandler}  />
-                    }
+                {!success.state && <Error500 message={success.message} /> }
+                {loading && <SpinnerLoading />}
+                {! validation && <ValidationPanel messages={messages} />}                                                     
+                <FormArticle editMode={true} imagePreviewUrl={imageInput.previewUrl} categories={categories} tags={tags} article={article} inputHandler={inputHandler} radioInputHandler={radioInputHandler} formHandler={formHandler} categorySelectHandler={categorySelectHandler} tagSelectHandler={tagSelectHandler} imageHandler={imageHandler} statementHandler={statementHandler}  />
             </div>
             <GoTopBtn />
-            </AuthenticatedUserContext.Provider>
         </div>
     )
     

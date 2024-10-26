@@ -8,9 +8,6 @@ import Navbar from 'src/components/Layouts/Admin/navbar.js';
 import FormPost from 'src/components/Layouts/Admin/Post/FormPost';
 import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 
-// import contexts
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
 // Styles
 import 'src/Styles/sass/main.scss';
 import 'src/Styles/sass/forms.scss'
@@ -318,10 +315,9 @@ class Create extends React.Component {
 
         return (
             <div className='home-dashboard'>
-                <AuthenticatedUserContext.Provider  value={this.state.authenticatedUser}  >
-                <Navbar />
+                <Navbar user={this.state.authenticatedUser} />
                 <div className='dashborad-body dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black'>
-                    <AdminrPanelHeader />
+                    <AdminrPanelHeader user={this.state.authenticatedUser} />
                     <h2 className='dashborad-body-title dark:text-gray-50'>افزودن پست جدید</h2>
                         {   
                             this.state.loading 
@@ -356,7 +352,6 @@ class Create extends React.Component {
                             <FormPost  tags={this.state.tags} statementHandler={statementHandler}  post={this.state.post} inputHandler={inputHandler} radioInputHandler={radioInputHandler}  tagSelectHandler={tagSelectHandler} formHandler={formHandler}  />
                         }
                 </div>
-                </AuthenticatedUserContext.Provider>
             </div>
             )
     }
