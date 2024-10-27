@@ -50,7 +50,7 @@ function LandingPage(props) {
 
         setLoading(true)
 
-        NodejsApi.get('http://localhost:5000')
+        NodejsApi.get('/')
         .then(response => {
             if(! response.data.success){
 
