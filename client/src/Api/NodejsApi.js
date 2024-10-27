@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 let instance = axios.create({
-    baseURL : 'http://localhost:5000',
+    baseURL : 'https://weblog-i6ln.onrender.com',
     timeout : 20000,
     timeoutErrorMessage : '500 Problem from server(time out error)'    ,
     withCredentials : true,
