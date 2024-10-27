@@ -30,7 +30,7 @@ const redirectIfAuthenticated = require('app/http/middleware/redirectIfAuthentic
 // CORS Configuration
 let whitelist = ['http://localhost:3000' , 'http://localhost:5000']
 let corsOptions = {
-  origin:  'http://localhost:3000' ,
+  origin:  ['https://weblog-client.onrender.com' ,'http://localhost:3000'] ,
   allowedHeaders : ['Content-Type' ,'Authorization' , 'Origin' , 'Access-Control-Allow-Origin'],
   credentials : true,
   methods : 'GET,PUT,POST,DELETE'

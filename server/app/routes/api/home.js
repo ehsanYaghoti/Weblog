@@ -31,7 +31,7 @@ const uploadSound = require('app/helper/uploadSound')
 // CORS
 let whitelist = ['http://localhost:3000' , 'http://localhost:5000']
 let corsOptions = {
-  origin: ['http://localhost:3000' , 'http://localhost:5000' , 'http://192.168.43.198:3000' , 'http://26.44.39.27:3000'] ,
+  origin: ['https://weblog-client.onrender.com' ,'http://localhost:3000' , 'http://localhost:5000' , 'http://192.168.43.198:3000' , 'http://26.44.39.27:3000'] ,
   allowedHeaders : ['Content-Type' ,'Authorization' , 'Origin' , 'Access-Control-Allow-Origin'],
   credentials : true,
   methods : 'GET,PUT,POST,DELETE'

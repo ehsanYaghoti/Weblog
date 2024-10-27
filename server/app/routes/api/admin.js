@@ -60,7 +60,7 @@ const checkUserRole = require('../../http/middleware/redirectIfNotHaveTheRole');
 // 
 
 // CORS Configuration
-let whitelist = ['http://localhost:3000' , 'http://localhost:5000']
+let whitelist = ['https://weblog-client.onrender.com' , 'http://localhost:3000' , 'http://localhost:5000']
 let corsOptions = {
   origin:  whitelist ,
   allowedHeaders : ['Content-Type' ,'Authorization' , 'Referer' , 'Origin' , 'Access-Control-Allow-Origin'],
