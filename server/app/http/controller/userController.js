@@ -80,15 +80,23 @@ class userController extends Controller {
     async checkAuth(req , res , next){
         try {
 
-            const user = await User.findById(req.user._id).populate('roles')
+            if(req.user){
+                const user = await User.findById(req.user._id).populate('roles')
 
+                
+                return res.status(200).json({
+                    authenticatedUser : user ,
+                    isAuthenticated : req.isAuthenticated(),
+                    success : true 
+                })
+            }
 
-            
             return res.status(200).json({
-                authenticatedUser : user ,
-                isAuthenticated : req.isAuthenticated(),
-                success : true 
+                authenticatedUser : undefined ,
+                isAuthenticated : false,
+                success : false
             })
+
 
         } catch (err) {
             console.log(err);
