@@ -14,7 +14,7 @@ import CardPost from 'src/components/Layouts/Home/Cards/CardPost';
 
 
 // images
-import L1 from './../../../Public/sunrise.jpg'
+import L1 from 'src/Static/sunrise.jpg'
 
 //import Api
 import NodejsApi from 'src/Api/NodejsApi'; 
