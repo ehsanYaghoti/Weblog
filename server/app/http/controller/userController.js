@@ -85,13 +85,17 @@ class userController extends Controller {
 
             
             return res.status(200).json({
-                authenticatedUser : user,
+                authenticatedUser : user ,
                 isAuthenticated : req.isAuthenticated(),
                 success : true 
             })
 
         } catch (err) {
             console.log(err);
+            res.json({
+                message : err,
+                success : false 
+            })
             next();
         }
     }

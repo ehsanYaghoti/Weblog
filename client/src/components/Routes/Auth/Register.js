@@ -37,12 +37,8 @@ function RegisterComponent(props) {
 
         let user = userState
 
-        Axios.post('http://localhost:5000/auth/register' , user , {
+        Axios.post('/auth/register' , user , {
             withCredentials : true ,
-            headers : {
-                "Access-Control-Allow-Origin" : "http://localhost:3000"        
-            }
-            
         })
             .then(response =>  {
 

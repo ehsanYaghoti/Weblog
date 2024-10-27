@@ -18,11 +18,6 @@ import { faUsers , faBook , faQuoteRight , faExclamationTriangle ,faBookmark  , 
 library.add(faUsers , faBook , faQuoteRight  , faDollarSign , faFile , faNewspaper )
 
 const AdminrPanelHeader = memo(function AdminrPanelHeader(props) { 
-    
-    // const UserContext =  useContext(AuthenticatedUserContext);
-    // let userProp = UserContext
-
-    // console.log(UserContext)
 
     //props
     let userProp = props.user

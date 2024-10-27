@@ -1,10 +1,5 @@
 import React , { memo } from 'react';
 import { NavLink } from 'react-router-dom';
-
-//import Context
-// import  AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUsers , faBook , faQuoteRight , faExclamationTriangle ,faBookmark  , faHeart , faDollarSign , faFile ,faNewspaper , faPlay, faBlog, faHome } from "@fortawesome/free-solid-svg-icons";
@@ -12,11 +7,6 @@ library.add(faUsers , faBook , faQuoteRight  , faDollarSign , faFile , faNewspap
 
 
 const Navbar = memo(function Navbar(props){
-
-    // const UserContext =  useContext(AuthenticatedUserContext);
-
-    // let queries = queryContext.queries
-    // let inputHandler = queryContext.inputHandler
 
     // let userState = UserContext
     let userState = props?.user

@@ -41,6 +41,7 @@ export default function isAuthenticated(Component, page) {
                 }
 
                 setLoading(false)
+                setIsAuthenticated(false)
 
             }
 
