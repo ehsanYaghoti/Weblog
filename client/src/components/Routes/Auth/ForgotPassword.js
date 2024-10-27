@@ -1,5 +1,5 @@
 import React , { useEffect, useState }   from "react";
-import { useNavigate , useLocation, useParams }  from 'react-router-dom'; 
+import { useNavigate , useLocation }  from 'react-router-dom'; 
 import Axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBlog , faSpinner, faClose  } from '@fortawesome/free-solid-svg-icons'
@@ -22,21 +22,18 @@ function ForgotPasswordComponent(props) {
     })
 
     const search = useLocation().search
-    const prams = useParams()
+    // const params = useParams()
 
     // const searchParams = new URLSearchParams(search)
     console.log(search)
     useEffect(() => {
-
-
-        console.log(prams)
 
         const searchParams = new URLSearchParams(search)
 
         setUserState({
             email : searchParams.get('email')
         })
-    } , [search])
+    } , [search ])
 
 
 
