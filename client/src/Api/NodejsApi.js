@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // baseURL : 'https://weblog-i6ln.onrender.com',
 let instance = axios.create({
-    baseURL : 'http://www.api.weblogg.ir',
+    baseURL : 'http://api.weblogg.ir',
     timeout : 20000,
     timeoutErrorMessage : '500 Problem from server(time out error)'    ,
     withCredentials : true,
@@ -15,14 +15,14 @@ let instance = axios.create({
 })
 
 instance.interceptors.request.use(function(config) {
-    // console.log(config)
+    console.log(config)
     return config;
 } , function(error){
     return Promise.reject(error);
 });
 
 instance.interceptors.response.use(function(response) {
-    // console.log(response)
+    console.log(response)
     return response;
 } , function(error){
 
