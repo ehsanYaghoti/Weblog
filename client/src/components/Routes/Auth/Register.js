@@ -37,41 +37,39 @@ function RegisterComponent(props) {
 
         let user = userState
 
-        NodejsApi.post('/auth/register' , user , {
-            withCredentials : true ,
-        })
-            .then(response =>  {
+        NodejsApi.post('/auth/register' , user)
+        .then(response =>  {
 
-                console.log(response)
+            console.log(response)
 
-                if(! response.data.success){
-                    
-                    setLoading(false)
-                    setValidation({
-                        success : false ,
-                        fullMessages : response.data.fullMessages,
-                        messages : response.data.messages
-                    })                    
-
-                } else if(response.data.success){
-                    console.log('result = true')
-                    setValidation({
-                        success : true,
-                        messages : []
-                    })
-                    setLoading(false)
-                    navigate('/')
-
-                }
-            })
-            .catch(err => { 
-                console.log(err)
+            if(! response.data.success){
+                
                 setLoading(false)
-                return setValidation({
-                    success : false,
-                    messages : err.message
+                setValidation({
+                    success : false ,
+                    fullMessages : response.data.fullMessages,
+                    messages : response.data.messages
+                })                    
+
+            } else if(response.data.success){
+                console.log('result = true')
+                setValidation({
+                    success : true,
+                    messages : []
                 })
+                setLoading(false)
+                navigate('/')
+
+            }
+        })
+        .catch(err => { 
+            console.log(err)
+            setLoading(false)
+            return setValidation({
+                success : false,
+                messages : err.message
             })
+        })
 
     }
 

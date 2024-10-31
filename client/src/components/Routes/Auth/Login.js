@@ -40,10 +40,7 @@ function LoginComponent({isAuthenticated}) {
 
         let user = userState
 
-        NodejsApi.post('/auth/login' , user , {
-            withCredentials : true ,
-            
-        })
+        NodejsApi.post('/auth/login' , user)
             .then(response =>  {
 
                 console.log(response)
