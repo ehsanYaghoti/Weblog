@@ -1,9 +1,11 @@
 import React , {useState , useEffect}   from "react";
 import { useNavigate , useLocation }  from 'react-router-dom'; 
-import Axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye , faEyeSlash , faBlog , faSpinner, faClose } from '@fortawesome/free-solid-svg-icons'
 import isAuthenticated from "src/Logics/isAuthenticated";
+
+//import Api
+import NodejsApi from 'src/Api/NodejsApi'; 
 
 
 
@@ -119,11 +121,8 @@ function ResetPasswordComponent(props) {
             return setLoading(false)
         } else if(user.password === user.confirmpassword){
 
-            Axios.post('http://localhost:5000/auth/password/reset' , user , {
-                withCredentials : true ,
-                headers : {
-                    "Access-Control-Allow-Origin" : "http://localhost:3000"        
-                }           
+            NodejsApi.post('/auth/password/reset' , user , {
+                withCredentials : true ,        
             })
             .then(response =>  {
 

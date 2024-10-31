@@ -1,9 +1,9 @@
 import React , { useState }   from "react";
 import { useNavigate , Link }  from 'react-router-dom'; 
 
-// importing Api
-// import NodejsApi from 'src/Api/NodejsApi'; 
-import Axios from "axios";
+
+//import Api
+import NodejsApi from 'src/Api/NodejsApi'; 
 
 
 // importing styles
@@ -40,11 +40,8 @@ function LoginComponent({isAuthenticated}) {
 
         let user = userState
 
-        Axios.post('http://localhost:5000/auth/login' , user , {
+        NodejsApi.post('/auth/login' , user , {
             withCredentials : true ,
-            headers : {
-                "Access-Control-Allow-Origin" : "http://localhost:3000"        
-            }
             
         })
             .then(response =>  {

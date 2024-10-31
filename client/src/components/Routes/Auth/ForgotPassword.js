@@ -1,9 +1,12 @@
 import React , { useEffect, useState }   from "react";
 import { useNavigate , useLocation }  from 'react-router-dom'; 
-import Axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBlog , faSpinner, faClose  } from '@fortawesome/free-solid-svg-icons'
 import isAuthenticated from "src/Logics/isAuthenticated";
+
+//import Api
+import NodejsApi from 'src/Api/NodejsApi'; 
+
 
 function ForgotPasswordComponent(props) {
 
@@ -57,7 +60,7 @@ function ForgotPasswordComponent(props) {
 
         let user = userState
 
-        Axios.post('http://localhost:5000/auth/forgotpassword' , user , {
+        NodejsApi.post('/auth/forgotpassword' , user , {
             withCredentials : true ,
             headers : {
                 "Access-Control-Allow-Origin" : "http://localhost:3000"        

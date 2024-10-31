@@ -1,12 +1,12 @@
 import React , { useState }   from "react";
 import { Link, useNavigate }  from 'react-router-dom'; 
-import Axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faEye , faEyeSlash , faBlog , faSpinner, faClose } from '@fortawesome/free-solid-svg-icons'
 import isAuthenticated from "src/Logics/isAuthenticated";
-// import NodejsApi from 'src/Api/NodejsApi'; 
 
+//import Api
+import NodejsApi from 'src/Api/NodejsApi'; 
 
 
 
@@ -37,7 +37,7 @@ function RegisterComponent(props) {
 
         let user = userState
 
-        Axios.post('/auth/register' , user , {
+        NodejsApi.post('/auth/register' , user , {
             withCredentials : true ,
         })
             .then(response =>  {
@@ -292,7 +292,7 @@ function RegisterComponent(props) {
                     <div className="grid grid-cols-1 divide-y w-full ">
                         <button type="submit" className="w-full hover:opacity-70 mt-2 drop-shadow-lg text-lg text-white bg-cyan-600 border border-solid  border-cyan-500 py-3 px-4 rounded-md self-center" >signup</button>
                         <button type="button" className="w-full hover:opacity-70 my-6 drop-shadow-lg  bg-red-500 text-white border border-solid border-red-300 py-4 px-4 rounded-md self-center " >
-                            <a href="http://localhost:5000/auth/google"> 
+                            <a href="http://api.weblogg.ir/auth/google"> 
                             <FontAwesomeIcon icon={faGoogle} />
 
                             <span className="ml-2 " >Sign up with Google</span>
