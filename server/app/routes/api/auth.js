@@ -28,9 +28,8 @@ const apiAuthJWT = require('app/http/middleware/apiAuthJWT');
 const redirectIfAuthenticated = require('app/http/middleware/redirectIfAuthenticated');
 
 // CORS Configuration
-let whitelist = ['http://localhost:3000' , 'http://localhost:5000']
 let corsOptions = {
-  origin:  ['https://weblog-client.onrender.com' ,'http://localhost:3000'] ,
+  origin:  [ 'http://weblogg.ir' , 'https://weblog-client.onrender.com' ,'http://localhost:3000'] ,
   allowedHeaders : ['Content-Type' ,'Authorization' , 'Origin' , 'Access-Control-Allow-Origin'],
   credentials : true,
   methods : 'GET,PUT,POST,DELETE'
