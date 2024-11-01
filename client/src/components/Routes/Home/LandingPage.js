@@ -12,10 +12,6 @@ import CardArticle from 'src/components/Layouts/Home/Cards/CardArticle';
 import CardPodcast from 'src/components/Layouts/Home/Cards/CardPodcast';
 import CardPost from 'src/components/Layouts/Home/Cards/CardPost';
 
-
-// images
-import L1 from 'src/Static/sunrise.jpg'
-
 //import Api
 import NodejsApi from 'src/Api/NodejsApi'; 
 
@@ -495,7 +491,7 @@ function LandingPage(props) {
                                         tags.map(tag => {
                                             return (
                                                 <a key={tag._id} href={`/tag/${tag.slug}`} className='flex flex-col items-start relative  rounded-md w-72 h-fit cursor-pointer shadow-sm hover:scale-105 transition-all m-10 dark:shadow-lg dark:shadow-slate-400/50' >
-                                                    <img src={L1} alt="" className='w-full h-full self-center rounded-md shadow-md object-cover ' />        
+                                                    <img src={`${process.env.REACT_APP_API_URL}/public/static/sunrise.jpg`} alt="" className='w-full h-full self-center rounded-md shadow-md object-cover ' />        
                                                     <h3 className='text-xl flex items-center justify-center rounded-md font-[600] bg-white bg-opacity-40 dark:bg-opacity-10  w-full h-full text-white absolute ' >#{tag.name}</h3>
                                                 </a>
                                             )
