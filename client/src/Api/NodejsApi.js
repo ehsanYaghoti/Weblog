@@ -21,7 +21,7 @@ instance.interceptors.request.use(function(config) {
 });
 
 instance.interceptors.response.use(function(response) {
-    console.log(response)
+    // console.log(response)
     return response;
 } , function(error){
 
