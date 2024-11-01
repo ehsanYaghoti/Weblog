@@ -40,7 +40,7 @@ function TableRow(props){
                         <FontAwesomeIcon icon='user-circle'  style={{margin:'0 20px' , height:'30px' , width:'30px'}} />
                         :
                         <div className='avatar'>
-                            <img src={`http://localhost:5000/${user.avatarpath}`} alt={user.username} className='object-cover' />
+                            <img src={`${process.env.REACT_APP_API_URL}/${user.avatarpath}`} alt={user.username} className='object-cover' />
 
                             {/* <img src={`localhost:5000/${user.avatarpath}`}   />  */}
                         </div>

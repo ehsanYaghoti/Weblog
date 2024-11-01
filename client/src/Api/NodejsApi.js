@@ -7,10 +7,9 @@ let instance = axios.create({
     withCredentials : true,
     // headers: {'Access-Control-Allow-Origin': '*'},
     // proxy: {
-    //     host: 'http://localhost',
+    //     host: 'http://www.api.weblogg.ir',
     //     port: 5000
     // }
-    // headers : {'Access-Control-Allow-Headers' : 'content-type' }
 })
 
 instance.interceptors.request.use(function(config) {

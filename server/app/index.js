@@ -58,13 +58,13 @@ module.exports = class Application {
         // Security Configuration
         // app.use(helmet() );
         // app.use(cors());
-        // app.use(
-        //     cors({
-        //     origin: ["http://localhost:3000"],
-        //     methods: ["GET", "POST"],
-        //     credentials: true,
-        //     })
-        // );
+        app.use(
+            cors({
+            origin: [ 'http://weblogg.ir'  , `${process.env.WEBSITE_URL}` , `${process.env.WEBSITE_FRONT_URL}` , ,'http://localhost:3000' ] ,
+            methods: ["GET", "POST" , "PUT" , "DELETE"],
+            credentials: true,
+            })
+        );
 
         //Body Parser Configuration
         app.use(express.json());

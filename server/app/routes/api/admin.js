@@ -60,9 +60,8 @@ const checkUserRole = require('../../http/middleware/redirectIfNotHaveTheRole');
 // 
 
 // CORS Configuration
-let whitelist = [ 'http://weblogg.ir' , 'https://weblog-client.onrender.com' , 'http://localhost:3000' , 'http://localhost:5000']
 let corsOptions = {
-  origin:  whitelist ,
+  origin: [ 'http://www.weblogg.ir'  , `${process.env.WEBSITE_URL}` , `${process.env.WEBSITE_FRONT_URL}` , ,'http://localhost:3000' ] ,
   allowedHeaders : ['Content-Type' ,'Authorization' , 'Referer' , 'Origin' , 'Access-Control-Allow-Origin'],
   credentials : true,
   methods : 'GET,PUT,POST,DELETE'
@@ -77,7 +76,7 @@ router.get('/dashboard' , CORS(corsOptions)   ,  adminController.maindashboard )
 router.get('/'   ,(req , res)=>{ 
   // console.log('admin page')
   // return res.json(req.user)
-  res.redirect('http://localhost:3000/admin')
+  res.redirect(`${process.env.WEBSITE_FRONT_URL}/admin`)
 })
 
 //  

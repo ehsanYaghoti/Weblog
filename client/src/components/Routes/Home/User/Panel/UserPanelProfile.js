@@ -61,7 +61,7 @@ function UserPanelProfile(props){
 
     useEffect(() => {
         setLoading(true)
-        NodejsApi.get(`http://localhost:5000/user/panel`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/user/panel`)
         .then(response => {
             if(! response.data.success){
                 if(response.data.code === 204){
@@ -354,7 +354,7 @@ function UserPanelProfile(props){
                                         <>
                                             <input  type='file' accept='.gif,.jpg,.jpeg,.GIF,.png,.PNG,.JPG,.JPEG,.bmp,.BMP'  className='hidden'  ref={hiddenFileInput}  onChange={imageHandler} name='image' placeholder='insert your picture here...'/>
                                             <div onClick={handleFakeButton}  className='h-full w-full rounded-full overflow-hidden bg-contain' >
-                                                <img src={user.avatarpath ? `http://localhost:5000/${user.avatarpath}` : `${imageInput.previewUrl}` }
+                                                <img src={user.avatarpath ? `${process.env.REACT_APP_API_URL}/${user.avatarpath}` : `${imageInput.previewUrl}` }
                                                 className='h-32 w-32 rounded-full object-cover hover:scale-110 scale-105 transition-all duration-500 z-50 ' alt='avatar' />
                                             </div>
                                             <button onClick={handleFakeButton} className='h-full w-full rounded-full absolute z-10 hover:scale-110 transition-all duration-300 flex items-center overflow-hidden justify-center bg-gray-300 bg-opacity-0 text-white' >
@@ -366,7 +366,7 @@ function UserPanelProfile(props){
                                         </>
                                         
                                         // .gif,.jpg,.jpeg,.GIF,.png,.PNG,.JPG,.JPEG,.bmp,.BMP
-                                        // <img src={`http://localhost:5000/public/${user.avatar}`} alt={`${user.username}`} />
+                                        // <img src={`${process.env.REACT_APP_API_URL}/public/${user.avatar}`} alt={`${user.username}`} />
                                     }
                                 </div>
                                     

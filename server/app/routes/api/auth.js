@@ -29,7 +29,7 @@ const redirectIfAuthenticated = require('app/http/middleware/redirectIfAuthentic
 
 // CORS Configuration
 let corsOptions = {
-  origin:  [ 'http://weblogg.ir' , 'https://weblog-client.onrender.com' ,'http://localhost:3000'] ,
+  origin: [ 'http://www.weblogg.ir'  , `${process.env.WEBSITE_URL}` , `${process.env.WEBSITE_FRONT_URL}` , ,'http://localhost:3000' ] ,
   allowedHeaders : ['Content-Type' ,'Authorization' , 'Origin' , 'Access-Control-Allow-Origin'],
   credentials : true,
   methods : 'GET,PUT,POST,DELETE'

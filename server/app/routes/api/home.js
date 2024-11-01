@@ -31,7 +31,7 @@ const uploadSound = require('app/helper/uploadSound')
 // CORS
 
 let corsOptions = {
-  origin: [ 'http://weblogg.ir' ,'https://weblog-client.onrender.com' ,'http://localhost:3000' , 'http://localhost:5000' ] ,
+  origin: [ 'http://weblogg.ir'  , `${process.env.WEBSITE_URL}` , `${process.env.WEBSITE_FRONT_URL}` , ,'http://localhost:3000' ] ,
   allowedHeaders : ['Content-Type' ,'Authorization' , 'Origin' , 'Access-Control-Allow-Origin'],
   credentials : true,
   methods : 'GET,PUT,POST,DELETE'

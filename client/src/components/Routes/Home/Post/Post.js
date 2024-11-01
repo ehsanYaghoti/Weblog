@@ -75,7 +75,7 @@ function Post(props) {
 
     useEffect(() => {
         setLoading(true)
-        NodejsApi.get(`http://localhost:5000/posts/${slug}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/posts/${slug}`)
         .then(async response => {
             if(! response.data.success){
                 setLoading(false)
@@ -246,7 +246,7 @@ function Post(props) {
 
         setLoading(true)
 
-        NodejsApi.post(`http://localhost:5000/answer/create` , answerField )
+        NodejsApi.post(`${process.env.REACT_APP_API_URL}/answer/create` , answerField )
         .then(async response => {
             if(! response.data.success){
                 setLoading(false)
@@ -371,7 +371,7 @@ function Post(props) {
     let reportHandler = (e , kind) => {
         console.log(kind)
         if(kind === 'post'){
-            NodejsApi.post(`http://localhost:5000/posts/report` , reportsField)
+            NodejsApi.post(`${process.env.REACT_APP_API_URL}/posts/report` , reportsField)
             .then(async response => {
                 if(! response.data.success){
                     setLoading(false)
@@ -431,7 +431,7 @@ function Post(props) {
                 })
             })
         } else if(kind === 'answer'){
-            NodejsApi.post(`http://localhost:5000/answer/report` , reportsField)
+            NodejsApi.post(`${process.env.REACT_APP_API_URL}/answer/report` , reportsField)
             .then(async response => {
                 if(! response.data.success){
                     setLoading(false)
@@ -546,7 +546,7 @@ function Post(props) {
                                                 <a href={`/user/dashboard/${post.user._id}`} className='h-fit' >
                                                     {
                                                         post.user.avatar !== null ?
-                                                        <img src={`http://localhost:5000/${post.user.avatarpath}`} alt="user" className='h-16 w-16 rounded-full ring-2 ring-green-200  object-cover self-center shadow-md hover:scale-105 transition-all' />
+                                                        <img src={`${process.env.REACT_APP_API_URL}/${post.user.avatarpath}`} alt="user" className='h-16 w-16 rounded-full ring-2 ring-green-200  object-cover self-center shadow-md hover:scale-105 transition-all' />
                                                         : <FontAwesomeIcon icon={faUserCircle}className='text-6xl ml-4 text-gray-400 ring-4 ring-green-500 rounded-full' />
                                                     }
                                                 </a>

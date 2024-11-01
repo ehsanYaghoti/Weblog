@@ -73,68 +73,6 @@ function RegisterComponent(props) {
 
     }
 
-    // const redirectHandler = () => {
-    //     navigate('/')
-    // }
-
-    // let validationhandler = () => {
-    //     let usernameField = document.getElementById('username')
-    //     let emailField = document.getElementById('email')
-    //     let passwordField = document.getElementById('passwordInput')
-
-    //     let usernameSpan = document.getElementById('usernameSpan') 
-    //     let emailSpan = document.getElementById('emailSpan') 
-    //     let passwordSpan = document.getElementById('passwordSpan')
-    //     // console.log('valid' + validation)
-    //     validation.fullMessages.forEach(message => {
-    //         console.log('path' + message.path)
-    //         switch (message.path) {
-    //             case 'username':
-    //                 usernameField.classList.add("border-red-500" , "text-red-500" )
-    //                 passwordSpan.classList.remove("peer-invalid/username:visible")
-    //                 usernameSpan.classList.replace("invisble" , "visible")
-    //                 usernameSpan.classList.add("border-red-500" , "text-red-600" , "bg-red-300" )
-    //                 break;
-    //             case 'email':
-    //                 emailField.classList.add("border-red-500" , "text-red-600")
-    //                 passwordSpan.classList.remove("peer-invalid/email:visible")
-    //                 emailSpan.classList.replace("invisble" , "visible")
-    //                 emailSpan.classList.add( "border-red-500" , "text-red-600")
-    //                 break;
-                    
-    //             case 'password':
-    //                 passwordField.classList.add("border-red-500" , "text-red-600" , "bg-transparent")
-    //                 passwordSpan.classList.remove("peer-invalid/password:visible")
-    //                 passwordSpan.classList.replace("invisble" , "visible")
-    //                 passwordSpan.classList.add( "border-red-500" , "text-red-600" , "bg-red-300")
-    //                 break;
-                    
-    //             default:
-    //                 break;
-    //         }
-    //     })
-    // }
-
-    // console.log(validation)
-
-    // let closeController = (e) => {
-    //     this.setClose(true)
-    // }
-
-    // let sweetAlertHandler = () => {
-    //     validation.messages.forEach(message => {
-    //         console.log(message)
-    //     })
-
-    //     setSwalProps({
-    //         show: true,
-    //         title: 'Basic Usage',
-    //         text: 'Hello World',
-    //     });
-    // }
-
-
-
     let inputHandler = (e) => {
         e.preventDefault();
         let name = e.target.name

@@ -55,7 +55,7 @@ function Tags(props) {
     useEffect(() => {
         setLoading(true)
 
-        NodejsApi.get('http://localhost:5000/tags')
+        NodejsApi.get('${process.env.REACT_APP_API_URL}/tags')
         .then(response => {
             if(! response.data.success){
                 if(response.data.code === 204){
@@ -131,7 +131,7 @@ function Tags(props) {
 
     useEffect(() => {
         setLoading(true)
-        NodejsApi.get(`http://localhost:5000/tags?feed=${filterTags.feed}&search=${filterTags.search}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/tags?feed=${filterTags.feed}&search=${filterTags.search}`)
         .then(response => {
             if(! response.data.success){
                 if(response.data.code === 204){
@@ -206,7 +206,7 @@ function Tags(props) {
         let name = e.target.name
         let value = e.target.value
 
-        NodejsApi.get(`http://localhost:5000/tags?${name}=${value}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/tags?${name}=${value}`)
         .then(response => {
             if(! response.data.success){
                 // setLoading(false)

@@ -58,7 +58,7 @@ function CardComment(props) {
                     {
                         comment.user.avatar 
                         ? 
-                        <img src={`http://localhost:5000/${comment.user.avatarpath}`} alt="user" className='h-14 w-14 rounded-full ring-2 ring-green-500  object-cover self-center shadow-md hover:scale-105 transition-all' />
+                        <img src={`${process.env.REACT_APP_API_URL}/${comment.user.avatarpath}`} alt="user" className='h-14 w-14 rounded-full ring-2 ring-green-500  object-cover self-center shadow-md hover:scale-105 transition-all' />
                         : <FontAwesomeIcon icon={faUserCircle} className='text-4xl ring-4 ring-green-500 rounded-full' />
                     }
                 </a>
@@ -152,7 +152,7 @@ function CardComment(props) {
                         {
                             userstate.user.avatar 
                             ? 
-                            <img src={`http://localhost:5000/${comment.user.avatarpath}`} alt="user" className='h-12 w-12 rounded-full ring-2 ring-green-200  object-cover self-center shadow-md hover:scale-105 transition-all' />
+                            <img src={`${process.env.REACT_APP_API_URL}/${comment.user.avatarpath}`} alt="user" className='h-12 w-12 rounded-full ring-2 ring-green-200  object-cover self-center shadow-md hover:scale-105 transition-all' />
                             : <FontAwesomeIcon icon={faUserCircle} className='text-4xl ring-4 ring-green-500 rounded-full' />
                         }
                     </a>

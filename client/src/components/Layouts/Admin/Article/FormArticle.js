@@ -107,7 +107,7 @@ function FormArticle(props){
                             <div style={{display : 'flex'  , alignItems : 'center' , gap : '10px' , justifyContent : "space-between"}}>
                                 <div className='dark:!border-gray-50' style={{display : 'flex' , alignItems : 'center' , border : '1px solid rgba(0 , 0 , 0 , .1 )' , borderRadius : '5px' , padding : '10px' }}>
                                     <span style={{ marginLeft : '10px'}} >عکس فعلی :</span>
-                                    <img src={`http://localhost:5000/${article.imagepath}`} alt='تصویر مقاله' />
+                                    <img src={`${process.env.REACT_APP_API_URL}/${article.imagepath}`} alt='تصویر مقاله' />
                                 </div>
                                 <div className='dark:!border-gray-50' style={{display : 'flex' , alignItems : 'center' , border : '1px solid rgba(0 , 0 , 0 , .1 )' , borderRadius : '5px' , padding : '10px' }}>
                                     <span style={{ marginLeft : '10px'}} >عکس جدید :</span>

@@ -80,7 +80,7 @@ function Tag(props) {
     useEffect(() => {
         setLoading(true)
 
-        NodejsApi.get(`http://localhost:5000/tag/${slug}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/tag/${slug}`)
         .then(response => {
             if(! response.data.success){
                 setLoading(false)
@@ -160,7 +160,7 @@ function Tag(props) {
     useEffect(() => {
         setLoading(true)
         
-        NodejsApi.get(`http://localhost:5000/tag/${slug}?type=${typeQuery.type}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/tag/${slug}?type=${typeQuery.type}`)
         .then(response => {
             if(! response.data.success){
                 setLoading(false)
@@ -241,7 +241,7 @@ function Tag(props) {
         let name = e.target.name
         let value = e.target.value
 
-        NodejsApi.get(`http://localhost:5000/tag/${slug}?${name}=${value}&type=${typeQuery.type}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/tag/${slug}?${name}=${value}&type=${typeQuery.type}`)
         .then(response => {
             if(! response.data.success){
                 // setLoading(false)
@@ -349,7 +349,7 @@ function Tag(props) {
             })
         }
 
-        NodejsApi.get(`http://localhost:5000/tag/${slug}?${name}=${queries[name]}&type=${typeQuery.type}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/tag/${slug}?${name}=${queries[name]}&type=${typeQuery.type}`)
         .then(response => {
             if(! response.data.success){
                 // setLoading(false)

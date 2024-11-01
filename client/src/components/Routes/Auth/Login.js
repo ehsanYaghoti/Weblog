@@ -260,7 +260,7 @@ function LoginComponent({isAuthenticated}) {
                     <div className="grid grid-cols-1 divide-y w-full ">
                         <button type="submit" className="w-full hover:opacity-70 mt-2 drop-shadow-lg text-lg text-white bg-cyan-600 border border-solid  border-cyan-500 py-3 px-4 rounded-md self-center" >sign in</button>
                         <button type="button" className="w-full hover:opacity-70 my-6 drop-shadow-lg  bg-red-500 text-white border border-solid border-red-300 py-4 px-4 rounded-md self-center " >
-                            <a href="http://localhost:5000/auth/google"> 
+                            <a href={`${process.env.REACT_APP_API_URL}/auth/google`} > 
                             <FontAwesomeIcon icon={faGoogle} />
 
                             <span className="ml-2 " >Sign in with Google</span>

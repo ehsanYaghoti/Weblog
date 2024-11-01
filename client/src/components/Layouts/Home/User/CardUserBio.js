@@ -29,7 +29,7 @@ function CardUserBio(props){
                             user.avatar === null ?
                             <FontAwesomeIcon icon={faCircleUser} className='text-gray-300 text-2xl font-[400] h-full w-full '   /> 
                             :
-                            <img src={`http://localhost:5000/${user.avatarpath}`} alt={`${user.username}`} className=' scale-105 hover:scale-125 transition-all duration-500 ' />
+                            <img src={`${process.env.REACT_APP_API_URL}/${user.avatarpath}`} alt={`${user.username}`} className=' scale-105 hover:scale-125 transition-all duration-500 ' />
                         }
                     </a>
                     <div className='h-fit flex flex-col items-center md:items-start gap-2 md:gap-1' >

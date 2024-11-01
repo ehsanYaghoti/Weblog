@@ -24,7 +24,7 @@ function CardArticle(props) {
         // CardArticle
         <div  key={article._id} className={`flex flex-col items-start gap-2 justify-center bg-white ltr:ml-3 rtl:mr-3  rounded-md w-full md:w-[400px] lg:w-full  h-fit p-4 dark:bg-slate-600/80 dark:text-white  ${ article.language === 'fa' ? 'font-["Vazir"]' : 'font-["Nunito"]'  } shadow-md shadow-slate-500/90 `} >
             <a href={`/articles/${article.slug}`} className='flex items-center justify-center w-full' >
-                <img src={`http://localhost:5000/${article.imagepath}`} alt={`${article.title}`} className='w-fit h-64 bg-white object-cover self-center  rounded-md shadow-sm hover:scale-105 transition-all' />
+                <img src={`${process.env.REACT_APP_API_URL}/${article.imagepath}`} alt={`${article.title}`} className='w-fit h-64 bg-white object-cover self-center  rounded-md shadow-sm hover:scale-105 transition-all' />
             </a>                                                    
             <h3 lang='fa' className='text-xl  h-16 w-full text-ellipsis overflow-clip  dark:text-gray-50 hover:opacity-85  font-[300] ltr:text-left rtl:text-right'  dir={`${article.language === 'fa' ?'rtl' :'ltr'}`}  >
                 <a href={`/articles/${article.slug}`} >
@@ -42,7 +42,7 @@ function CardArticle(props) {
                 <a href={`/user/dashboard/${article.author._id}`} className='flex items-center gap-2' >
                     {
                         article.author.avatar !== null ?
-                        <img src={`http://localhost:5000/${article.author.avatarpath}`} alt="author" className='h-10 w-10 rounded-full ring-1 ring-green-200  object-cover self-center shadow-md hover:scale-105 transition-all' />
+                        <img src={`${process.env.REACT_APP_API_URL}/${article.author.avatarpath}`} alt="author" className='h-10 w-10 rounded-full ring-1 ring-green-200  object-cover self-center shadow-md hover:scale-105 transition-all' />
                         : <FontAwesomeIcon icon={faUserCircle} />
                     }
                     <span className='dark:text-gray-50 hover:text-opacity-80' >{article.author.username}</span>

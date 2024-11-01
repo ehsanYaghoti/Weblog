@@ -51,7 +51,7 @@ function UserPanelComments(props){
 
     useEffect(() => {
         setLoading(true)
-        NodejsApi.get(`http://localhost:5000/user/panel`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/user/panel`)
         .then(response => {
             if(! response.data.success){
                 if(response.data.code === 204){

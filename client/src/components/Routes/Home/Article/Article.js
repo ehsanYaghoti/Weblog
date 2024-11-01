@@ -84,7 +84,7 @@ function Article(props) {
 
     useEffect(() => {
         setLoading(true)
-        NodejsApi.get(`http://localhost:5000/articles/${slug}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/articles/${slug}`)
         .then(async response => {
             if(! response.data.success){
                 setLoading(false)
@@ -413,7 +413,7 @@ function Article(props) {
         // console.log(e.target.value)
         console.log(commentField)
         setLoading(true)
-        NodejsApi.post(`http://localhost:5000/comment/` , commentField )
+        NodejsApi.post(`${process.env.REACT_APP_API_URL}/comment/` , commentField )
         .then(async response => {
             if(! response.data.success){
                 setLoading(false)
@@ -711,7 +711,7 @@ function Article(props) {
                                         <>
                                         {/* article image */}
                                         <div className='w-full h-[200px] lg:h-[400px] self-center flex items-center justify-center border border-solid dark:border-none border-gray-200 rounded-lg shadow-md mb-10  ' >
-                                            <img src={`http://localhost:5000/${article.imagepath}`} 
+                                            <img src={`${process.env.REACT_APP_API_URL}/${article.imagepath}`} 
                                                 onError={e =>{ 
                                                     e.currentTarget.style.display = 'none'
                                                     console.log(e)  

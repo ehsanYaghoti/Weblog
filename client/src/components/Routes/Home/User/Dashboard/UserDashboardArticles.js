@@ -53,7 +53,7 @@ function User(props){
 
     useEffect(() => {
         setLoading(true)
-        NodejsApi.get(`http://localhost:5000/user/dashboard/${id}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/user/dashboard/${id}`)
         .then(response => {
             if(! response.data.success){
                 if(response.data.code === 204){

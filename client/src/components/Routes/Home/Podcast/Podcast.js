@@ -75,7 +75,7 @@ function Podcast(props) {
     
     useEffect(() => {
         setLoading(true)
-        NodejsApi.get(`http://localhost:5000/podcasts/${slug}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/podcasts/${slug}`)
         .then(async response => {
             if(! response.data.success){
                 setLoading(false)
@@ -400,7 +400,7 @@ function Podcast(props) {
 
         setLoading(true)
 
-        NodejsApi.post(`http://localhost:5000/comment/` , commentField )
+        NodejsApi.post(`${process.env.REACT_APP_API_URL}/comment/` , commentField )
         .then(async response => {
             if(! response.data.success){
                 setLoading(false)
@@ -600,7 +600,7 @@ function Podcast(props) {
                                         <>
                                         {/* podcast image */}
                                         <div className='w-full h-[200px] md:h-[400px] self-center flex items-center justify-center border border-solid border-gray-200 rounded-lg shadow-md mb-10 dark:border-none ' >
-                                            <img src={`http://localhost:5000/${podcast.imagepath}`} 
+                                            <img src={`${process.env.REACT_APP_API_URL}/${podcast.imagepath}`} 
                                                 onError={e =>{ 
                                                     e.currentTarget.style.display = 'none'
                                                     console.log(e)  }  } 
@@ -626,7 +626,7 @@ function Podcast(props) {
                                             {/* podcast sound */}
                                             <div className='h-fit w-full flex items-center justify-center md:p-4 mb-4'>
                                                 {/* <span style={{ marginLeft : '10px'}} >صوت فعلی :</span> */}
-                                                <audio id="player"  controls={true}  className='h-[60px]  w-[700px]  md:w-[500px]'  src={`http://localhost:5000/${podcast.soundpath}`} />   
+                                                <audio id="player"  controls={true}  className='h-[60px]  w-[700px]  md:w-[500px]'  src={`${process.env.REACT_APP_API_URL}/${podcast.soundpath}`} />   
                                             </div>
                                             {/* podcast statement */}
                                             <p id={podcast._id} className='h-fit whitespace-pre-line leading-7 text-lg font-[500] pb-4 ' style={{wordBreak : 'normal' , wordSpacing : '2px'}} >

@@ -69,7 +69,7 @@ function Articles(props) {
 
     useEffect(() => {
         setLoading(true)
-        NodejsApi.get(`http://localhost:5000/articles`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/articles`)
         .then(response => {
             if(! response.data.success){
                 setLoading(false)
@@ -164,7 +164,7 @@ function Articles(props) {
 
         setLoading(true)
 
-        NodejsApi.get(`http://localhost:5000/articles?category=${searchParams.get('category')}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/articles?category=${searchParams.get('category')}`)
         .then(response => {
             if(! response.data.success){
                 if(response.data.code === 204){
@@ -255,7 +255,7 @@ function Articles(props) {
         let value = e.target.value
         setLoading(true)
 
-        NodejsApi.get(`http://localhost:5000/articles?${name}=${value}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/articles?${name}=${value}`)
         .then(response => {
             if(! response.data.success){
                 // setLoading(false)
@@ -346,7 +346,7 @@ function Articles(props) {
 
         setLoading(true)
 
-        NodejsApi.get(`http://localhost:5000/articles?${name}=${queries[name]}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/articles?${name}=${queries[name]}`)
         .then(response => {
             if(! response.data.success){
                 // setLoading(false)

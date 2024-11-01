@@ -92,7 +92,7 @@ function Search(props) {
     useEffect(() => {
         setLoading(true)
 
-        NodejsApi.get(`http://localhost:5000/search/${search}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/search/${search}`)
         .then(response => {
             if(! response.data.success){
                 setLoading(false)
@@ -213,7 +213,7 @@ function Search(props) {
     useEffect(() => {
         setLoading(true)
         
-        NodejsApi.get(`http://localhost:5000/search/${search}?type=${typeQuery.type}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/search/${search}?type=${typeQuery.type}`)
         .then(response => {
             if(! response.data.success){
                 setLoading(false)
@@ -353,7 +353,7 @@ function Search(props) {
     let paginationHandler = (e) => {
         e.preventDefault();
 
-        NodejsApi.get(`http://localhost:5000/search/${search}?type=${typeQuery.type}`)
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/search/${search}?type=${typeQuery.type}`)
         .then(response => {
             if(! response.data.success){
                 // setLoading(false)

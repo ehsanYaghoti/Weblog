@@ -51,7 +51,7 @@ function Answers(props) {
                     <a href={`/user/dashboard/${userstate.user._id}`} className='  w-fit' >
                         {
                             userstate.user.avatar !== null ?
-                            <img src={`http://localhost:5000/${userstate.user.avatarpath}`} alt="user" className='h-16 w-16 rounded-full ring-2 ring-green-200  object-cover self-center shadow-md hover:scale-105 transition-all' />
+                            <img src={`${process.env.REACT_APP_API_URL}/${userstate.user.avatarpath}`} alt="user" className='h-16 w-16 rounded-full ring-2 ring-green-200  object-cover self-center shadow-md hover:scale-105 transition-all' />
                             : <FontAwesomeIcon icon={faUserCircle} className='text-4xl ring-4 ring-green-500 rounded-full dark:text-gray-50' />
                         }
                     </a>

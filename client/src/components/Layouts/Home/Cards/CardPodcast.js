@@ -25,7 +25,7 @@ function CardPodcast(props) {
             
             {/* Card image */}
             <a href={`/podcasts/${podcast.slug}`} className='h-full' >
-                <img src={`http://localhost:5000/${podcast.imagepath}`} alt="podcast" className='w-full md:w-64 h-full object-cover md:object-cover  rounded-l-lg shadow-md hover:scale-105 transition-all' />
+                <img src={`${process.env.REACT_APP_API_URL}/${podcast.imagepath}`} alt="podcast" className='w-full md:w-64 h-full object-cover md:object-cover  rounded-l-lg shadow-md hover:scale-105 transition-all' />
             </a>
             
             <div className='flex flex-col items-start gap-6 pt-4' >
@@ -98,7 +98,7 @@ function CardPodcast(props) {
                     <a href={`/user/dashboard/${podcast.user._id}`} className='flex items-center gap-2 h-fit' >
                         {
                             podcast.user.avatar !== null ?
-                            <img src={`http://localhost:5000/${podcast.user.avatarpath}`} alt="user" className='h-10 w-10 rounded-full ring-1 ring-green-200  object-cover self-center shadow-md hover:scale-105 transition-all' />
+                            <img src={`${process.env.REACT_APP_API_URL}/${podcast.user.avatarpath}`} alt="user" className='h-10 w-10 rounded-full ring-1 ring-green-200  object-cover self-center shadow-md hover:scale-105 transition-all' />
                             : <FontAwesomeIcon icon={faUserCircle} />
                         }
                         <span className='dark:text-gray-50 hover:text-opacity-80' >{podcast.user.username}</span>

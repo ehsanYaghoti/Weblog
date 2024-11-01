@@ -169,7 +169,7 @@ const AdminrPanelHeader = memo(function AdminrPanelHeader(props) {
                                     {
                                         userProp?.user?.avatar !== null ?
                                         <div className='h-12 w-12 ring-2 ring-green-400 overflow-hidden rounded-full my-4   hover:scale-110 transition-all ' >
-                                            <img src={`http://localhost:5000/${userProp.user?.avatarpath}`} alt="avatar" className='object-cover scale-105' />
+                                            <img src={`${process.env.REACT_APP_API_URL}/${userProp.user?.avatarpath}`} alt="avatar" className='object-cover scale-105' />
                                         </div>                                :
                                         <FontAwesomeIcon icon={faUser} />
                                     }

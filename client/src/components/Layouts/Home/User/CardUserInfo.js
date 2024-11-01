@@ -39,7 +39,7 @@ function CardUserInfo(props){
                         {
                             userstate.user.avatar === null ?
                             <FontAwesomeIcon icon={faCircleUser} className='text-gray-300 dark:text-gray-200 text-2xl font-[400] h-full w-full '   /> :
-                            <img src={`http://localhost:5000/${userstate.user.avatarpath}`} alt={`${userstate.user.username}`} className=' scale-105 hover:scale-125 transition-all duration-500 ' />
+                            <img src={`${process.env.REACT_APP_API_URL}/${userstate.user.avatarpath}`} alt={`${userstate.user.username}`} className=' scale-105 hover:scale-125 transition-all duration-500 ' />
                         }
                     </div>
                     <div className='h-fit flex flex-col items-center lg:items-start gap-4 lg:gap-2' >

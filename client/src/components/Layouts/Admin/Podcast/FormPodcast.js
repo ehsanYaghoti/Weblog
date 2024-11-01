@@ -118,7 +118,7 @@ function FormPodcast(props){
                         <div style={{display : 'flex'  , alignItems : 'center' , justifyContent : "space-between"}}>
                             <div style={{display : 'flex' , alignItems : 'center' , border : '1px solid rgba(0 , 0 , 0 , .1 )' , borderRadius : '5px' , padding : '10px' }}>
                                 <span style={{ marginLeft : '10px'}} >عکس فعلی :</span>
-                                <img src={`http://localhost:5000/${podcast.imagepath}`} alt='تصویر پادکست' />
+                                <img src={`${process.env.REACT_APP_API_URL}/${podcast.imagepath}`} alt='تصویر پادکست' />
                             </div>
                             <div style={{display : 'flex' , alignItems : 'center' , border : '1px solid rgba(0 , 0 , 0 , .1 )' , borderRadius : '5px' , padding : '10px' }}>
                                 <span style={{ marginLeft : '10px'}} >عکس جدید :</span>
@@ -153,7 +153,7 @@ function FormPodcast(props){
                             <div style={{display : 'flex'  , alignItems : 'center' , justifyContent : "space-between"}}>
                                 <div style={{display : 'flex' , flexDirection : 'column'  , alignItems : 'center' , border : '1px solid rgba(0 , 0 , 0 , .1 )' , borderRadius : '5px' , padding : '10px' }}>
                                     <span style={{ marginLeft : '10px'}} >صوت فعلی :</span>
-                                    <audio controls={true}   src={`http://localhost:5000/${podcast.soundpath}`} />   
+                                    <audio controls={true}   src={`${process.env.REACT_APP_API_URL}/${podcast.soundpath}`} />   
                                 </div>
                                 <div style={{display : 'flex' , flexDirection : 'column' , alignItems : 'center' , border : '1px solid rgba(0 , 0 , 0 , .1 )' , borderRadius : '5px' , padding : '10px' }}>
                                     <span style={{ marginLeft : '10px'}} >صوت جدید :</span>

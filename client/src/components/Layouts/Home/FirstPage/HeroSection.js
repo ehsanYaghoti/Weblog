@@ -3,32 +3,25 @@ import React from 'react';
 // Layouts
 import ImageSlider from 'src/components/Layouts/Home/FirstPage/ImageSlider';
 
-
-// images
-import L1 from 'src/Static/sunrise.jpg'
-import L2 from 'src/Static/landscape2.jpg'
-import L3 from 'src/Static/landscape.jpg'
-
-
 function HeroSectoin(props) {
 
     let slides = [
         {
-            url : L1 ,
+            url : `${process.env.REACT_APP_API_URL}/public/static/landscape.jpg` ,
             title :  'Title' , 
             descripiton : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua' , 
             hasButton : true ,
             buttonContent  : 'Read'
         },
         {
-            url : L2 , 
+            url : `${process.env.REACT_APP_API_URL}/public/static/landscape2.jpg` , 
             title :  'Title' , 
             descripiton : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ' , 
             hasButton : false ,
             buttonContent  : 'Read'
         },
         {
-            url : L3 , 
+            url : `${process.env.REACT_APP_API_URL}/public/static/sunrise.jpg` , 
             title :  'Title' , 
             descripiton : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' , 
             hasButton : false ,
@@ -36,6 +29,7 @@ function HeroSectoin(props) {
         },
     ]
   
+    console.log(process.env)
 
     return (
         // Hero Section 
@@ -52,7 +46,7 @@ function HeroSectoin(props) {
                     <ul className='h-[95%] flex flex-col items-start gap-4 ' >
                         <li className='flex items-center ' >
                         <a href="/articels" className='flex items-center'>
-                            <img src={L1} alt="" className='h-[100px] w-[100px] rounded-md border border-solid border-gray-400 shadow-md hover:scale-110 transition-all dark:border-none' />
+                            <img src={`${process.env.REACT_APP_API_URL}/public/static/landscape.jpg`} alt="" className='h-[100px] w-[100px] rounded-md border border-solid border-gray-400 shadow-md hover:scale-110 transition-all dark:border-none' />
                             <div className='flex flex-col items-start ml-4 font-["Nunito"] hover:opacity-80' >
                                 <span className='text-xl font-[600] h-fit text-gray-900 dark:text-white' >Lorem Ipsum</span>
                                 <p className='font-[200] font-["Nunito"] text-gray-800 line-clamp-2 leading-6 dark:text-white ' >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
@@ -61,7 +55,7 @@ function HeroSectoin(props) {
                         </li>
                         <li className='flex items-center ' >
                             <a href="/articels" className='flex items-center'>
-                            <img src={L2} alt="" className='h-[100px] w-[100px] rounded-md border border-solid border-gray-400 shadow-md hover:scale-110 transition-all dark:border-none' />
+                            <img src={`${process.env.REACT_APP_API_URL}/public/static/landscape2.jpg`} alt="" className='h-[100px] w-[100px] rounded-md border border-solid border-gray-400 shadow-md hover:scale-110 transition-all dark:border-none' />
                             <div className='flex flex-col items-start ml-4 font-["Nunito"] hover:opacity-80' >
                                 <span className='text-xl font-[600] h-fit text-gray-900 dark:text-white' >Lorem Ipsum</span>
                                 <p className='font-[200] font-["Nunito"] text-gray-800 line-clamp-2 leading-6 dark:text-white' >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
@@ -70,7 +64,7 @@ function HeroSectoin(props) {
                         </li>
                         <li className='flex items-center ' >
                         <a href="/articels" className='flex items-center'>
-                            <img src={L3} alt="" className='h-[100px] w-[100px] rounded-md border border-solid border-gray-400 shadow-md object-cover hover:scale-110 transition-all dark:border-none ' />
+                            <img src={`${process.env.REACT_APP_API_URL}/public/static/sunrise.jpg`} alt="" className='h-[100px] w-[100px] rounded-md border border-solid border-gray-400 shadow-md object-cover hover:scale-110 transition-all dark:border-none ' />
                             <div className='flex flex-col items-start ml-4 font-["Nunito"] hover:opacity-80' >
                                 <span className='text-xl text-gray-900 font-[600] h-fit dark:text-white' >Lorem Ipsum</span>
                                 <p className='font-[200] font-["Nunito"] text-gray-800 line-clamp-2 leading-6 dark:text-white' >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>

@@ -18,7 +18,7 @@ const apiAuthAdminJWT = require('app/http/middleware/apiAuthAdminJWT');
 
 // CORS
 let corsOptions = {
-  origin: ['http://weblogg.ir' , 'http://localhost:3000' , 'http://192.168.43.198:3000' ] ,
+  origin: [ 'http://www.weblogg.ir'  , `${process.env.WEBSITE_URL}` , `${process.env.WEBSITE_FRONT_URL}` , ,'http://localhost:3000' ] ,
   allowedHeaders : ['Content-Type' ,'Authorization' , 'Origin' , 'Access-Control-Allow-Origin'],
   credentials : true,
   methods : 'GET,PUT,POST,DELETE'
