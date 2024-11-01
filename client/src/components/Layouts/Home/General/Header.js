@@ -26,7 +26,7 @@ function Header(props) {
 
 
     let themeHandler = (e , theme ) => {
-        console.log(theme)
+        // console.log(theme)
 
         switch (theme) {
             
@@ -34,17 +34,17 @@ function Header(props) {
                 
                 document.documentElement.classList.add('dark')
 
-                document.getElementById('moon').classList.remove('hidden')
-                document.getElementById('moon2').classList.remove('hidden')
-                document.getElementById('DarkThemeSpan').classList.remove('hidden')
+                document.getElementById('moon')?.classList.remove('hidden')
+                document.getElementById('moon2')?.classList.remove('hidden')
+                document.getElementById('DarkThemeSpan')?.classList.remove('hidden')
 
-                document.getElementById('sun').classList.add('hidden')
-                document.getElementById('sun2').classList.add('hidden')
-                document.getElementById('lightThemeSpan').classList.add('hidden')
+                document.getElementById('sun')?.classList.add('hidden')
+                document.getElementById('sun2')?.classList.add('hidden')
+                document.getElementById('lightThemeSpan')?.classList.add('hidden')
 
-                document.getElementById('systemMode').classList.add('hidden')
-                document.getElementById('systemMode2').classList.add('hidden')
-                document.getElementById('SystemThemeSpan').classList.add('hidden')
+                document.getElementById('systemMode')?.classList.add('hidden')
+                document.getElementById('systemMode2')?.classList.add('hidden')
+                document.getElementById('SystemThemeSpan')?.classList.add('hidden')
 
                 // Whenever the user explicitly chooses dark mode
                 localStorage.theme = 'dark'
@@ -53,48 +53,48 @@ function Header(props) {
             case 'system':
 
                 if ( ( window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark')
+                    document.documentElement?.classList.add('dark')
                 } else {
-                    document.documentElement.classList.remove('dark')
+                    document.documentElement?.classList.remove('dark')
                 }
 
-                document.getElementById('systemMode').classList.remove('hidden')
-                document.getElementById('systemMode2').classList.remove('hidden')
-                document.getElementById('SystemThemeSpan').classList.remove('hidden')
+                document.getElementById('systemMode')?.classList.remove('hidden')
+                document.getElementById('systemMode2')?.classList.remove('hidden')
+                document.getElementById('SystemThemeSpan')?.classList.remove('hidden')
 
-                document.getElementById('sun').classList.add('hidden')
-                document.getElementById('sun2').classList.add('hidden')
-                document.getElementById('lightThemeSpan').classList.add('hidden')
+                document.getElementById('sun')?.classList.add('hidden')
+                document.getElementById('sun2')?.classList.add('hidden')
+                document.getElementById('lightThemeSpan')?.classList.add('hidden')
 
-                document.getElementById('moon').classList.add('hidden')
-                document.getElementById('moon2').classList.add('hidden')
-                document.getElementById('DarkThemeSpan').classList.add('hidden')
+                document.getElementById('moon')?.classList.add('hidden')
+                document.getElementById('moon2')?.classList.add('hidden')
+                document.getElementById('DarkThemeSpan')?.classList.add('hidden')
 
                 // Whenever the user explicitly chooses system mode
                 localStorage.theme = 'system'
 
             break;
             case 'light':
-                document.documentElement.classList.remove('dark')
+                document.documentElement?.classList.remove('dark')
 
-                document.getElementById('sun').classList.remove('hidden')
-                document.getElementById('sun2').classList.remove('hidden')
-                document.getElementById('lightThemeSpan').classList.remove('hidden')
+                document.getElementById('sun')?.classList.remove('hidden')
+                document.getElementById('sun2')?.classList.remove('hidden')
+                document.getElementById('lightThemeSpan')?.classList.remove('hidden')
 
-                document.getElementById('moon').classList.add('hidden')
-                document.getElementById('moon2').classList.add('hidden')
-                document.getElementById('DarkThemeSpan').classList.add('hidden')
+                document.getElementById('moon')?.classList.add('hidden')
+                document.getElementById('moon2')?.classList.add('hidden')
+                document.getElementById('DarkThemeSpan')?.classList.add('hidden')
                 
-                document.getElementById('systemMode').classList.add('hidden')
-                document.getElementById('systemMode2').classList.add('hidden')
-                document.getElementById('SystemThemeSpan').classList.add('hidden')
+                document.getElementById('systemMode')?.classList.add('hidden')
+                document.getElementById('systemMode2')?.classList.add('hidden')
+                document.getElementById('SystemThemeSpan')?.classList.add('hidden')
 
                 // Whenever the user explicitly chooses light mode
                 localStorage.theme = 'light'
 
             break;        
             default:
-                document.documentElement.classList.remove('dark')
+                document.documentElement?.classList.remove('dark')
             break;
         }
     }
@@ -130,7 +130,7 @@ function Header(props) {
             let userInfo4 = document.getElementById('userInfo4')
 
             if(e.target !== userInfo1 && e.target !== userInfo2  && e.target !== userInfo3  && e.target !== userInfo4 ){
-                if(document.getElementById('userMenu') !== null && document.getElementById('userMenu').classList.contains('flex')){
+                if(document.getElementById('userMenu') !== null && document.getElementById('userMenu')?.classList.contains('flex')){
                     document.getElementById('userMenu')?.classList.replace('flex' , 'hidden')
                 }
             }   
@@ -243,7 +243,7 @@ function Header(props) {
                             <div className='relative' >    
 
                                 <div id='userInfo1' className='flex items-center gap-4 w-fit '
-                                    onClick={e => document.getElementById('userMenu').classList.contains('hidden') ? 
+                                    onClick={e => document.getElementById('userMenu')?.classList.contains('hidden') ? 
                                     document.getElementById('userMenu')?.classList.replace('hidden' , 'flex')
                                     : 
                                     document.getElementById('userMenu')?.classList.replace('flex' , 'hidden')

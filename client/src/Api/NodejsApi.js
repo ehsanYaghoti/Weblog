@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// baseURL : 'https://weblog-i6ln.onrender.com',
 let instance = axios.create({
     baseURL : 'http://api.weblogg.ir',
     timeout : 20000,
@@ -15,7 +14,7 @@ let instance = axios.create({
 })
 
 instance.interceptors.request.use(function(config) {
-    console.log(config)
+    // console.log(config)
     return config;
 } , function(error){
     return Promise.reject(error);
