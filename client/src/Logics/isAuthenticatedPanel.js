@@ -9,7 +9,7 @@ export default function isAuthenticatedPanel(Component) {
     return (props) => {
 
         const [loading, setLoading] = useState(true)
-        const [isAuthenticated , setIsAuthenticated] = useState(null)
+        const [isAuthenticated , setIsAuthenticated] = useState(false)
         const navigate = useNavigate()
 
         useEffect(() => {

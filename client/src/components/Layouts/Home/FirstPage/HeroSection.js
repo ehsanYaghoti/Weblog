@@ -28,8 +28,6 @@ function HeroSectoin(props) {
             buttonContent  : 'Read'
         },
     ]
-  
-    console.log(process.env)
 
     return (
         // Hero Section 
