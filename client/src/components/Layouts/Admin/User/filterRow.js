@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 //import Context
 import  QueryContext from 'src/Contexts/queryContext';
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
 
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,10 +17,6 @@ function FilterRow(props){
 
     let queries = queryContext.queries
     let inputHandler = queryContext.inputHandler
-
-    const UserContext =  useContext(AuthenticatedUserContext);
-    
-    let authenticatedUser = UserContext
 
     return (
         <div className='filter-row'>
@@ -48,7 +42,7 @@ function FilterRow(props){
                 </label>
             </div>
 
-            <Link className='new-user' to={{ pathname : '/admin/users/create' , state : authenticatedUser  }}  > 
+            <Link className='new-user' to={{ pathname : '/admin/users/create'}}  > 
                 <span className='!whitespace-nowrap' > افزودن کاربر جدید</span> 
                 <FontAwesomeIcon icon='plus' />
             </Link>

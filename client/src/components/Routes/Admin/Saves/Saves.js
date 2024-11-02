@@ -98,6 +98,11 @@ function Saves(props) {
     } , [queries])
     
     useEffect(() => {
+
+        setAuthenticatedUser({
+            isAuthenticated : true,
+            user : props?.user
+        })
         setLoading(true)
         NodejsApi.get(`/admin/saves` )
         .then(response => {
@@ -125,11 +130,6 @@ function Saves(props) {
             console.log(response.data)
             let data = response.data.data
             let saves = data.docs
-
-            setAuthenticatedUser({
-                isAuthenticated : response.data.isAuthenticated,
-                user : response.data.authenticatedUser
-            })
 
             setSaves(saves);
             setPagination({
@@ -167,7 +167,7 @@ function Saves(props) {
             })
         })
 
-    } , [navigate])
+    } , [navigate , props.user])
 
     let deleteHandler = (e , id) =>{
         setLoading(true)

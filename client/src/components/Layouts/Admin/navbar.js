@@ -11,7 +11,7 @@ const Navbar = memo(function Navbar(props){
     // let userState = UserContext
     let userState = props?.user
 
-    // console.log(userState)
+    console.log(userState)
     
     let userRolesNames = []
     if(userState?.isAuthenticated && userState?.user?.roles.length !== 0 && userState?.user?.roles !== undefined ){

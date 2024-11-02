@@ -3,7 +3,6 @@ import { Link  } from 'react-router-dom';
 
 //import Contexts
 import  TableContext from 'src/Contexts/tableContext';
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,10 +15,6 @@ function TablePostRow(props){
     const tableContext =  useContext(TableContext);
     let post = props.post
     let deleteHandler = tableContext.deleteHandler
-
-    const UserContext =  useContext(AuthenticatedUserContext);
-    
-    let authenticatedUser = UserContext
 
     let tagsNames = []
     if(post.tags !==  null){
@@ -74,7 +69,6 @@ function TablePostRow(props){
                     <div className='edit-i' >
                         <Link to={{
                             pathname : `/admin/posts/edit/${post._id}`
-                            , state : authenticatedUser
                         }}>
                             <FontAwesomeIcon icon='sync' /><span>ویرایش</span>
                         </Link>

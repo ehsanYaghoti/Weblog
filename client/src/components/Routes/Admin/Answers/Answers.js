@@ -55,6 +55,7 @@ function Answers(props) {
 
 
     useEffect(() => {
+
         setLoading(true)
 
         let queryString = Object.keys(queries).map(key => key + '=' + queries[key]).join('&');
@@ -99,6 +100,11 @@ function Answers(props) {
     } , [queries])
     
     useEffect(() => {
+
+        setAuthenticatedUser({
+            isAuthenticated : true,
+            user : props.user
+        })
         setLoading(true)
         NodejsApi.get(`/admin/answers` )
         .then(response => {
@@ -126,11 +132,6 @@ function Answers(props) {
             console.log(response.data)
             let data = response.data.data
             let answers = data.docs
-
-            setAuthenticatedUser({
-                isAuthenticated : response.data.isAuthenticated,
-                user : response.data.authenticatedUser
-            })
 
             setAnswers(answers);
             setPagination({
@@ -168,7 +169,7 @@ function Answers(props) {
             })
         })
 
-    } , [navigate])
+    } , [navigate , props.user])
 
     let deleteHandler = (e , id) =>{
         

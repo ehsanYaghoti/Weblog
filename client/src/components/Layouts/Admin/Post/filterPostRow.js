@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 //import Context
 import  QueryContext from 'src/Contexts/queryContext';
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
 
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,28 +18,15 @@ function FilterPostRow(props){
     let queries = queryContext.queries
     let inputHandler = queryContext.inputHandler
 
-    const UserContext =  useContext(AuthenticatedUserContext);
-    
-    let authenticatedUser = UserContext
-
-
     return (
         <div className='filter-row'>
             <input className='input-search' name='name' value={queries.name}  placeholder='جستجو پست ...' type='text' onChange={inputHandler}/>      
-            {/* <label>
-                نوع دسته  : 
-                <select className='select' value={queries.parent } name='parent' onChange={inputHandler}>
-                    <option value='father'>دسته اصلی</option>
-                    <option value='child'>دسته فرزند</option>
-                </select>
-            </label> */}
-
-        <Link className='new-user' to={{ pathname : '/admin/posts/create' , state : authenticatedUser  }}  > 
-            <span> افزودن پست جدید</span> 
-            <FontAwesomeIcon icon='plus' />
-        </Link>
-
-    </div>
+            
+            <Link className='new-user' to={{ pathname : '/admin/posts/create' }}  > 
+                <span> افزودن پست جدید</span> 
+                <FontAwesomeIcon icon='plus' />
+            </Link>
+        </div>
     )
 };
 

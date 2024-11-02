@@ -1,8 +1,5 @@
 import React , {useState , useEffect }  from 'react';
 
-// import Contexts
-// import authenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
 // Layouts
 import GoTopBtn from 'src/components/Layouts/Home/General/GoTopBtn';
 import SpinnerOnTop from 'src/components/Layouts/Home/Loadings/SpinnerOnTop';

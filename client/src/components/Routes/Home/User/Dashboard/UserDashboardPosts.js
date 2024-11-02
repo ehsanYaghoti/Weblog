@@ -1,9 +1,6 @@
 import React , {useState , useEffect }  from 'react';
 import { useParams  } from 'react-router-dom';
 
-// import Contexts
-// import authenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
 // Layouts
 import Header from 'src/components/Layouts/Home/General/Header';
 import Footer from 'src/components/Layouts/Home/General/Footer';

@@ -105,6 +105,11 @@ function Tags(props) {
     } , [queries])
     
     useEffect(() => {
+
+        setAuthenticatedUser({
+            isAuthenticated : true,
+            user : props?.user
+        })
         setLoading(true)
         NodejsApi.get(`/admin/tags` )
         .then(response => {
@@ -132,12 +137,6 @@ function Tags(props) {
             console.log(response.data)
             let data = response.data.data
             let tags = data.docs
-
-            setAuthenticatedUser({
-                isAuthenticated : response.data.isAuthenticated,
-                user : response.data.authenticatedUser
-            })
-
 
             setTags(tags);
             setPagination({
@@ -175,7 +174,7 @@ function Tags(props) {
             })
         })
 
-    } , [navigate])
+    } , [navigate , props.user])
 
     let deleteHandler = (e , bb) =>{
         

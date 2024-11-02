@@ -2,9 +2,6 @@ import React , {useState , useEffect , useRef }  from 'react';
 import Select from 'react-select';
 import { Editor } from '@tinymce/tinymce-react';
 
-// import Contexts
-// import authenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
 // Layouts
 import SpinnerOnTop from 'src/components/Layouts/Home/Loadings/SpinnerOnTop';
 import UserPanelHeader from 'src/components/Layouts/Home/User/UserPanelHeader';

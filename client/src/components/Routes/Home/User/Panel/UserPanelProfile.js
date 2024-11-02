@@ -1,8 +1,5 @@
 import React , {useState , useEffect , useRef }  from 'react';
 
-// import Contexts
-// import authenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
 // Layouts
 // import Footer from 'src/components/Layouts/Home/Footer';
 import GoTopBtn from 'src/components/Layouts/Home/General/GoTopBtn';

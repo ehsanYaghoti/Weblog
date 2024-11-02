@@ -97,6 +97,11 @@ function Roles(props) {
     } , [queries])
     
     useEffect(() => {
+
+        setAuthenticatedUser({
+            isAuthenticated : true,
+            user : props?.user
+        })
         setLoading(true)
         NodejsApi.get(`/admin/roles` )
         .then(response => {
@@ -124,11 +129,6 @@ function Roles(props) {
             console.log(response.data)
             let data = response.data.data
             let Roles = data.docs
-
-            setAuthenticatedUser({
-                isAuthenticated : response.data.isAuthenticated,
-                user : response.data.authenticatedUser
-            })
 
             setRoles(Roles);
             setPagination({
@@ -166,7 +166,7 @@ function Roles(props) {
             })
         })
 
-    } , [navigate])
+    } , [navigate , props.user])
 
     let deleteHandler = (e , id) =>{
         

@@ -2,10 +2,6 @@ import React , { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
-// import contexts
-// import  AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
-
 // styles
 import 'src/Styles/sass/main.scss';
 import 'src/Styles/sass/navbar.scss';
@@ -22,7 +18,7 @@ const AdminrPanelHeader = memo(function AdminrPanelHeader(props) {
     //props
     let userProp = props.user
 
-
+    console.log(userProp)
 
     let themeHandler = (e , theme ) => {
         console.log(theme)

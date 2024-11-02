@@ -8,8 +8,6 @@ import NodejsApi from 'src/Api/NodejsApi';
 import PaginationContext from 'src/Contexts/paginationContext'
 import QueryContext from 'src/Contexts/queryContext'
 import TableContext from 'src/Contexts/tableContext'
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
 
 //Components
 import Navbar from 'src/components/Layouts/Admin/navbar.js';
@@ -55,6 +53,7 @@ function Articles(props) {
 
 
     useEffect(() => {
+
         setLoading(true)
 
         let queryString = Object.keys(queries).map(key => key + '=' + queries[key]).join('&');
@@ -107,6 +106,11 @@ function Articles(props) {
     } , [queries])
     
     useEffect(() => {
+
+        setAuthenticatedUser({
+            isAuthenticated : true,
+            user : props.user
+        })
         setLoading(true)
         NodejsApi.get(`/admin/articles` )
         .then(response => {
@@ -142,11 +146,6 @@ function Articles(props) {
             console.log(response.data)
             let data = response?.data?.data
             let articles = data?.docs
-
-            setAuthenticatedUser({
-                isAuthenticated : response.data.isAuthenticated,
-                user : response.data.authenticatedUser
-            })
 
             setArticles(articles);
             setPagination({
@@ -184,7 +183,7 @@ function Articles(props) {
             })
         })
 
-    } , [navigate])
+    } , [navigate , props.user])
 
     let deleteHandler = (e , id) =>{
         
@@ -226,11 +225,8 @@ function Articles(props) {
         })
     }
 
-    console.log(AuthenticatedUserContext)
-    // console.log(articles)
     return (
         <div className='home-dashboard'>
-            <AuthenticatedUserContext.Provider  value={authenticatedUser}  >
             <Navbar user={authenticatedUser}  />
             <div className='dashborad-body dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black'>
                 <AdminrPanelHeader user={authenticatedUser} />
@@ -259,7 +255,6 @@ function Articles(props) {
                 }
                 </QueryContext.Provider>
             </div>
-            </AuthenticatedUserContext.Provider>
         </div>
     )
 

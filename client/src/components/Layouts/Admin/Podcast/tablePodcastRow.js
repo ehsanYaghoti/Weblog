@@ -3,8 +3,6 @@ import { Link  } from 'react-router-dom';
 
 //import Contexts
 import  TableContext from 'src/Contexts/tableContext';
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -16,10 +14,7 @@ function TablePodcastRow(props){
     // contexts
     const tableContext =  useContext(TableContext);
     let deleteHandler = tableContext.deleteHandler
-    const UserContext =  useContext(AuthenticatedUserContext);
-    
-    let authenticatedUser = UserContext
-    
+        
     // props
     let podcast = props.podcast
 
@@ -63,7 +58,6 @@ function TablePodcastRow(props){
                     <div className='edit-i' >
                         <Link to={{
                             pathname : `/admin/podcasts/edit/${podcast._id}`
-                            , state : authenticatedUser
                         }}>
                             <FontAwesomeIcon icon='sync' /><span>ویرایش</span>
                         </Link>

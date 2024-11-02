@@ -8,7 +8,6 @@ import NodejsApi from 'src/Api/NodejsApi';
 import PaginationContext from 'src/Contexts/paginationContext'
 import QueryContext from 'src/Contexts/queryContext'
 import TableContext from 'src/Contexts/tableContext'
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
 
 //Components
 import Navbar from 'src/components/Layouts/Admin/navbar.js';
@@ -106,6 +105,11 @@ function Reports(props) {
     } , [queries])
     
     useEffect(() => {
+
+        setAuthenticatedUser({
+            isAuthenticated : true,
+            user : props?.user
+        })
         setLoading(true)
         NodejsApi.get(`/admin/reports` )
         .then(response => {
@@ -126,11 +130,6 @@ function Reports(props) {
                 state : response.data.success ,
                 message : ''
                 }
-            })
-
-            setAuthenticatedUser({
-                isAuthenticated : response.data.isAuthenticated,
-                user : response.data.authenticatedUser
             })
 
             console.log(response.data)
@@ -172,7 +171,7 @@ function Reports(props) {
             })
         })
 
-    } , [navigate])
+    } , [navigate , props.user])
 
     let deleteHandler = (e , bb) =>{
         
@@ -216,8 +215,6 @@ function Reports(props) {
 
     return (
         <div className='home-dashboard'>
-        <AuthenticatedUserContext.Provider  value={authenticatedUser}  >
-
             <Navbar user={authenticatedUser}   />
             <div className='dashborad-body dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black'>
                 <AdminrPanelHeader user={authenticatedUser} />
@@ -250,7 +247,6 @@ function Reports(props) {
                 }
                 </QueryContext.Provider>
             </div>
-            </AuthenticatedUserContext.Provider>
         </div>
     )
 

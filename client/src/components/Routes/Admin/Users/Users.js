@@ -115,6 +115,11 @@ function Users(props) {
     } , [queries])
     
     useEffect(() => {
+
+        setAuthenticatedUser({
+            isAuthenticated : true,
+            user : props?.user
+        })
         setLoading(true)
         NodejsApi.get(`/admin/user` )
         .then(response => {
@@ -138,11 +143,6 @@ function Users(props) {
             console.log(response.data)
             let data = response.data.data
             let users = data.docs
-
-            setAuthenticatedUser({
-                isAuthenticated : response.data.isAuthenticated,
-                user : response.data.authenticatedUser
-            })
 
             setUsersState(users);
             setPagination({
@@ -180,7 +180,7 @@ function Users(props) {
             })
         })
 
-    } , [navigate])
+    } , [navigate , props.user])
 
     let deleteHandler = (e , bb) =>{
         setLoading(true)
@@ -335,43 +335,6 @@ function Users(props) {
             })
         })
         setLoading(false)
-
-        // NodejsApi.get(`${process.env.REACT_APP_API_URL}/articles?${name}=${queries[name]}`)
-        // .then(response => {
-        //     if(! response.data.success){
-        //         // setLoading(false)
-        //         return  setSuccess(prevState => {
-        //            return {
-        //             state : response.data.success ,
-        //             message : response.data.data
-        //             }
-        //         })
-              
-        //     }
-
-        //     setSuccess(prevState => {
-        //         return {
-        //         state : response.data.success ,
-        //         message : ''
-        //         }
-        //     })
-
-
-        //     let data = response.data
-        //     let articles = data.articles.docs
-        //     setArticles(articles);
-        //     setLoading(false)
-
-        // } )
-        // .catch(err => {
-        //     console.log(err)
-        //     setSuccess({
-        //         state : false,
-        //         message : err.message
-        //     })
-        //     setLoading(false)
-
-        // })
 
     }
 

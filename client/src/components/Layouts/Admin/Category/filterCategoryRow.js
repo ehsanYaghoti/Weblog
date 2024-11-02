@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 //import Context
 import  QueryContext from 'src/Contexts/queryContext';
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
 
 
 //import icons
@@ -19,10 +18,6 @@ function FilterCategoryRow(props){
 
     let queries = queryContext.queries
     let inputHandler = queryContext.inputHandler
-
-    const UserContext =  useContext(AuthenticatedUserContext);
-    
-    let authenticatedUser = UserContext
 
     let parentNames = []
     queryContext.categories.forEach(category => {
@@ -45,7 +40,7 @@ function FilterCategoryRow(props){
                 </select>
             </label>
 
-        <Link className='new-user' to={{ pathname : '/admin/categories/create' , state : authenticatedUser  }}  > 
+        <Link className='new-user' to={{ pathname : '/admin/categories/create'  }}  > 
             <span className='text-gray-50' > افزودن دسته جدید</span> 
             <FontAwesomeIcon icon='plus' />
         </Link>

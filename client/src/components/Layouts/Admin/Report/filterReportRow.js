@@ -1,10 +1,5 @@
-import  React , {useContext}  from  'react';
+import  React  from  'react';
 import { Link } from 'react-router-dom';
-
-// import contexts
-import AuthenticatedUserContext from 'src/Contexts/authenticatedUserContext';
-
-
 
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,17 +10,11 @@ library.add(faPlus)
 
 function FilterReportRow(props){
 
-    // const queryContext =  useContext(QueryContext);
-    const UserContext =  useContext(AuthenticatedUserContext);
-    
-    let authenticatedUser = UserContext
-
-
     return (
         <div className='filter-row'>
             
 
-        <Link className='new-user' to={{ pathname : '/admin/reports/create' , state : authenticatedUser   }}  > 
+        <Link className='new-user' to={{ pathname : '/admin/reports/create' }}  > 
             <span> افزودن گزارش جدید</span> 
             <FontAwesomeIcon icon='plus' />
         </Link>

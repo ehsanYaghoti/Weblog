@@ -7,7 +7,7 @@ import SpinnerOnTop from 'src/components/Layouts/Home/Loadings/SpinnerOnTop';
 export default function isAdmin(Component, page) {
     return (props) => {
 
-        const [isAdmin, setIsAdmin] = useState(false)
+        const [isAdmin, setIsAdmin] = useState(null)
         const [loading, setLoading] = useState(true)
         const [user , setUser] = useState({})
 
