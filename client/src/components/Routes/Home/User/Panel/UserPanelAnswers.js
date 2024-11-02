@@ -16,7 +16,7 @@ import NodejsApi from 'src/Api/NodejsApi';
 // import icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle  } from '@fortawesome/free-solid-svg-icons';
-import isAuthenticated from 'src/Logics/isAuthenticated';
+import isAuthenticatedPanel from 'src/Logics/isAuthenticatedPanel';
 
 
 function UserPanelAnswers(props){
@@ -172,4 +172,4 @@ function UserPanelAnswers(props){
     )
 }
 
-export default isAuthenticated(UserPanelAnswers , 'panel'); 
+export default isAuthenticatedPanel(UserPanelAnswers); 

@@ -10,7 +10,7 @@ import NodejsApi from 'src/Api/NodejsApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faEye , faEyeSlash , faBlog , faSpinner, faClose  } from '@fortawesome/free-solid-svg-icons'
-import isAuthenticated from "src/Logics/isAuthenticated";
+import isAuthenticatedAuth from "src/Logics/isAuthenticatedAuth";
 
 
 
@@ -287,4 +287,4 @@ function LoginComponent({isAuthenticated}) {
 }
 
 
-export default isAuthenticated(LoginComponent , 'auth' ) ;
+export default isAuthenticatedAuth(LoginComponent) ;

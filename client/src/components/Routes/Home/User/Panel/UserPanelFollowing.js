@@ -14,7 +14,7 @@ import NodejsApi from 'src/Api/NodejsApi';
 // import icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import isAuthenticated from 'src/Logics/isAuthenticated';
+import isAuthenticatedPanel from 'src/Logics/isAuthenticatedPanel';
 
 
 
@@ -262,4 +262,4 @@ function UserPanelFollowing(props) {
     )
 }
 
-export default isAuthenticated(UserPanelFollowing , 'panel');
+export default isAuthenticatedPanel(UserPanelFollowing);

@@ -38,6 +38,7 @@ export default function isAuthenticated(Component, page) {
 
                 } else if(userStatus){
                     setIsAuthenticated(true)
+                    return <Component isAuthenticated={true} {...props} />
                 }
 
                 setLoading(false)
@@ -50,33 +51,37 @@ export default function isAuthenticated(Component, page) {
             console.log(isAuthenticated)
 
 
-        }, [isAuthenticated, navigate])
+        }, [isAuthenticated, navigate , props])
 
         
 
         if (loading) {
             return <Spinner />
-        }
+        } else if(! loading ){
 
-        if (page === 'auth') {
-           
-            if (!isAuthenticated) {
+            if (page === 'auth') {
+            
+                if (!isAuthenticated) {
+                    console.log(isAuthenticated)
+                    return <Component isAuthenticated={false} {...props} />
+                }
+
+            } else if (page === 'panel') {
                 console.log(isAuthenticated)
-                return <Component isAuthenticated={false} {...props} />
-            }
+                if (loading) {
+                    return <Spinner />
+                }
 
-        } else if (page === 'panel') {
-            console.log(isAuthenticated)
-            if (loading) {
-                return <Spinner />
-            }
+                if (isAuthenticated) {
+                    console.log(isAuthenticated)
 
-            if (isAuthenticated) {
-                console.log(isAuthenticated)
+                    return <Component isAuthenticated={true} {...props} />
 
-                return <Component isAuthenticated={true} {...props} />
+                }
+
 
             }
+
         }
 
         return

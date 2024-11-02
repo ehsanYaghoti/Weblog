@@ -2,7 +2,7 @@ import React , { useEffect, useState }   from "react";
 import { useNavigate , useLocation }  from 'react-router-dom'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBlog , faSpinner, faClose  } from '@fortawesome/free-solid-svg-icons'
-import isAuthenticated from "src/Logics/isAuthenticated";
+import isAuthenticatedAuth from "src/Logics/isAuthenticatedAuth";
 
 //import Api
 import NodejsApi from 'src/Api/NodejsApi'; 
@@ -193,4 +193,4 @@ function ForgotPasswordComponent(props) {
 }
 
 
-export default  isAuthenticated(ForgotPasswordComponent , 'auth');
+export default  isAuthenticatedAuth(ForgotPasswordComponent);

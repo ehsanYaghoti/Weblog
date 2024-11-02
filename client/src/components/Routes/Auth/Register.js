@@ -3,10 +3,10 @@ import { Link, useNavigate }  from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faEye , faEyeSlash , faBlog , faSpinner, faClose } from '@fortawesome/free-solid-svg-icons'
-import isAuthenticated from "src/Logics/isAuthenticated";
 
 //import Api
 import NodejsApi from 'src/Api/NodejsApi'; 
+import isAuthenticatedAuth from "src/Logics/isAuthenticatedAuth";
 
 
 
@@ -257,4 +257,4 @@ function RegisterComponent(props) {
 }
 
 
-export default isAuthenticated(RegisterComponent , 'auth');
+export default isAuthenticatedAuth(RegisterComponent);
