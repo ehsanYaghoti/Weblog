@@ -13,13 +13,13 @@ import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 // Styles
 import 'src/Styles/sass/main.scss';
 import 'src/Styles/sass/forms.scss'
-import Spinner from 'react-bootstrap/Spinner'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {faTimes } from "@fortawesome/free-solid-svg-icons";
 import GoTopBtn from 'src/components/Layouts/Home/General/GoTopBtn';
 import isAdmin from 'src/Logics/isAdmin';
 import { toast } from 'react-toastify';
+import SpinnerLoading from 'src/components/Layouts/Admin/General/Loadings/spinner';
 
 
 library.add(faTimes)
@@ -380,7 +380,7 @@ class ArticleCreate extends React.Component {
                     <h2 className='dashborad-body-title dark:text-gray-50'>افزودن مقاله جدید</h2>
                         {   
                             this.state.loading 
-                            ? <Spinner animation='grow' style={{alignSelf : 'center'}} />
+                            ? <SpinnerLoading />
                             : 
                                 ! this.state.validation 
                                 ?   

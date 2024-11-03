@@ -61,7 +61,7 @@ function Posts(props) {
     useEffect(() => {
         setLoading(true)
 
-        NodejsApi.get('${process.env.REACT_APP_API_URL}/posts')
+        NodejsApi.get('/posts')
         .then(response => {
             if(! response.data.success){
                 if(response.data.code === 204){
@@ -254,7 +254,7 @@ function Posts(props) {
 
         setLoading(true)
 
-        NodejsApi.get(`${process.env.REACT_APP_API_URL}/posts?${name}=${queries[name]}`)
+        NodejsApi.get(`/posts?${name}=${queries[name]}`)
         .then(response => {
             if(! response.data.success){
                 // setLoading(false)

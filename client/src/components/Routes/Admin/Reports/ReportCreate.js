@@ -10,11 +10,13 @@ import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 // Styles
 import 'src/Styles/sass/main.scss';
 import 'src/Styles/sass/forms.scss'
-import Spinner from 'react-bootstrap/Spinner'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import isAdmin from 'src/Logics/isAdmin';
+import { toast } from 'react-toastify';
+import SpinnerLoading from 'src/components/Layouts/Admin/General/Loadings/spinner';
 library.add(faTimes)
 
 
@@ -82,6 +84,7 @@ class ReportCreate extends React.Component {
                         })
                     } else if(response.data.success){
                         console.log('result = true')
+                        toast.success('اطلاعات با موفقیت ذخیره شد')
                          this.setState((prevState) => {
                             return{
                                 ...prevState,
@@ -146,7 +149,7 @@ class ReportCreate extends React.Component {
                         {   
                             this.state.loading 
                             ? 
-                                <Spinner animation='grow' style={{alignSelf : 'center'}} />                                    
+                                <SpinnerLoading />                                  
 
                             : 
                                 ! this.state.validation 

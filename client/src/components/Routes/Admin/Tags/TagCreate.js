@@ -9,11 +9,13 @@ import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 // Styles
 import 'src/Styles/sass/main.scss';
 import 'src/Styles/sass/forms.scss'
-import Spinner from 'react-bootstrap/Spinner'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import isAdmin from 'src/Logics/isAdmin';
+import { toast } from 'react-toastify';
+import SpinnerLoading from 'src/components/Layouts/Admin/General/Loadings/spinner';
 library.add(faTimes)
 
 
@@ -82,6 +84,7 @@ class TagCreate extends React.Component {
                         })
                     } else if(response.data.success){
                         console.log('result = true')
+                        toast.success('اطلاعات با موفقیت ذخیره شد')
                          this.setState((prevState) => {
                             return{
                                 ...prevState,
@@ -146,11 +149,7 @@ class TagCreate extends React.Component {
                             this.state.loading 
                             ? 
 
-                                setTimeout(() => {
-                                
-                                    <Spinner animation='grow' style={{alignSelf : 'center'}} />
-                                    
-                                }, 5000)
+                                <SpinnerLoading />
 
                             : 
                                 ! this.state.validation 
@@ -217,11 +216,7 @@ class TagCreate extends React.Component {
                                     <input type='text' className='dark:text-gray-800' value={ this.state.tag.explain}  onChange={inputHandler} name='explain' placeholder='توضیح تگ را در اینجا وارد کنید ...'/>
                                 </label>
                                 </div>
-                                <button type='submit' className='button'>{this.state.loading ? 
-                                setTimeout(() => {
-                                    <Spinner animation='grow' style={{alignSelf : 'center'}} />
-                                    
-                                }, 3000) :  'افزودن تگ جدید'} </button>
+                                <button type='submit' className='button'>افزودن تگ جدید</button>
                             </form>
                         }
                 </div>

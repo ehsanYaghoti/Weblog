@@ -66,7 +66,7 @@ function Podcasts(props) {
     useEffect(() => {
         setLoading(true)
 
-        NodejsApi.get('${process.env.REACT_APP_API_URL}/podcasts')
+        NodejsApi.get('/podcasts')
         .then(response => {
             if(! response.data.success){
                 if(response.data.code === 204){
@@ -155,7 +155,7 @@ function Podcasts(props) {
 
         setLoading(true)
         
-        NodejsApi.get(`${process.env.REACT_APP_API_URL}/podcasts?category=${searchParams.get('category')}`)
+        NodejsApi.get(`/podcasts?category=${searchParams.get('category')}`)
         .then(response => {
             if(! response.data.success){
                 if(response.data.code === 204){
@@ -246,7 +246,7 @@ function Podcasts(props) {
 
         setLoading(true)
 
-        NodejsApi.get(`${process.env.REACT_APP_API_URL}/podcasts?${name}=${value}`)
+        NodejsApi.get(`/podcasts?${name}=${value}`)
         .then(response => {
             if(! response.data.success){
                 // setLoading(false)
@@ -334,7 +334,7 @@ function Podcasts(props) {
             })
         }
 
-        NodejsApi.get(`${process.env.REACT_APP_API_URL}/podcasts?${name}=${queries[name]}`)
+        NodejsApi.get(`/podcasts?${name}=${queries[name]}`)
         .then(response => {
             if(! response.data.success){
                 // setLoading(false)

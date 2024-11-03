@@ -9,11 +9,13 @@ import AdminrPanelHeader from 'src/components/Layouts/Admin/AdminrPanelHeader';
 // Styles
 import 'src/Styles/sass/main.scss';
 import 'src/Styles/sass/forms.scss'
-import Spinner from 'react-bootstrap/Spinner'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {faTimes } from "@fortawesome/free-solid-svg-icons";
 import isAdmin from 'src/Logics/isAdmin';
+import { toast } from 'react-toastify';
+import SpinnerLoading from 'src/components/Layouts/Admin/General/Loadings/spinner';
 library.add(faTimes)
 
 
@@ -63,7 +65,7 @@ class createUser extends React.Component {
             })
             e.preventDefault();
             let user = this.state.text
-            Axios.post('http://localhost:4000/admin/user/create' , user)
+            Axios.post(`${process.env.REACT_APP_API_URL}/admin/user/create` , user)
                 .then(response =>  {
                     console.log(response)
                     if(! response.data.result){
@@ -79,6 +81,7 @@ class createUser extends React.Component {
                         })
                     } else if(response.data.result){
                         console.log('result = true')
+                        toast.success('اطلاعات با موفقیت ذخیره شد')
                          this.setState((prevState) => {
                             return{
                                 ...prevState,
@@ -139,7 +142,7 @@ class createUser extends React.Component {
                     <h2 className='dashborad-body-title dark:text-gray-50'>افزودن کاربر جدید</h2>
                         {   
                             this.state.loading 
-                            ? <Spinner animation='grow' style={{alignSelf : 'center'}} />
+                            ? <SpinnerLoading />
                             : 
                             ! this.state.validation 
                             ?   <>
