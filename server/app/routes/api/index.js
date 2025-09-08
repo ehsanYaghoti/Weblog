@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const CORS = require('cors')
-const JWT = require('jsonwebtoken');
-const config = require('./../../../config');
+const CORS = require('cors');
 
 // Routers
 const homeRouter = require('./home');
@@ -11,8 +9,6 @@ const authRouter = require('./auth');
 
 // Middlewares
 const redirectIfNotAdmin = require('app/http/middleware/redirectIfNotAdmin');
-const apiAuth = require('app/http/middleware/apiAuth');
-const apiAuthJWT = require('app/http/middleware/apiAuthJWT');
 const apiAuthAdminJWT = require('app/http/middleware/apiAuthAdminJWT');
 
 

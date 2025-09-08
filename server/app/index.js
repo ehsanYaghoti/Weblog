@@ -6,14 +6,13 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
-const helmet = require("helmet");
-const cors = require("cors");
-const config = require("../config");
-const { MongoClient, ServerApiVersion } = require("mongodb");
 
-// Middlewares
+// Middlewares and Config
 const rememberMiddleware = require("app/http/middleware/loginMiddleware");
-const activeationMiddleware = require("app/http/middleware/activeationMiddleware");
+// const activeationMiddleware = require("app/http/middleware/activeationMiddleware");
+const config = require("../config");
+
+
 
 module.exports = class Application {
   constructor() {
@@ -23,8 +22,8 @@ module.exports = class Application {
   async init() {
     this.setupExpress();
     await this.setupMongoose();
-    // this.setupConfig();
-    // this.setupRoutes();
+    this.setupConfig();
+    this.setupRoutes();
   }
 
   setupExpress() {
@@ -34,24 +33,20 @@ module.exports = class Application {
     server.listen(port, () => {
       console.log(`server is listening on port ${port}`);
     });
+
   }
 
   async setupMongoose() {
-
     try {
 
-        // console.log(process.env.DATABASE_URI);
+      await mongoose.connect(process.env.DATABASE_URI);
 
-        await mongoose.connect('mongodb+srv://eeehhssaannn:7VzWk6fwwu3lIOmX@cluster0.xbjlc.mongodb.net/admin?retryWrites=true&w=majority&appName=Cluster0');
-
-        console.log("Connected to MongoDB");
+      console.log("Connected to MongoDB");
 
     } catch (error) {
-
-        console.log("MongoDB connection error:", error);
-        process.exit(1); // Exit the app if DB connection fails
+      console.log("MongoDB connection error:", error);
+      process.exit(1); // Exit the app if DB connection fails
     }
-
   }
 
   setupConfig() {
