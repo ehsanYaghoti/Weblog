@@ -13,14 +13,14 @@ import PaginationContext from 'src/Contexts/paginationContext'
 import Pagination from 'src/components/Layouts/Home/General/PaginationHome';
 
 //import Api
-import NodejsApi from 'src/Api/NodejsApi'; 
+import NodejsApi from 'src/Api/NodejsApi';
 
 // import icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle , faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function Tags(props) {
-    
+
     const [userstate , setUserState ]  = useState({
         isAuthenticated : false,
         user : {
@@ -29,11 +29,11 @@ function Tags(props) {
             likes : []
         }
     })
-    const [tags , setTags] = useState([])    
+    const [tags , setTags] = useState([])
 
     const [filterTags , setFilterTags] = useState({
         feed : false  ,
-        search : '' 
+        search : ''
     })
 
     const [ pagination , setPagination ] = useState({
@@ -55,7 +55,7 @@ function Tags(props) {
     useEffect(() => {
         setLoading(true)
 
-        NodejsApi.get('${process.env.REACT_APP_API_URL}/tags')
+        NodejsApi.get(`${process.env.REACT_APP_API_URL}/tags`)
         .then(response => {
             if(! response.data.success){
                 if(response.data.code === 204){
@@ -70,7 +70,7 @@ function Tags(props) {
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -84,7 +84,7 @@ function Tags(props) {
                 state : true,
                 message : ''
             })
-            
+
             console.log(response.data)
             let data = response.data
             let user = data.user
@@ -146,7 +146,7 @@ function Tags(props) {
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -160,7 +160,7 @@ function Tags(props) {
                 state : true,
                 message : ''
             })
-            
+
             console.log(response.data)
             let data = response.data
             let tags = []
@@ -186,7 +186,7 @@ function Tags(props) {
             ])
 
 
-            
+
 
             setLoading(false)
 
@@ -223,7 +223,7 @@ function Tags(props) {
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setNocontent({
@@ -262,7 +262,7 @@ function Tags(props) {
             })
         })
 
-        
+
 
     }
 
@@ -295,15 +295,15 @@ function Tags(props) {
                     let tags = data.tags
                     console.log(tags)
 
-                    
+
                     if(tags){
                         console.log('defined tags')
 
                         setTags([
                             ...tags
                         ])
-                    }          
-                      
+                    }
+
                     setButtonLoading(false)
                 }
             })
@@ -322,10 +322,10 @@ function Tags(props) {
             .then(response =>{
                 console.log(response.data)
                 if(response.data.success){
-                    let data = response.data  
+                    let data = response.data
                     let tags = data.tags
                     console.log(tags)
-                    
+
                     if(tags){
                         console.log('defined tags')
                         setTags([
@@ -358,7 +358,7 @@ function Tags(props) {
             success.state ? (
                 <div className='flex flex-col w-full h-fit bg-gradient-to-br from-30% from-slate-100 to-70% to-slate-300 dark:bg-gradient-to-t dark:from-10% dark:from-slate-600 dark:to-90% dark:to-slate-800 dark:text-gray-50'>
                     {
-                        loading ? 
+                        loading ?
                         <SpinnerOnTop />
                         : ''
                     }
@@ -389,15 +389,15 @@ function Tags(props) {
                                 }}  type="text" name='search' className='w-full pl-8 pr-4 py-2 outline-none rounded-md bg-gray-200 text-gray-700 font-["Nunito"]' placeholder='search here' style={{textAlign : 'left'}} />
                                 {/* <input lang='fa' type="text" className='pl-8 pr-4 py-2 outline-none rounded-md bg-gray-200 text-gray-700 font-["Vazir"]' placeholder='search here' style={{textAlign : 'left'}} /> */}
                                 <FontAwesomeIcon icon={faSearch} className='text-slate-500 absolute left-2 top-3 ' />
-                            </div>             
+                            </div>
                             {/* filter switch */}
                             <label className='h-fit inline-flex items-center gap-4 whitespace-nowrap  cursor-pointer ' >
-                                
+
                                 <span className='h-fit text-lg font-[600] text-gray-700 dark:text-gray-50' >All tags</span>
 
                                 <input type="checkbox" name='tagFollow' className=' sr-only peer'  onClick={filterHandler} />
                                 <div className='w-11 h-6 relative bg-gray-500 peer-focus:outline-none peer-focus:ring-4 peer-focus:outline-blue-600  rounded-full peer peer-checked:after:translate-x-full  peer-checked:after:border-white after:content-[""] after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:bg-white after:border after:border-gray-300 after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 ' ></div>
-                            
+
                                 <span className='h-fit text-lg font-[600] text-gray-700 dark:text-gray-50' >My tags</span>
 
                             </label>
@@ -405,10 +405,10 @@ function Tags(props) {
                         {/* all tags cards */}
                         <div className='grid grid-cols-1 justify-items-center md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 grid-rows-2 gap-6 mb-8' >
                         {
-                        ! noContent.state ? 
+                        ! noContent.state ?
                         <span className='' >{noContent.message}</span>
                         : (
-                            
+
                             tags.map(tag => {
                                 return (
                                     // tag card
@@ -420,7 +420,7 @@ function Tags(props) {
                         </div>
                         {/* pagination */}
                         {
-                                        
+
                             ! (pagination.totalPages === 1) ?
                             (
                                 <PaginationContext.Provider value={{ pagination  , paginationHandler }}>
@@ -437,9 +437,9 @@ function Tags(props) {
 
                 <span className='flex items-center justify-center w-full h-full font-["Vazir"] text-8xl text-gray-500 ' >
                     { success.message }
-                    <FontAwesomeIcon icon={faExclamationCircle} />    
+                    <FontAwesomeIcon icon={faExclamationCircle} />
                 </span>
-                
+
             )
         }
         </div>

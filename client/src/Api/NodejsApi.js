@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let instance = axios.create({
-    baseURL : 'http://api.weblogg.ir',
+    baseURL : process.env.REACT_APP_API_URL ,
     timeout : 20000,
     timeoutErrorMessage : '500 Problem from server(time out error)'    ,
     withCredentials : true,
