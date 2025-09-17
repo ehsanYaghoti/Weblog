@@ -8,17 +8,17 @@ import UserPanelHeader from 'src/components/Layouts/Home/User/UserPanelHeader';
 import UserPanelNavbar from 'src/components/Layouts/Home/User/UserPanelNavbar';
 
 //import Api
-import NodejsApi from 'src/Api/NodejsApi'; 
+import NodejsApi from 'src/Api/NodejsApi';
 
 // import icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle, faClose } from '@fortawesome/free-solid-svg-icons';
-import { faUserCircle  } from '@fortawesome/free-regular-svg-icons';
+// import { faUserCircle  } from '@fortawesome/free-regular-svg-icons';
 import GoTopBtn from 'src/components/Layouts/Home/General/GoTopBtn';
 import isAuthenticatedPanel from 'src/Logics/isAuthenticatedPanel';
 
 function User(props){
-    
+
     const [authenticatedUser , setAuthenticatedUser ]  = useState({
         isAuthenticated : false,
         user : {
@@ -39,7 +39,7 @@ function User(props){
 
     const [post , setPost] = useState({
         title : '',
-        statement : '', 
+        statement : '',
         tags : []
     })
 
@@ -73,7 +73,7 @@ function User(props){
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -87,7 +87,7 @@ function User(props){
                 state : true,
                 message : ''
             })
-            
+
             console.log(response.data)
             let data = response.data
             let user = data.user
@@ -99,7 +99,7 @@ function User(props){
                 user : data.authenticatedUser,
             })
 
-            
+
             setUser({
                 ...user
             });
@@ -130,7 +130,7 @@ function User(props){
                 tagsOptions.push({value : `${tag._id}` , label : `${tag.name}`})
             )
         })
-    } 
+    }
 
     let statementHandler = (e , data) => {
         console.log(data)
@@ -138,7 +138,7 @@ function User(props){
             return {
                 ...prevState,
                 statement : data,
-                
+
             }
         })
     }
@@ -165,7 +165,7 @@ function User(props){
                 } else if(tag.label){
                     return tags.push(tag.value)
                 }
-                
+
             })
         }
         console.log('tags' +  tags)
@@ -184,7 +184,7 @@ function User(props){
 
         NodejsApi.post('/posts/create' , SendPost )
             .then(response =>  {
-                
+
                 if(! response.data.success){
                     setLoading(false)
                     return setValidation(prevState => {
@@ -195,9 +195,9 @@ function User(props){
                             messages : response.data.messages,
                         }
                     })
-                } 
+                }
 
-                
+
                 setSuccess(prevState => {
                     return {
                         state : response.data.success ,
@@ -219,7 +219,7 @@ function User(props){
                 setLoading(false)
 
             })
-            .catch(err => {  
+            .catch(err => {
                 console.log(err)
                 setSuccess({
                     state : false,
@@ -258,18 +258,18 @@ function User(props){
             }
         })
     }
-    
+
     let tagSelectorValues = []
     if( post.tags !== null ){
         post.tags.map(tag => {
             if(tag.name){
-                // console.log('0') 
+                // console.log('0')
                 return tagSelectorValues.push({value : `${tag.id}` , label : `${tag.name}`})
             } else {
                 // console.log('1')
                 return tagSelectorValues.push({value : `${tag.value}` , label : `${tag.label}`})
             }
-            
+
         })
     }
 
@@ -280,24 +280,24 @@ function User(props){
             success.state ? (
                 <div className='flex flex-col w-full h-fit'>
                     {
-                        loading ? 
+                        loading ?
                         <SpinnerOnTop />
                         : ''
                     }
                     {
                         !validation.close ?
                         !validation.success ?
-                        ( 
+                        (
                             <div className="w-fit h-fit flex font-[Vazir] peer/validation leading-8   flex-col self-center m-auto items-center z-50 fixed top-1/2 left-1/4 p-4 bg-red-600  border border-solid border-red-300 rounded-md" id="validation" >
                                 <FontAwesomeIcon icon={faClose} className="hover:text-white text-lg self-end cursor-pointer peer-active/validation:hidden parent  " onClick={e => setValidation( prevState => {
                                     return {
                                         ...prevState,
                                         close : true
                                     }
-                                }) } /> 
+                                }) } />
                                 {
                                     Array.isArray(validation.messages) ?
-                                    
+
                                     validation.messages.map((message , number = 0) => {
                                         return (
                                             <span className="text-md rtl text-white flex flex-row items-center" style={{direction : "rtl"}} key={number} >{number+=1} - {message}</span>
@@ -309,16 +309,16 @@ function User(props){
                             </div>
                         )  :
                         (
-                            validation.result ? 
+                            validation.result ?
                             (
                                 <div className="w-fit h-fit flex font-[Vazir] peer/validation leading-8   flex-col self-center m-auto items-center z-50 fixed top-1/2 left-1/4 p-4 bg-green-600  border border-solid border-green-300 rounded-md" id="validation" >
-                                    <FontAwesomeIcon icon={faClose} className="hover:text-white text-lg self-end cursor-pointer peer-active/validation:hidden parent  " onClick={e => 
+                                    <FontAwesomeIcon icon={faClose} className="hover:text-white text-lg self-end cursor-pointer peer-active/validation:hidden parent  " onClick={e =>
                                     setValidation( prevState => {
                                         return {
                                             ...prevState,
                                             close : true
                                         }
-                                    }) } /> 
+                                    }) } />
                                     <span className="text-md rtl text-white" >
                                         Creating post has been successful check the forum link in navbar menu <br/>
                                         Or this is post link
@@ -327,21 +327,21 @@ function User(props){
                                 </div>
                             )
                             : ''
-                        ) : 
+                        ) :
                         (
                             ''
                         )
-                        
+
                     }
                     <UserPanelHeader user={authenticatedUser} userNavbar={user} />
                     <main className='flex flex-row items-center w-full h-fit min-h-screen gap-10 pl-0 font-["Nunito"]  bg-gradient-to-br from-30% from-slate-100 to-70% to-slate-300 dark:bg-gradient-to-t dark:from-10% dark:from-slate-600 dark:to-90% dark:to-slate-800 dark:text-gray-50' >
 
                         <UserPanelNavbar user={user} />
-                        
+
                         { ! noContent.state ? <span className='' >{noContent.message}</span> :
                         (
                             <div className='w-full px-4 py-8 lg:w-[80%] lg:pl-8 lg:ml-[25%] xl:ml-[20%] lg:mx-4 ' >
-                            
+
                             <form onSubmit={formHandler} className='flex flex-col w-full gap-8 p-6 my-4 mr-6  border border-solid border-gray-300 rounded-md shadow-md shadow-slate-50/90 bg-white dark:bg-slate-600/80' >
                                 {/* post author */}
                                 <div className='flex items-start md:items-center md:gap-4' >
@@ -350,14 +350,16 @@ function User(props){
                                         <a href={`/user/dashboard/${user._id}`}>
                                         {
                                             user.avatar === null ?
-                                            <FontAwesomeIcon icon={faUserCircle} className='text-gray-300 text-2xl font-[400] h-full w-full '   /> :
+                                            // <FontAwesomeIcon icon={faUserCircle} className='text-gray-300 text-2xl font-[400] h-full w-full '   />
+                                            <img src={' '} alt='no avatar' className=' scale-105 hover:scale-125 transition-all duration-500 ' />
+                                            :
                                             <img src={`${process.env.REACT_APP_API_URL}/${user.avatarpath}`} alt={`${user.username}`} className=' scale-105 hover:scale-125 transition-all duration-500 ' />
                                         }
                                         </a>
                                     </div>
 
                                     <div className='h-fit w-fit flex flex-col md:items-start items-center  gap-4 md:gap-1' >
-                                        
+
                                         <span className='h-fit w-fit text-lg font-[600] dark:text-gray-50' >
                                             <a href={`/user/dashboard/${user._id}`}>
                                                 {
@@ -378,7 +380,7 @@ function User(props){
                                             </button>
                                             {
                                                 user.profossional === null ? ''
-                                                : 
+                                                :
                                                 <button className='h-fit w-fit md:px-2  ' >
                                                     profossional : {user.profossional}
                                                 </button>
@@ -396,9 +398,9 @@ function User(props){
                                         3 - tags should be at least 1 and maximum 4.
                                     </p>
                                 </div>
-                                    
+
                                 <h2 className='h-fit font-[700] self-center text-lg text-gray-800 dark:text-gray-50 ' >New Post</h2>
-                            
+
                                 <label className='flex flex-col items-start gap-4' >
                                     <span className='h-fit whitespace-nowrap font-[700] text-lg text-gray-800 dark:text-gray-50' >title of the post : </span>
                                     <input value={post.title}  onChange={inputHandler} name='title' className='w-full px-6 py-3 border border-solid border-gray-300 rounded-md shadow-md outline-none text-gray-800 text-base font-[600]'  type="text" placeholder='type title here...' />
@@ -410,11 +412,11 @@ function User(props){
                                     onInit={(evt, editor) => editorRef.current = editor}
                                     onChange={log}
                                     init={{
-                                        plugins: ["advlist", "anchor", "autolink", "charmap", "code", 
-                                        "help", "image", "insertdatetime", "link", "lists", "media", 
+                                        plugins: ["advlist", "anchor", "autolink", "charmap", "code",
+                                        "help", "image", "insertdatetime", "link", "lists", "media",
                                         "preview", "searchreplace", "table", "visualblocks"],
                                         // 'tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
-                                        
+
                                         toolbar: 'undo redo language | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                                         content_langs: [
                                             { title: 'English', code: 'en' },
@@ -437,11 +439,11 @@ function User(props){
                                         ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
                                     }}
                                     // initialValue={''}
-                                />  
+                                />
                                 </label>
-                                
+
                                 <label className='flex flex-col items-center gap-4' >
-                                    <div className='flex flex-col items-start w-full ' > 
+                                    <div className='flex flex-col items-start w-full ' >
                                         <span className='h-fit whitespace-nowrap font-[700] text-lg text-gray-800 dark:text-gray-50' >tags of the post (maximum 4) : </span>
                                         <Select className='w-full h-16  mt-6 dark:text-gray-500' value={tagSelectorValues}  isMulti={true} options={tagsOptions}  onChange={tagSelectHandler} />
                                     </div>
@@ -451,7 +453,7 @@ function User(props){
                                     <button type='submit' className='px-5 py-2 bg-cyan-400 text-white hover:opacity-80 text-lg font-[600] border border-solid border-gray-300 rounded-md drop-shadow-sm ' >publish</button>
                                     <button type='reset'  className='px-5 py-2 bg-red-400 text-white hover:opacity-80 text-lg font-[600] border border-solid border-gray-300 rounded-md drop-shadow-sm '  >cancel</button>
                                 </div>
-                                
+
 
                             </form>
                         </div>)}
@@ -461,7 +463,7 @@ function User(props){
                 </div>
             ) : (
                 <span className='flex items-center justify-center w-full h-full font-["Nunito"] text-8xl text-gray-500 ' >
-                    <FontAwesomeIcon icon={faExclamationCircle} />  
+                    <FontAwesomeIcon icon={faExclamationCircle} />
                     <span className='h-fit' >
                         { success.message }
                     </span>
@@ -472,4 +474,4 @@ function User(props){
     )
 }
 
-export default isAuthenticatedPanel(User); 
+export default isAuthenticatedPanel(User);

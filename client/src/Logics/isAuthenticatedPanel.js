@@ -1,5 +1,5 @@
 //import Api
-import { Spinner } from '@material-tailwind/react';
+// import { Spinner } from '@material-tailwind/react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -29,7 +29,7 @@ export default function isAuthenticatedPanel(Component) {
                     toast.info(`You are not login now to access first log in from /auth/login`)
                     navigate('/')
 
-                } 
+                }
 
                 setLoading(false)
                 setIsAuthenticated(true)
@@ -41,10 +41,10 @@ export default function isAuthenticatedPanel(Component) {
 
         }, [navigate , props])
 
-        
+
 
         if(loading) {
-            return <Spinner />
+            return <span>Loading .... </span>
         }
 
         if(isAuthenticated){

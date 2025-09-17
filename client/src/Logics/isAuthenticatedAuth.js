@@ -1,9 +1,10 @@
 //import Api
-import { Spinner } from '@material-tailwind/react';
+// import { Spinner } from '@material-tailwind/react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import NodejsApi from 'src/Api/NodejsApi';
+import SpinnerLoading from 'src/components/Layouts/Admin/General/Loadings/spinner';
 
 export default function isAuthenticatedAuth(Component) {
 
@@ -33,7 +34,7 @@ export default function isAuthenticatedAuth(Component) {
                     toast.info(`You are login now to access first log out from user panel`)
                     return
 
-                } 
+                }
 
                 setIsAuthenticated(false)
                 setLoading(false)
@@ -47,14 +48,15 @@ export default function isAuthenticatedAuth(Component) {
         }, [ navigate , props])
 
         if(loading) {
-            return <Spinner />
+            // return <Spinner />
+            return <SpinnerLoading />
         }
 
         if(!isAuthenticated){
             return <Component isAuthenticated={false} {...props} />
         }
 
-    
+
     }
 
 }

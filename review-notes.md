@@ -6,10 +6,12 @@
 
 ### Client
 
+- this project needs a big code refactoring for implementing (DRY , ...)
+
 #### Visual Bugs (Demo feedback)
 
-- [] HP => Podcast cards overflowing texts
-- [] HP => Too much empty space on posts cards
+- [] Home => Podcast cards overflowing texts
+- [] Home => Too much empty space on posts cards
 
 - [] Blog => filter messages are only persian
 - [] Blog => loading state is not look good
@@ -27,12 +29,9 @@
 - [] user dashboard => loading is not right
 - [] user dashboard => followed tags section tags shouldn't have follow button when logged out (and all tag cards)
 
+- [] user Panel  => sidebar visual bug
 
-
-
-
-
-
+- [] saves , likes , following  => loading is not set right
 
 #### Functional UI Bugs
 
@@ -59,4 +58,11 @@
 8 . sticky sidebar in single page ?
 9 . change to sticky and static header when scroll
 10 . better sound controller in podcast single page
-11 . find a better color pallete
+11 . find a better color pallete with better constrant ratio
+12 . test with light house and update to get best scores
+13 . after search for example if there is no article and podcast but 1 post swith to posts tab
+14 . better design for many media page
+15 . redesin whole ?
+16 . update to typescript
+17 . Rerendering optimization
+18 . cahching feature

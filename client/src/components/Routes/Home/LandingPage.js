@@ -13,7 +13,7 @@ import CardPodcast from 'src/components/Layouts/Home/Cards/CardPodcast';
 import CardPost from 'src/components/Layouts/Home/Cards/CardPost';
 
 //import Api
-import NodejsApi from 'src/Api/NodejsApi'; 
+import NodejsApi from 'src/Api/NodejsApi';
 
 
 // import icons
@@ -21,7 +21,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle , faBlog } from '@fortawesome/free-solid-svg-icons';
 
 function LandingPage(props) {
-    
+
     const [userstate , setUserState ]  = useState({
         isAuthenticated : false,
         user : {
@@ -57,7 +57,7 @@ function LandingPage(props) {
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -66,7 +66,7 @@ function LandingPage(props) {
                 message : ''
                 }
             })
-            
+
             let data = response.data
             let user = data.user
             let articles = data.articles
@@ -79,7 +79,7 @@ function LandingPage(props) {
             setArticles([
                 ...articles
             ])
-            
+
             setPodcasts([
                 ...podcasts
             ])
@@ -128,7 +128,7 @@ function LandingPage(props) {
         setButtonLoading(true)
         let data ={
             id,
-            kind , 
+            kind ,
             single,
             moreData
         }
@@ -240,7 +240,7 @@ function LandingPage(props) {
         setButtonLoading(true)
         let data ={
             id,
-            kind , 
+            kind ,
             single,
             moreData
         }
@@ -297,7 +297,7 @@ function LandingPage(props) {
                         }
 
                     }
-                    
+
                     setButtonLoading(false)
                 }
             })
@@ -362,7 +362,7 @@ function LandingPage(props) {
                         }
 
                     }
-                    
+
                     setButtonLoading(false)
 
                 }
@@ -382,7 +382,7 @@ function LandingPage(props) {
     return (
         <div className='flex flex-col w-full h-screen'  >
         {
-            loading ? 
+            loading ?
             <SpinnerOnTop />
             : ''
         }
@@ -395,7 +395,7 @@ function LandingPage(props) {
                         {/* explain about site */}
                         <div className='relative hidden sm:flex items-center  self-center justify-center w-full md:h-[400px] h-fit bg-gradient-to-r from-[#0F2027] via-[#203A43] to-[#2C5364] bg-opacity-40  text-xl font-semibold text-gray-700 text-center shadow-lgx` align-middle p-4 my-10 mx-5' >
                             <p className=' tracking-wide text-white drop-shadow-md break-words z-20 leading-10 whitespace-pre-wrap w-[800px]  h-fit ' >
-                                This is Weblog <br/> 
+                                This is Weblog <br/>
 
                                 where you can read Articles and learn from them and have raction about it<br/>
                                 with likes
@@ -404,7 +404,7 @@ function LandingPage(props) {
                                 and share it for else to use it.<br/>
                                 There is also <br/>
                                 Podcasts that you can listen to it and do whatever you do with articles.<br/>
-                                And 
+                                And
                                 you can ask question or answer questions in forum posts.<br/>
                             </p >
                             {/* Logo */}
@@ -426,14 +426,14 @@ function LandingPage(props) {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
-                                <span className='h-fit' >All articles</span> 
-                            </a>                                   
+                                <span className='h-fit' >All articles</span>
+                            </a>
 
                             {/* contents */}
                             <div className='grid justify-items-center grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3   gap-y-9 gap-x-6 xl:gap-x-20 w-full p-4 lg:px-6 '  >
-                                {/* cards */}                                
+                                {/* cards */}
                                 {
-                                    articles.length === 0 ? 
+                                    articles.length === 0 ?
                                     <span className='dark:text-gray-50 font-[700] w-screen text-2xl  text-center ' >There is no Article</span>
                                     :
                                     articles.map(article => {
@@ -445,7 +445,7 @@ function LandingPage(props) {
                                 }
                             </div>
 
-                            
+
 
                             {/* Top Podcasts */}
                             <h2 className='text-2xl h-fit self-center font-[600] text-gray-900 my-10 mt-64 dark:text-white' >Newst Podcasts</h2>
@@ -455,12 +455,12 @@ function LandingPage(props) {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
-                                <span className='h-fit' >All podcasts</span> 
-                            </a>          
+                                <span className='h-fit' >All podcasts</span>
+                            </a>
                             {/* content */}
                             <div className='grid justify-items-center grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  grid-rows-1 gap-y-9 gap-x-6  w-full p-4 lg:px-6'  >
                             {
-                                podcasts.length === 0 ? 
+                                podcasts.length === 0 ?
                                 <span className='dark:text-gray-50 font-[700] w-screen text-2xl  text-center ' >There is no Podcast</span>
                                 :
                                 podcasts.map(podcast => {
@@ -483,15 +483,15 @@ function LandingPage(props) {
                                 </a>
                                 {/* contents */}
                                 <div className=' w-full h-fit flex items-center flex-wrap  justify-evenly  '  >
-                                    
+
                                     {
-                                        tags.length === 0 ? 
+                                        tags.length === 0 ?
                                         <span className='dark:text-gray-50 font-[700] w-screen text-2xl  text-center ' >There is no Tag</span>
                                         :
                                         tags.map(tag => {
                                             return (
                                                 <a key={tag._id} href={`/tag/${tag.slug}`} className='flex flex-col items-start relative  rounded-md w-72 h-fit cursor-pointer shadow-sm hover:scale-105 transition-all m-10 dark:shadow-lg dark:shadow-slate-400/50' >
-                                                    <img src={`${process.env.REACT_APP_API_URL}/public/static/sunrise.jpg`} alt="" className='w-full h-full self-center rounded-md shadow-md object-cover ' />        
+                                                    <img src={`${process.env.REACT_APP_API_URL}/public/static/sunrise.jpg`} alt="" className='w-full h-full self-center rounded-md shadow-md object-cover ' />
                                                     <h3 className='text-xl flex items-center justify-center rounded-md font-[600] bg-white bg-opacity-40 dark:bg-opacity-10  w-full h-full text-white absolute ' >#{tag.name}</h3>
                                                 </a>
                                             )
@@ -502,7 +502,7 @@ function LandingPage(props) {
 
 
                             {/* Top Posts */}
-                            <h2 className='text-2xl h-fit self-center mb-10 font-[600] text-gray-900 my-10 mt-6 dark:text-white' >Newst Posts</h2>                            
+                            <h2 className='text-2xl h-fit self-center mb-10 font-[600] text-gray-900 my-10 mt-6 dark:text-white' >Newst Posts</h2>
                             {/* explain Podcasts  */}
                             <p style={{wordSpacing : '10px'}} className=' w-full flex items-center justify-center text-center tracking-wide text-[#12343b] text-xl font-bold bg-gray-100 px-4 py-10 my-10 border-y border-solid border-gray-100 dark:bg-[#474E68] dark:text-white dark:border-none ' >There is newst posts to Read and comment and Like and Share</p>
                             <a href="/posts" className='self-start text-xl flex items-center gap-2 text-blue-700 underline underline-offset-2 ml-10  mb-4 dark:hover:text-blue-400 ' >
@@ -510,11 +510,11 @@ function LandingPage(props) {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                                 <span className='font-[700] text-xl' >All posts</span>
-                            </a>          
-                            {/* content */} 
+                            </a>
+                            {/* content */}
                             <div className='grid justify-items-center grid-cols-1 gap-y-6 gap-x-6 w-full p-8 mb-64 '  >
                                 {
-                                    posts.length === 0 ? 
+                                    posts.length === 0 ?
                                     <span className='dark:text-gray-50 font-[700] w-full text-2xl  text-center ' >There is no Post</span>
                                     :
                                     posts.map(post => {
@@ -534,7 +534,7 @@ function LandingPage(props) {
                 </div>
             ) : (
                 <span className='flex items-center justify-center w-full h-full font-["Nunito"] text-8xl text-gray-500 ' >
-                    <FontAwesomeIcon icon={faExclamationCircle} />  
+                    <FontAwesomeIcon icon={faExclamationCircle} />
                     <span className='h-fit' >
                         { success.message }
                     </span>

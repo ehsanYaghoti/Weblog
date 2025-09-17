@@ -1,5 +1,5 @@
 import React , { useState , useEffect   } from 'react';
-import { useParams }  from 'react-router-dom'; 
+import { useParams }  from 'react-router-dom';
 
 // Layouts
 import Header from 'src/components/Layouts/Home/General/Header';
@@ -15,7 +15,7 @@ import TimesAgo from 'src/components/Layouts/Home/General/TimesAgo';
 import ButtonSpinner from 'src/components/Layouts/Home/Loadings/ButtonSpinner';
 
 //import Api
-import NodejsApi from 'src/Api/NodejsApi'; 
+import NodejsApi from 'src/Api/NodejsApi';
 
 // import icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,7 +24,7 @@ import {  faHeart , faBookmark , faClock, faFolderClosed , faUser, faStar, faRec
 
 
 function Article(props) {
-    
+
     const [userstate , setUserState ]  = useState({
         isAuthenticated : false,
         user : {
@@ -57,7 +57,7 @@ function Article(props) {
         likeCount : 0,
         savedByThisUser : false,
         saveCount : 0
-    })    
+    })
 
     const [weekFavouriteArticles , setWeekFavouriteArticles] = useState([])
     const [recentArticles , setRecentArticles] = useState([])
@@ -79,8 +79,8 @@ function Article(props) {
 
 
 
-    const {slug} = useParams()    
-    
+    const {slug} = useParams()
+
 
     useEffect(() => {
         setLoading(true)
@@ -100,7 +100,7 @@ function Article(props) {
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -114,7 +114,7 @@ function Article(props) {
                 state : true,
                 message : ''
             })
-            
+
             let data = response.data
             let user = data.user
             let article = data.article
@@ -122,7 +122,7 @@ function Article(props) {
             let recentArticles = data.recentArticles
             let similarArticles = data.similarArticles[0].articles
 
-            
+
 
             // console.log(data.similarArticles[0])
 
@@ -160,7 +160,7 @@ function Article(props) {
         try {
             if(document.getElementById(article._id)){
                 let parser = new DOMParser();
-                document.getElementById(article._id).innerHTML = parser.parseFromString( article.statement , 'text/html').body.innerHTML 
+                document.getElementById(article._id).innerHTML = parser.parseFromString( article.statement , 'text/html').body.innerHTML
             }
         } catch (error) {
             console.log(error)
@@ -182,7 +182,7 @@ function Article(props) {
             single,
             moreData
         }
-        
+
         if(liked){
             console.log('dislike')
             // NodejsApi.post('/dislike' , article)
@@ -248,12 +248,12 @@ function Article(props) {
             .then(response =>{
                 if(response.data.success){
 
-                    let data = response.data  
+                    let data = response.data
 
                     let likedArticle = data.article
 
                     if(likedArticle !== undefined ){
-                    
+
                         if(likedArticle._id === article._id){
                             setArticle(prevState => {
                                 return {
@@ -263,14 +263,14 @@ function Article(props) {
                                 }
                             })
                         }
-                        
+
                         if(similarArticles.some(simiarticle => simiarticle._id === likedArticle._id)){
 
                             let index = similarArticles.findIndex(element => element._id === likedArticle._id)
 
                             similarArticles[index].likedByThisUser = true
                             similarArticles[index].likeCount = likedArticle.likeCount +1
-                            
+
                             setSimilarArticles(similarArticles)
                         }
 
@@ -310,7 +310,7 @@ function Article(props) {
 
         let data ={
             id,
-            kind , 
+            kind ,
             single,
             moreData
         }
@@ -323,10 +323,10 @@ function Article(props) {
                 console.log(response.data)
                 if(response.data.success){
 
-                    let data = response.data  
+                    let data = response.data
 
                     let unsavedArticle = data.article
-                    
+
                     if(unsavedArticle._id === article._id){
                         setArticle(prevState => {
                             return {
@@ -336,20 +336,20 @@ function Article(props) {
                             }
                         })
                     }
-                    
+
                     if(similarArticles.some(simiarticle => simiarticle._id === unsavedArticle._id)){
 
                         let index = similarArticles.findIndex(element => element._id === unsavedArticle._id)
 
                         similarArticles[index].savedByThisUser = false
                         similarArticles[index].saveCount = unsavedArticle.saveCount -1
-                        
+
                         setSimilarArticles(similarArticles)
                     }
 
                     setButtonSaveLoading(false)
 
-      
+
                 }
             })
             .catch(err => {
@@ -368,10 +368,10 @@ function Article(props) {
             .then(response =>{
 
                 if(response.data.success){
-                    let data = response.data  
+                    let data = response.data
 
                     let savedArticle = data.article
-                    
+
                     if(savedArticle._id === article._id){
                         setArticle(prevState => {
                             return {
@@ -381,14 +381,14 @@ function Article(props) {
                             }
                         })
                     }
-                    
+
                     if(similarArticles.some(simiarticle => simiarticle._id === savedArticle._id)){
 
                         let index = similarArticles.findIndex(element => element._id === savedArticle._id)
 
                         similarArticles[index].savedByThisUser = true
                         similarArticles[index].saveCount = savedArticle.saveCount +1
-                        
+
                         setSimilarArticles(similarArticles)
                     }
 
@@ -429,7 +429,7 @@ function Article(props) {
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -443,12 +443,12 @@ function Article(props) {
                 state : true,
                 message : ''
             })
-            
-            let data = response.data            
+
+            let data = response.data
             let articleComments = data.articleComments
             let newCommentsNumber = data.newCommentsNumber
 
-            
+
             console.log(data)
 
             setArticle(prevState => {
@@ -502,7 +502,7 @@ function Article(props) {
                 }
             })
         }
-        
+
 
     }
 
@@ -520,7 +520,7 @@ function Article(props) {
             .then(response =>{
                 console.log(response.data)
                 if(response.data.success){
-                    let author = response.data.user  
+                    let author = response.data.user
 
                     if(! author.followedByThisUser){
 
@@ -554,7 +554,7 @@ function Article(props) {
             .then(response =>{
                 console.log(response.data)
                 if(response.data.success){
-                    let author = response.data.user  
+                    let author = response.data.user
 
                     if(author.followedByThisUser){
 
@@ -596,14 +596,14 @@ function Article(props) {
                 <div className='flex flex-col w-full h-fit scroll-smooth '>
                     <Header user={userstate} />
                     <main className='flex flex-col items-center lg:items-start lg:flex-row lg:justify-center w-full h-fit pb-6 gap-2 scroll-smooth  font-["Nunito"] bg-gradient-to-br from-30% from-slate-100 to-70% to-slate-300  dark:bg-gradient-to-t dark:from-10% dark:from-slate-600 dark:to-90% dark:to-slate-800 dark:text-gray-50' >
-                        
+
                         {/* Side Menu */}
                         <div className='hidden lg:flex flex-col w-full h-fit px-2 lg:w-[25%] lg:ml-0 xl:ml-6' >
                             {/* author */}
                             <CardUserBio buttonLoading={buttonLoading} user={article.author} followUserHandler={followUserHandler} authenticatedUser={userstate} sidebar={true} />
                             {/* Chosen Articles */}
                             {
-                            !(weekFavouriteArticles.length === 0) ? 
+                            !(weekFavouriteArticles.length === 0) ?
                             (
                                 <div className='flex flex-col items-center justify-between gap-4 w-full  min-w-fit  min-h-fit mt-5  py-4 lg:px-6 xl:px-10 rounded-md border border-solid border-gray-300 shadow-lg dark:border-none bg-white  dark:bg-gradient-to-br dark:from-10% dark:from-[rgb(20,30,48)] dark:to-90% dark:to-[rgb(36,59,85)]' >
                                     <div className='flex flex-col items-center h-fit w-full ' >
@@ -640,7 +640,7 @@ function Article(props) {
                                     <button className='px-6 py-3 w-fit hover:opacity-70 border border-solid border-cyan-200 rounded-md text-cyan-800  dark:text-blue-400 text-xl font-[500]  '          >
                                         <a href="/articles">
                                             <FontAwesomeIcon icon={faArrowLeft} />
-                                            <span className='ml-2'>see all articles</span>                                               
+                                            <span className='ml-2'>see all articles</span>
                                         </a>
                                     </button>
                                 </div>
@@ -684,7 +684,7 @@ function Article(props) {
                                 <button className='px-6 py-3 w-fit hover:opacity-70 border border-solid border-cyan-200 rounded-md text-cyan-800 dark:text-blue-400 text-xl font-[500]  '          >
                                     <a href="/articles">
                                         <FontAwesomeIcon icon={faArrowLeft} />
-                                        <span className='ml-2'>see all articles</span>                                               
+                                        <span className='ml-2'>see all articles</span>
                                     </a>
                                 </button>
                             </div>)
@@ -696,26 +696,26 @@ function Article(props) {
                         <div className='flex flex-col items-center w-full lg:w-[75%] h-fit min-h-screen px-2  lg:p-6 pt-5 text-gray-800 scroll-smooth ' >
                             {/* contents */}
                             {
-                            ! noContent.state ? 
+                            ! noContent.state ?
                             <span className='' >{noContent.message}</span>
                             :
-                            (   
+                            (
                                 // Article Content
                                 <div className=' flex flex-col items-start justify-start  w-full h-full px-4 py-8 lg:p-10 border border-solid border-gray-300 rounded-xl shadow-md bg-white dark:bg-gradient-to-t dark:from-10% dark:from-[#1A1A2E] dark:to-90% dark:to-slate-700/80 dark:border-none dark:text-gray-50' >
                                     {
-                                        loading ? 
-                                        (                                            
+                                        loading ?
+                                        (
                                             <LoadingSkeletonSingle />
-                                        ) : 
+                                        ) :
                                         (
                                         <>
                                         {/* article image */}
                                         <div className='w-full h-[200px] lg:h-[400px] self-center flex items-center justify-center border border-solid dark:border-none border-gray-200 rounded-lg shadow-md mb-10  ' >
-                                            <img src={`${process.env.REACT_APP_API_URL}/${article.imagepath}`} 
-                                                onError={e =>{ 
+                                            <img src={`${process.env.REACT_APP_API_URL}/${article.imagepath}`}
+                                                onError={e =>{
                                                     e.currentTarget.style.display = 'none'
-                                                    console.log(e)  
-                                                }} 
+                                                    console.log(e)
+                                                }}
                                             alt={`${article.title}`} className='object-cover w-full rounded-xl ' />
                                         </div>
 
@@ -761,22 +761,22 @@ function Article(props) {
                                                     {/* react to article */}
                                                     <div className='flex items-center gap-3 text-sm ' >
                                                         {/* Comments link */}
-                                                        <a href={`#comments`} className='flex items-center gap-1 py-1 px-2 rounded-md border border-solid border-gray-100 bg-gray-100 text-gray-500 hover:bg-gray-500 hover:text-white dark:border-none dark:shadow-md dark:shadow-gray-500/50 dark:bg-gray-200 dark:text-gray-600 cursor-pointer' > 
+                                                        <a href={`#comments`} className='flex items-center gap-1 py-1 px-2 rounded-md border border-solid border-gray-100 bg-gray-100 text-gray-500 hover:bg-gray-500 hover:text-white dark:border-none dark:shadow-md dark:shadow-gray-500/50 dark:bg-gray-200 dark:text-gray-600 cursor-pointer' >
                                                             <FontAwesomeIcon icon={faComment} />
                                                             {article.commentCount}
                                                         </a >
                                                         {/* Save Button */}
                                                         <button disabled={userstate.isAuthenticated || !buttonSaveLoading ? false : true} className={`flex items-center gap-1 py-1 px-2 rounded-md  border border-solid border-blue-50  hover:bg-opacity-90 hover:text-blue-400  dark:hover:text-white dark:border-none cursor-pointer
                                                             ${ userstate.isAuthenticated ?
-                                                                article.savedByThisUser ? 'bg-blue-500 text-white hover:bg-opacity-30 dark:shadow-md dark:shadow-blue-500/50' : 'bg-blue-50 text-blue-200 dark:bg-blue-200 dark:text-blue-400  ' 
+                                                                article.savedByThisUser ? 'bg-blue-500 text-white hover:bg-opacity-30 dark:shadow-md dark:shadow-blue-500/50' : 'bg-blue-50 text-blue-200 dark:bg-blue-200 dark:text-blue-400  '
                                                                 : ''
                                                             }`} onClick={e => saveHandler(e, article._id , article.savedByThisUser , 'article')} >
                                                             {
-                                                                buttonSaveLoading ? <ButtonSpinner /> : 
+                                                                buttonSaveLoading ? <ButtonSpinner /> :
                                                                 <>
-                                                                    <FontAwesomeIcon icon={ 
+                                                                    <FontAwesomeIcon icon={
                                                                         userstate.isAuthenticated ?
-                                                                        article.savedByThisUser ? faBookmarkSolid : faBookmark  
+                                                                        article.savedByThisUser ? faBookmarkSolid : faBookmark
                                                                         : faBookmark
                                                                     }  />
                                                                     {article.saveCount}
@@ -784,16 +784,16 @@ function Article(props) {
                                                             }
                                                         </button>
                                                         {/* Like Button */}
-                                                        <button id={`likeOf-${article._id}`} disabled={userstate.isAuthenticated || !buttonLikeLoading ? false : true} className={`flex items-center gap-1  py-1 px-2 rounded-md  border border-solid border-red-50 hover:bg-opacity-90 hover:text-red-400   dark:hover:text-white dark:border-none cursor-pointer 
+                                                        <button id={`likeOf-${article._id}`} disabled={userstate.isAuthenticated || !buttonLikeLoading ? false : true} className={`flex items-center gap-1  py-1 px-2 rounded-md  border border-solid border-red-50 hover:bg-opacity-90 hover:text-red-400   dark:hover:text-white dark:border-none cursor-pointer
                                                             ${ userstate.isAuthenticated  ?
-                                                                article.likedByThisUser ? 'bg-red-500 text-white hover:bg-opacity-30 dark:shadow-md dark:shadow-red-400/50' : 'bg-red-50 text-red-200 dark:bg-red-200 dark:text-red-400 ' 
+                                                                article.likedByThisUser ? 'bg-red-500 text-white hover:bg-opacity-30 dark:shadow-md dark:shadow-red-400/50' : 'bg-red-50 text-red-200 dark:bg-red-200 dark:text-red-400 '
                                                                 : ''
                                                             } `} onClick={e => likeHandler(e, article._id , article.likedByThisUser , 'article')} >
-                                                            {buttonLikeLoading ? <ButtonSpinner /> : 
+                                                            {buttonLikeLoading ? <ButtonSpinner /> :
                                                              <>
-                                                                <FontAwesomeIcon icon={ 
+                                                                <FontAwesomeIcon icon={
                                                                     userstate.isAuthenticated ?
-                                                                    article.likedByThisUser ? faheartSolid : faHeart  
+                                                                    article.likedByThisUser ? faheartSolid : faHeart
                                                                     : faHeart
                                                                 }  />
                                                                 {article.likeCount}
@@ -805,18 +805,18 @@ function Article(props) {
                                             </div>
 
                                         </div>
-    
+
                                         </>
                                         )
                                     }
                                 </div>
                             )
-                            }       
+                            }
                             <CardUserBio buttonLoading={buttonLoading} user={article.author} followUserHandler={followUserHandler} authenticatedUser={userstate} sidebar={false} />
-                        
+
                             {/* similarArticles */}
                             {
-                                similarArticles.length === 0 ? '' : 
+                                similarArticles.length === 0 ? '' :
 
                                 <div className='flex flex-col items-start' >
 
@@ -851,7 +851,7 @@ function Article(props) {
                             <CardUserBio buttonLoading={buttonLoading} user={article.author} followUserHandler={followUserHandler} authenticatedUser={userstate} sidebar={true} />
                             {/* Chosen Articles */}
                             {
-                            !(weekFavouriteArticles.length === 0) ? 
+                            !(weekFavouriteArticles.length === 0) ?
                             (
                             <div className='flex flex-col items-center justify-between gap-4 w-full  min-w-fit h-fit  mt-5  py-4 px-10 rounded-md border border-solid  border-gray-300 shadow-lg bg-white dark:border-none  dark:bg-gradient-to-br dark:from-10% dark:from-[rgb(20,30,48)] dark:to-90% dark:to-[rgb(36,59,85)] ' >
                                 <div className='flex flex-col items-center h-fit w-full ' >
@@ -888,7 +888,7 @@ function Article(props) {
                                     <button className='px-6 py-3 w-fit hover:opacity-70 border border-solid border-cyan-200 rounded-md text-cyan-800 text-xl font-[500]  '          >
                                         <a href="/articles">
                                             <FontAwesomeIcon icon={faArrowLeft} />
-                                            <span className='ml-2'>see all articles</span>                                               
+                                            <span className='ml-2'>see all articles</span>
                                         </a>
                                     </button>
                                 </div>
@@ -932,14 +932,14 @@ function Article(props) {
                                 <button className='px-6 py-3 w-fit hover:opacity-70 border border-solid border-cyan-200 rounded-md text-cyan-800 dark:text-blue-400 text-xl font-[500]  '          >
                                     <a href="/articles">
                                         <FontAwesomeIcon icon={faArrowLeft} />
-                                        <span className='ml-2'>see all articles</span>                                               
+                                        <span className='ml-2'>see all articles</span>
                                     </a>
                                 </button>
                             </div>)
                             }
 
                         </div>
- 
+
                     </main>
                     <Footer />
                     <GoTopBtn />
@@ -947,7 +947,7 @@ function Article(props) {
                 ) : (
                 <span className='flex items-center justify-center w-full h-full font-["Vazir"] min-h-screen text-8xl text-gray-500 ' >
                     { success.message }
-                    <FontAwesomeIcon icon={faExclamationCircle} />    
+                    <FontAwesomeIcon icon={faExclamationCircle} />
                 </span>
             )
         }
