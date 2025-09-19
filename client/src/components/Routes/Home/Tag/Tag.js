@@ -16,7 +16,7 @@ import CardPost from 'src/components/Layouts/Home/Cards/CardPost';
 // import Pagination from 'src/components/Layouts/Home/PaginationHome';
 
 //import Api
-import NodejsApi from 'src/Api/NodejsApi'; 
+import NodejsApi from 'src/Api/NodejsApi';
 
 // import icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,7 +25,7 @@ import { faFileLines } from '@fortawesome/free-regular-svg-icons';
 
 
 function Tag(props) {
-    
+
     const [userstate , setUserState ]  = useState({
         isAuthenticated : false,
         user : {
@@ -41,7 +41,7 @@ function Tag(props) {
         articles : [],
         podcasts : [],
         posts : []
-    })    
+    })
 
     const [queries , setQuery] = useState({
         type : 'articles' ,
@@ -67,14 +67,14 @@ function Tag(props) {
     //     totalDocs : 0,
     //     totalPages : 0
     // })
-    
+
 
     const [success , setSuccess] = useState({ state : true ,  message : ''})
     const [noContent , setNocontent] = useState({ state : true ,  message : ''})
     const [loading , setLoading] = useState(false)
     const [buttonLoading  , setButtonLoading] = useState(false)
 
-    const {slug} = useParams()    
+    const {slug} = useParams()
 
 
     useEffect(() => {
@@ -98,7 +98,7 @@ function Tag(props) {
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -112,7 +112,7 @@ function Tag(props) {
                 state : true,
                 message : ''
             })
-            
+
             console.log(response.data)
             let data = response.data
             let user = data.user
@@ -159,7 +159,7 @@ function Tag(props) {
 
     useEffect(() => {
         setLoading(true)
-        
+
         NodejsApi.get(`${process.env.REACT_APP_API_URL}/tag/${slug}?type=${typeQuery.type}`)
         .then(response => {
             if(! response.data.success){
@@ -177,7 +177,7 @@ function Tag(props) {
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -191,7 +191,7 @@ function Tag(props) {
                 state : true,
                 message : ''
             })
-            
+
             console.log(response.data)
             let data = response.data
             let user = data.user
@@ -258,7 +258,7 @@ function Tag(props) {
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setNocontent({
@@ -321,7 +321,7 @@ function Tag(props) {
             })
         })
 
-        
+
 
     }
 
@@ -331,7 +331,7 @@ function Tag(props) {
         setLoading(true)
 
         if(queries[name] === 'asc'){
-            
+
             setQuery(prevState => {
                 return {
                     ...prevState,
@@ -359,7 +359,7 @@ function Tag(props) {
                     message : response.data.data
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -399,7 +399,7 @@ function Tag(props) {
 
             setLoading(false)
             document.getElementById('sortDropdown').classList.replace('flex' , 'hidden')
-            
+
 
         } )
         .catch(err => {
@@ -432,7 +432,7 @@ function Tag(props) {
                     let tag = data.tag
                     console.log(tag)
 
-                    
+
                     if(tag){
                         setTag(prevState => {
                             return {
@@ -441,7 +441,7 @@ function Tag(props) {
 
                             }
                         })
-                    }  
+                    }
 
                     setButtonLoading(false)
                 }
@@ -461,10 +461,10 @@ function Tag(props) {
             .then(response =>{
                 console.log(response.data)
                 if(response.data.success){
-                    let data = response.data  
+                    let data = response.data
                     let tag = data.tag
                     console.log(tag)
-                    
+
                     if(tag){
                         console.log('defined tag')
                         setTag(prevState => {
@@ -499,7 +499,7 @@ function Tag(props) {
 
         let data ={
             id,
-            kind , 
+            kind ,
             single,
             moreData
         }
@@ -638,7 +638,7 @@ function Tag(props) {
 
         let data ={
             id,
-            kind , 
+            kind ,
             single,
             moreData
         }
@@ -845,14 +845,14 @@ function Tag(props) {
             success.state ? (
                 <div className='flex flex-col w-full h-fit bg-gradient-to-br from-30% from-slate-100 to-70% to-slate-300 dark:bg-gradient-to-t dark:from-10% dark:from-slate-600 dark:to-90% dark:to-slate-800 dark:text-gray-50'>
                     {
-                        loading ? 
+                        loading ?
                         <SpinnerOnTop />
                         : ''
                     }
                     <Header user={userstate} />
                     {/* Main Content */}
                     <main className='flex flex-col  w-full md:w-[90%] lg:w-full xl:w-[90%] md:self-center px-2 py-4 lg:p-8 h-fit min-h-screen gap-10 font-["Nunito"] ' >
-                    
+
                         {/* tag info row */}
                         <div className='flex flex-col lg:flex-row items-center gap-4 [&>div]:bg-white [&>div]:dark:bg-slate-700/80 w-full lg:h-28' >
                             {/* tag card */}
@@ -863,13 +863,14 @@ function Tag(props) {
                                     {tag.name}
                                 </span>
                                 {/* tag follow button */}
-                                <button className='text-white text-lg font-[600] hover:text-blue-600 bg-blue-600 hover:bg-white focus:opacity-60 px-4 py-2 border border-solid border-blue-600 rounded-md' >
-                                    {
-                                        tag.followedByThisUser ?
-                                        <span onClick={e => followTagHandler(e , tag._id , tag.followedByThisUser)} >unfollow</span>
-                                        : <span onClick={e => followTagHandler(e , tag._id , tag.followedByThisUser)} >follow</span>
-                                    }
-                                </button>
+                                {
+                                    userstate.isAuthenticated &&
+                                    <button onClick={e => followTagHandler(e , tag._id , tag.followedByThisUser)}  className='text-white text-lg font-[600] hover:text-blue-600 bg-blue-600 hover:bg-white focus:opacity-60 px-4 py-2 border border-solid border-blue-600 rounded-md' >
+                                        {
+                                            tag.followedByThisUser ? 'unfollow' : 'follow'
+                                        }
+                                    </button>
+                                }
                             </div>
                             {/* tag medias count */}
                             <div  className='flex items-center gap-6 h-full w-full md:w-80  min-w-fit p-4   border border-solid border-gray-300 rounded-md shadow-md dark:text-gray-50' >
@@ -887,7 +888,7 @@ function Tag(props) {
                                         Has been published
                                     </span>
                                 </div>
-                                
+
                             </div>
                             <div  className='flex items-center gap-6 h-full w-full md:w-80  min-w-fit p-4   border border-solid border-gray-300 rounded-md shadow-md dark:text-gray-50' >
                                 <span className='text-blue-600 text-4xl font-[700] hover:text-blue-900 dark:hover:text-blue-500 h-full py-4 drop-shadow-md' >
@@ -895,8 +896,8 @@ function Tag(props) {
                                 </span>
                                 <div className='flex flex-col h-fit ' >
                                     <span className='h-fit text-lg font-[700] space-x-2' >
-                                        {   
-                                            tag.podcastsCount                                            
+                                        {
+                                            tag.podcastsCount
                                         }
                                         <span className='ml-2'>Podcast</span>
                                     </span>
@@ -904,7 +905,7 @@ function Tag(props) {
                                         Has been published
                                     </span>
                                 </div>
-                                
+
                             </div>
                             <div  className='flex items-center gap-6 h-full w-full md:w-80  min-w-fit p-4   border border-solid border-gray-300 rounded-md shadow-md dark:text-gray-50' >
                                 <span className='text-blue-600 text-4xl font-[700] hover:text-blue-900 dark:hover:text-blue-500 h-full py-4 drop-shadow-md' >
@@ -921,7 +922,7 @@ function Tag(props) {
                                         Has been published
                                     </span>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -931,36 +932,36 @@ function Tag(props) {
                             <div className='flex flex-col  lg:flex-row items-center gap-6 w-full h-full' >
                                 {/* sort */}
                                 <div className='flex flex-col relative items-center h-full w-full md:w-80 lg:w-48 xl:w-64 gap-4 z-20    dark:text-gray-50'>
-                                    <button type='button' id='dropBtn'  className='text-lg text-gray-600 dark:text-gray-50 bg-white dark:bg-slate-700/80 font-semibold h-fit py-6 w-full flex items-center justify-center gap-2 text-center cursor-pointer rounded-md border border-solid border-gray-300' 
+                                    <button type='button' id='dropBtn'  className='text-lg text-gray-600 dark:text-gray-50 bg-white dark:bg-slate-700/80 font-semibold h-fit py-6 w-full flex items-center justify-center gap-2 text-center cursor-pointer rounded-md border border-solid border-gray-300'
                                         // onBlur={e => document.getElementById('sortDropdown').classList.replace('flex' , 'hidden')}
-                                        // onMouseEnter={e => document.getElementById('sortDropdown').classList.replace('hidden' , 'flex')}  
-                                        onClick={e => document.getElementById('sortDropdown').classList.contains('hidden') ? 
+                                        // onMouseEnter={e => document.getElementById('sortDropdown').classList.replace('hidden' , 'flex')}
+                                        onClick={e => document.getElementById('sortDropdown').classList.contains('hidden') ?
                                             document.getElementById('sortDropdown').classList.replace('hidden' , 'flex')
-                                            : 
+                                            :
                                             document.getElementById('sortDropdown').classList.replace('flex' , 'hidden')
                                         }>
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" dataslot="icon" className="w-6 h-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
                                         </svg>
-                                        <span className='h-fit ' >Sort by</span>  
+                                        <span className='h-fit ' >Sort by</span>
                                         <FontAwesomeIcon icon={faAngleDown} />
 
                                     </button>
 
-                                    <div id='sortDropdown' 
+                                    <div id='sortDropdown'
                                     onMouseLeave={e => document.getElementById('sortDropdown').classList.replace('flex' , 'hidden')}
                                     className='hidden absolute top-24 flex-col text-gray-700 dark:bg-slate-700/80 dark:text-gray-50  transition-all w-full h-fit p-4 font-semibold divide-y-2 divide-gray-300 bg-white rounded-md border border-solid border-gray-300 shadow-md' >
-                                        
+
                                         <button name='likeCount' value={queries.likeCount} onClick={sortHandler} className='cursor-pointer hover:opacity-80 hover:bg-teal-400 hover:text-white focus:bg-teal-100 focus:text-white focus:ring-2 focus:ring-teal-900 px-4 py-3' >likes</button >
                                         <button name='saveCount' value={queries.saveCount} onClick={sortHandler} className='cursor-pointer hover:opacity-80 hover:bg-teal-400 hover:text-white focus:bg-teal-100 focus:text-white focus:ring-2 focus:ring-teal-900 px-4 py-3' >saves</button>
                                         <button name='viewCount' value={queries.viewCount} onClick={sortHandler} className='cursor-pointer hover:opacity-80 hover:bg-teal-400 hover:text-white focus:bg-teal-100 focus:text-white focus:ring-2 focus:ring-teal-900 px-4 py-3' >viewes</button>
                                         <button name='commentCount' value={queries.commentCount} onClick={sortHandler} className='cursor-pointer hover:opacity-80 hover:bg-teal-400 hover:text-white focus:bg-teal-100 focus:text-white focus:ring-2 focus:ring-teal-900 px-4 py-3' >comments</button>
                                         <button name='answerCount' value={queries.answerCount} onClick={sortHandler} className='cursor-pointer hover:opacity-80 hover:bg-teal-400 hover:text-white focus:bg-teal-100 focus:text-white focus:ring-2 focus:ring-teal-900 px-4 py-3' >answers</button>
                                         <button name='date' value={queries.date} onClick={sortHandler} className='cursor-pointer hover:opacity-80 hover:bg-teal-400 hover:text-white focus:bg-teal-100 focus:text-white focus:ring-2 focus:ring-teal-900 px-4 py-3' >date</button>
-                                
+
                                     </div>
-                                </div> 
+                                </div>
                                 {/* filter */}
                                 <div className='text-gray-600 flex lg:self-start items-center whitespace-nowrap justify-center w-full md:w-80 bg-white  lg:w-fit h-fit lg:h-full rounded-md border border-solid border-gray-300  p-4 mb-10 dark:bg-slate-700/80 dark:text-gray-50' >
                                     <div className='flex items-center justify-center h-fit gap-8 text-base xl:text-lg font-semibold '  >
@@ -969,7 +970,7 @@ function Tag(props) {
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
                                             </svg>
                                             <span>
-                                                Filter By Time  : 
+                                                Filter By Time  :
                                             </span>
                                             <select className='select dark:text-gray-600 outline-none rounded-sm' name='createdAt' onChange={paginationHandler}>
                                                 <option value='' >always</option>
@@ -977,7 +978,7 @@ function Tag(props) {
                                                 <option value='1monthAgo'>1 month ago</option>
                                                 <option value='1yearAgo'>1 year ago</option>
                                             </select>
-                                        </label>               
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -996,13 +997,13 @@ function Tag(props) {
                                         <span>
                                             Podcasts
                                         </span>
-                                    </button>   
+                                    </button>
                                     <button onClick={e => typeMediaHandler(e , 'posts')} className={`${ typeQuery.type === 'posts' ? "bg-cyan-700 shadow-sm shadow-cyan-600/70 text-slate-50" : 'bg-white'  } text-gray-600   hover:bg-opacity-90  flex items-center gap-2 px-4 py-2 border border-solid border-gray-300 rounded-md ring-1 focus:ring-cyan-400 focus:text-white`} >
                                         <FontAwesomeIcon icon={faFileLines} />
                                         <span>
                                             Posts
                                         </span>
-                                    </button>                
+                                    </button>
                                 </div>
                             </div>
 
@@ -1010,7 +1011,7 @@ function Tag(props) {
 
                         {/* contents */}
                         {
-                            !(tag.articles === undefined) ? 
+                            !(tag.articles === undefined) ?
                             (
                                 <>
                                 {/* all Articles */}
@@ -1018,9 +1019,9 @@ function Tag(props) {
                                         <span className='text-2xl font-[600] text-gray-900 dark:text-gray-50' >Articles</span>
                                 </h2>
                                 {
-                                ! noContent.state ? 
+                                ! noContent.state ?
                                 <span className='' >{noContent.message}</span>
-                                : ( 
+                                : (
                                 <div className='grid justify-items-center grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-y-9 gap-x-6 w-full mb-8 '  >
                                     {
                                         tag.articles.map(article => {
@@ -1037,7 +1038,7 @@ function Tag(props) {
                         }
 
                         {
-                            !(tag.podcasts === undefined) ? 
+                            !(tag.podcasts === undefined) ?
                             (
                                 <>
                                 {/* all Podcasts */}
@@ -1045,9 +1046,9 @@ function Tag(props) {
                                         <span className='text-2xl font-[600] text-gray-900 dark:text-gray-50' >Podcasts</span>
                                 </h2>
                                 {
-                                ! noContent.state ? 
+                                ! noContent.state ?
                                 <span className='' >{noContent.message}</span>
-                                : ( 
+                                : (
                                 <div className='grid justify-items-center grid-cols-1 lg:grid-cols-1 xl:grid-cols-2  grid-rows-1 gap-y-9 gap-x-6 w-full mb-8 '  >
                                 {
                                     tag.podcasts.map(podcast => {
@@ -1062,9 +1063,9 @@ function Tag(props) {
                             )
                             : ''
                         }
-                        
+
                         {
-                            !(tag.posts === undefined)  ? 
+                            !(tag.posts === undefined)  ?
                             (
                                 <>
                                     {/* all Posts */}
@@ -1072,9 +1073,9 @@ function Tag(props) {
                                         <span className='text-2xl font-[600] text-gray-900 dark:text-gray-50' >Posts</span>
                                     </h2>
                                     {
-                                    ! noContent.state ? 
+                                    ! noContent.state ?
                                     <span className='' >{noContent.message}</span>
-                                    : ( 
+                                    : (
                                     <div className='grid justify-items-center grid-cols-1 grid-rows-1 gap-y-9 gap-x-6 w-full mb-8'  >
                                         {
                                             tag.posts.map(post => {
@@ -1089,12 +1090,12 @@ function Tag(props) {
                             )
                             : ''
                         }
-                        
+
 
 
                         {/* pagination */}
                         {/* {
-                                        
+
                             ! (pagination.totalPages === 1) ?
                             (
                                 <PaginationContext.Provider value={{ pagination  , paginationHandler }}>
@@ -1103,7 +1104,7 @@ function Tag(props) {
                             )
                             : ''
                         } */}
-                    
+
                     </main>
                     <Footer />
                     <GoTopBtn />
@@ -1112,9 +1113,9 @@ function Tag(props) {
 
                 <span className='flex items-center justify-center w-full h-full font-["Vazir"] text-8xl text-gray-500 dark:text-gray-50 ' >
                     { success.message }
-                    <FontAwesomeIcon icon={faExclamationCircle} />    
+                    <FontAwesomeIcon icon={faExclamationCircle} />
                 </span>
-                
+
             )
         }
         </div>

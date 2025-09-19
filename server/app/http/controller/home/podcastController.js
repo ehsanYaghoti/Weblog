@@ -1,12 +1,12 @@
 const Controller = require('../controller');
 const Podcast = require('app/models/podcast');
-const Category = require('app/models/category');
 const Tag = require('app/models/tag');
+const User = require('app/models/user');
 
 
 class podcastController extends Controller {
 
-    async somePodcast(req , res , next){ 
+    async somePodcast(req , res , next){
         try {
 
         let query = req.query
@@ -19,7 +19,7 @@ class podcastController extends Controller {
             sort : sort ,
             select :  '-statement -summary -images' ,
             populate : [
-                {path : 'user' , select : '_id username avatar avatarpath'} , 
+                {path : 'user' , select : '_id username avatar avatarpath'} ,
                 {path : 'categories' , select : '_id name slug'} ,
                 {path : 'tags' , select : '_id name slug'} ,
             ]
@@ -31,8 +31,8 @@ class podcastController extends Controller {
 
         let aWeekAgo = new Date(Date.now() - 1000 * 60 * 60 * 24 * 7)
         const weekFavouritePodcasts = await Podcast.find({createdAt : {"$gte" : aWeekAgo }}).select('-statement -summary -images').sort({likeCount : 'desc' }).limit(3)
-        .populate({path : 'user' , select : '_id username avatar avatarpath'}) 
-        .populate({path : 'categories' , select : '_id name slug'}) 
+        .populate({path : 'user' , select : '_id username avatar avatarpath'})
+        .populate({path : 'categories' , select : '_id name slug'})
 
 
         let podcastsByCategory = []
@@ -47,7 +47,7 @@ class podcastController extends Controller {
                         podcasts.totalPages = '1'
                         return  podcasts.docs = podcastsByCategory
                     }
-                })  
+                })
             })
             // console.log(articles.docs)
 
@@ -56,10 +56,15 @@ class podcastController extends Controller {
 
 
         const tags = await Tag.find({}).sort({followersCount : 'desc'}).limit(10)
+        let userTags = []
+        if(req.user){
+            const user = await User.findById(req.user._id).populate({ path :'tags' , select : 'name slug'}).select('tags')
+            userTags = user.tags
+        }
 
-        if(podcasts.docs.length === 0){ 
-            return res.json({ 
-                message : ' پادکست جهت نمایش وجود ندارد' , 
+        if(podcasts.docs.length === 0){
+            return res.json({
+                message : ' پادکست جهت نمایش وجود ندارد' ,
                 code : 204,
                 success : false
         })}
@@ -70,9 +75,10 @@ class podcastController extends Controller {
         return res.json({
             podcasts ,
             tags ,
+            userTags,
             isAuthenticated : req.isAuthenticated(),
             weekFavouritePodcasts,
-            user : req.user,            
+            user : req.user,
             success : true
         })
     } catch (err) {
@@ -85,7 +91,7 @@ class podcastController extends Controller {
       }
     }
 
-    async singlePodcast(req , res , next){ 
+    async singlePodcast(req , res , next){
         try {
         // console.log(req.params.slug)
 
@@ -96,20 +102,20 @@ class podcastController extends Controller {
         .populate({path : 'comments' , match : {parent : null} , populate : [{path : 'user' , select : 'username avatar avatarpath' } , {path : 'parent' , select : 'title user' , populate : {path : 'user' , select : 'username'} }  , {path : 'comments' , populate : [{path : 'user' , select : 'username avatar avatarpath' } , {path : 'parent' , select : 'title user' , populate : {path : 'user' , select : 'username'} } , {path : 'comments' , populate : [{path : 'user' , select : 'username avatar avatarpath' } , {path : 'parent' , select : 'title user' , populate : {path : 'user' , select : 'username'} } ] } ] } ] })
 
         await Podcast.findOneAndUpdate({slug : req.params.slug} , {$set : {
-            viewCount : podcast.viewCount +1 
+            viewCount : podcast.viewCount +1
         }})
 
         const similarPodcasts = await Tag.find({name : podcast.tags[0].name })
-        .populate({path : 'podcasts' , select : 'title slug user thumb imagepath soundTime language saveCount likeCount likedByThisUser savedByThisUser commentCount createdAt' , limit : 2 , populate : [{path : 'user' , select : 'username avatar avatarpath'} , {path : 'tags categories' , select : 'name slug'}] }) 
-        
+        .populate({path : 'podcasts' , select : 'title slug user thumb imagepath soundTime language saveCount likeCount likedByThisUser savedByThisUser commentCount createdAt' , limit : 2 , populate : [{path : 'user' , select : 'username avatar avatarpath'} , {path : 'tags categories' , select : 'name slug'}] })
+
         this.checkUserLikdeAndSavedPodcasts(req , similarPodcasts[0].podcasts , podcast)
         this.checkUserLikdedComments(req , podcast.comments)
         this.checkUserFollowedUsers(req , null , podcast.user)
 
         // console.log(similarPodcasts)
 
-        if(! podcast){ return res.json({ 
-            message : ' پادکست جهت نمایش وجود ندارد' , 
+        if(! podcast){ return res.json({
+            message : ' پادکست جهت نمایش وجود ندارد' ,
             code : 204,
             success : false
         })}
@@ -120,7 +126,7 @@ class podcastController extends Controller {
             podcast ,
             similarPodcasts,
             isAuthenticated : req.isAuthenticated(),
-            user : req.user,            
+            user : req.user,
             success : true
         })
     } catch (err) {

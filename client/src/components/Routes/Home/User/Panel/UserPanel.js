@@ -280,9 +280,8 @@ function User(props){
             success.state ? (
                 <div className='flex flex-col w-full h-fit'>
                     {
-                        loading ?
+                        loading &&
                         <SpinnerOnTop />
-                        : ''
                     }
                     {
                         !validation.close ?

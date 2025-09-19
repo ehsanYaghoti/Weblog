@@ -412,7 +412,7 @@ function Tags(props) {
                             tags.map(tag => {
                                 return (
                                     // tag card
-                                    <CardTag key={tag._id} buttonLoading={buttonLoading} tag={tag} followTagHandler={followTagHandler} singlePage={false} />
+                                    <CardTag key={tag._id} isAuthenticated={userstate.isAuthenticated} buttonLoading={buttonLoading} tag={tag} followTagHandler={followTagHandler} singlePage={false} />
                                 )
                             })
                         )

@@ -236,7 +236,7 @@ const Header = memo ( function Header(props) {
                 {/* Auth links */}
                 <div className='h-fit flex items-center font-["Ubuntu"]' >
                     {
-                        loading ? <FontAwesomeIcon icon={faCircleNotch} className=" animate-spin dark:text-red-600 " /> :
+                        loading ? <FontAwesomeIcon icon={faCircleNotch} className=" text-2xl animate-spin dark:text-white " /> :
                         userProp.isAuthenticated ?
                         (
                             <div className='relative' >

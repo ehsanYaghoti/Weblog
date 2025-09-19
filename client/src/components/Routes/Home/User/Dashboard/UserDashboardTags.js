@@ -10,7 +10,7 @@ import SpinnerOnTop from 'src/components/Layouts/Home/Loadings/SpinnerOnTop';
 
 
 //import Api
-import NodejsApi from 'src/Api/NodejsApi'; 
+import NodejsApi from 'src/Api/NodejsApi';
 
 // import icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,7 +19,7 @@ import CardTag from 'src/components/Layouts/Home/Cards/CardTag';
 
 
 function User(props){
-    
+
     const [authenticatedUser , setAuthenticatedUser ]  = useState({
         isAuthenticated : false,
         user : {
@@ -67,7 +67,7 @@ function User(props){
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -81,7 +81,7 @@ function User(props){
                 state : true,
                 message : ''
             })
-            
+
             console.log(response.data)
             let data = response.data
             let user = data.user
@@ -91,7 +91,7 @@ function User(props){
                 user : data.authenticatedUser,
             })
 
-            
+
             setUserState({
                 user : {
                     ...user
@@ -129,7 +129,7 @@ function User(props){
             .then(response =>{
                 console.log(response.data)
                 if(response.data.success){
-                    let user = response.data.user  
+                    let user = response.data.user
 
                     if(! user.followedByThisUser){
 
@@ -162,7 +162,7 @@ function User(props){
             .then(response =>{
                 console.log(response.data)
                 if(response.data.success){
-                    let user = response.data.user  
+                    let user = response.data.user
 
                     if(user.followedByThisUser){
 
@@ -216,7 +216,7 @@ function User(props){
                     let tags = data.tags
                     console.log(tags)
 
-                    
+
                     if(tags){
                         console.log('defined tags')
 
@@ -231,8 +231,8 @@ function User(props){
                                 }
                             }
                         })
-                    }          
-                      
+                    }
+
                     setButtonLoading(false)
                 }
             })
@@ -251,9 +251,9 @@ function User(props){
             .then(response =>{
                 console.log(response.data)
                 if(response.data.success){
-                    let data = response.data  
+                    let data = response.data
                     let tags = data.tags
-                    
+
                     if(tags){
                         console.log('defined tags')
                         setUserState(prevState => {
@@ -292,29 +292,29 @@ function User(props){
             success.state ? (
                 <div className='flex flex-col w-full h-fit'>
                     {
-                        loading ? 
+                        loading ?
                         <SpinnerOnTop />
                         : ''
                     }
                     <Header user={authenticatedUser} />
                     <main className='flex flex-col items-center w-full h-fit min-h-screen gap-10 py-6 px-2 md:p-6 font-["Nunito"] bg-gradient-to-br from-30% from-slate-100 to-70% to-slate-300 dark:bg-gradient-to-t dark:from-10% dark:from-slate-600 dark:to-90% dark:to-slate-800 dark:text-gray-50' >
                     {
-                        ! noContent.state ? 
+                        ! noContent.state ?
                         <span className='' >{noContent.message}</span>
                         :
-                        (                
+                        (
                         <div className='flex flex-col items-center gap-8 w-full xl:w-[85%]' >
                             <CardUserInfo followUserHandler={followUserHandler} buttonLoading={buttonLoading} userstate={userstate} authenticatedUser={authenticatedUser} />
                             {/* all tags cards */}
                             <div className='grid grid-cols-1 justify-items-center md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 grid-rows-2 gap-6 w-full mb-8' >
                             {
-                            ! noContent.state ? 
+                            ! noContent.state ?
                             <span className='' >{noContent.message}</span>
                             : (
                                 userstate.user.tags.map(tag => {
                                     return (
                                         // tag card
-                                        <CardTag key={tag._id} tag={tag} buttonLoading={buttonLoading} followTagHandler={followTagHandler} singlePage={false} />
+                                        <CardTag key={tag._id} isAuthenticated={authenticatedUser.isAuthenticated} tag={tag} buttonLoading={buttonLoading} followTagHandler={followTagHandler} singlePage={false} />
                                     )
                                 })
                             )
@@ -329,7 +329,7 @@ function User(props){
                 </div>
             ) : (
                 <span className='flex items-center justify-center w-full h-full font-["Nunito"] text-8xl text-gray-500 ' >
-                    <FontAwesomeIcon icon={faExclamationCircle} />  
+                    <FontAwesomeIcon icon={faExclamationCircle} />
                     <span className='h-fit' >
                         { success.message }
                     </span>
@@ -341,4 +341,4 @@ function User(props){
     )
 }
 
-export default User; 
+export default User;

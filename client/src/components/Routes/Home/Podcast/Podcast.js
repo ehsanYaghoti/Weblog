@@ -1,5 +1,5 @@
 import React , { useState , useEffect   } from 'react';
-import { useParams }  from 'react-router-dom'; 
+import { useParams }  from 'react-router-dom';
 
 // Layouts
 import Header from 'src/components/Layouts/Home/General/Header';
@@ -14,7 +14,7 @@ import ShareLinkBtn from 'src/components/Layouts/Home/General/ShareLinkBtn';
 import ButtonSpinner from 'src/components/Layouts/Home/Loadings/ButtonSpinner';
 
 //import Api
-import NodejsApi from 'src/Api/NodejsApi'; 
+import NodejsApi from 'src/Api/NodejsApi';
 
 // import icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,7 +23,7 @@ import {  faHeart , faBookmark , faClock, faFolderClosed , faRectangleList  } fr
 import ButtonTag from 'src/components/Layouts/Home/Buttons/ButtonTag';
 
 function Podcast(props) {
-    
+
     const [userstate , setUserState ]  = useState({
         isAuthenticated : false,
         user : {
@@ -54,7 +54,7 @@ function Podcast(props) {
         likeCount : 0,
         savedByThisUser : false,
         saveCount : 0
-    })    
+    })
 
     const [similarPodcasts , setSimilarPodcasts] = useState([])
     const [commentField , setCommentField] = useState({
@@ -71,8 +71,8 @@ function Podcast(props) {
     const [success , setSuccess] = useState({ state : true ,  message : ''})
     const [noContent , setNocontent] = useState({ state : true ,  message : ''})
 
-    const {slug} = useParams()    
-    
+    const {slug} = useParams()
+
     useEffect(() => {
         setLoading(true)
         NodejsApi.get(`${process.env.REACT_APP_API_URL}/podcasts/${slug}`)
@@ -91,7 +91,7 @@ function Podcast(props) {
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -105,13 +105,13 @@ function Podcast(props) {
                 state : true,
                 message : ''
             })
-            
+
             let data = response.data
             let user = data.user
             let podcast = data.podcast
             let similarPodcasts = data.similarPodcasts[0].podcasts
 
-            
+
             // console.log(data)
             // console.log(data.similarPodcasts[0])
 
@@ -147,7 +147,7 @@ function Podcast(props) {
         try {
             if(document.getElementById(podcast._id)){
                 let parser = new DOMParser();
-                document.getElementById(podcast._id).innerHTML = parser.parseFromString( podcast.statement , 'text/html').body.innerHTML 
+                document.getElementById(podcast._id).innerHTML = parser.parseFromString( podcast.statement , 'text/html').body.innerHTML
             }
         } catch (error) {
             console.log(error)
@@ -160,7 +160,7 @@ function Podcast(props) {
 
     let likeHandler = (e , id , liked , kind , single = 'singlePage' , moreData = null) =>{
         e.preventDefault()
-        
+
         setButtonLikeLoading(true)
 
         let data ={
@@ -202,7 +202,7 @@ function Podcast(props) {
 
                             setSimilarPodcasts(similarPodcasts)
                         }
-                    
+
                     }
 
                     let comments = data.comments
@@ -215,7 +215,7 @@ function Podcast(props) {
                             }
                         })
                     }
-                    
+
                     setButtonLikeLoading(false)
 
                 }
@@ -261,9 +261,9 @@ function Podcast(props) {
 
                             setSimilarPodcasts(similarPodcasts)
                         }
-                    
+
                     }
-                    
+
                     let comments = data.comments
 
                     if(comments){
@@ -297,7 +297,7 @@ function Podcast(props) {
 
         let data ={
             id,
-            kind , 
+            kind ,
             single,
             moreData
         }
@@ -332,9 +332,9 @@ function Podcast(props) {
 
                         setSimilarPodcasts(similarPodcasts)
                     }
-                    
+
                     setButtonSaveLoading(false)
-      
+
                 }
             })
             .catch(err => {
@@ -351,7 +351,7 @@ function Podcast(props) {
 
             NodejsApi.post('/save' , data)
             .then(response =>{
-                
+
                 if(response.data.success){
 
                     let data = response.data
@@ -376,7 +376,7 @@ function Podcast(props) {
 
                         setSimilarPodcasts(similarPodcasts)
                     }
-                    
+
                     setButtonSaveLoading(false)
 
                 }
@@ -416,7 +416,7 @@ function Podcast(props) {
                     message : response.data.message
                     }
                 })
-              
+
             }
 
             setSuccess(prevState => {
@@ -430,12 +430,12 @@ function Podcast(props) {
                 state : true,
                 message : ''
             })
-            
-            let data = response.data            
+
+            let data = response.data
             let podcastComments = data.podcastComments
             let newCommentsNumber = data.newCommentsNumber
 
-            
+
             console.log(data)
 
             setPodcast(prevState => {
@@ -490,7 +490,7 @@ function Podcast(props) {
                 }
             })
         }
-        
+
 
     }
 
@@ -501,13 +501,13 @@ function Podcast(props) {
         }
         setButtonLoading(true)
 
-        if(followed){ 
+        if(followed){
             console.log('unfollow')
             NodejsApi.put(`/user/unfollow/${followingUserId}` , data )
             .then(response =>{
                 console.log(response.data)
                 if(response.data.success){
-                    let user = response.data.user  
+                    let user = response.data.user
 
                     if(! user.followedByThisUser){
 
@@ -540,7 +540,7 @@ function Podcast(props) {
             .then(response =>{
                 console.log(response.data)
                 if(response.data.success){
-                    let user = response.data.user  
+                    let user = response.data.user
 
                     if(user.followedByThisUser){
 
@@ -585,26 +585,26 @@ function Podcast(props) {
                         <div className='flex flex-col scroll-smooth items-center w-full lg:w-[80%] h-fit min-h-screen p-4 md:p-10 pt-5 text-gray-800' >
                             {/* contents */}
                             {
-                            ! noContent.state ? 
+                            ! noContent.state ?
                             <span className='' >{noContent.message}</span>
                             :
-                            (   
+                            (
                                 // Podcast Content
                                 <div className=' flex flex-col items-start justify-start scroll-smooth  w-full h-full min-h-fit p-4 lg:p-10 border border-solid border-gray-300 rounded-xl shadow-md bg-white dark:bg-gradient-to-t dark:from-10% dark:from-[#1A1A2E] dark:to-90% dark:to-slate-700/80 dark:border-none dark:text-gray-50' >
                                     {
-                                        loading ? 
-                                        (                                            
+                                        loading ?
+                                        (
                                             <LoadingSkeletonSingle />
-                                        ) : 
+                                        ) :
                                         (
                                         <>
                                         {/* podcast image */}
                                         <div className='w-full h-[200px] md:h-[400px] self-center flex items-center justify-center border border-solid border-gray-200 rounded-lg shadow-md mb-10 dark:border-none ' >
-                                            <img src={`${process.env.REACT_APP_API_URL}/${podcast.imagepath}`} 
-                                                onError={e =>{ 
+                                            <img src={`${process.env.REACT_APP_API_URL}/${podcast.imagepath}`}
+                                                onError={e =>{
                                                     e.currentTarget.style.display = 'none'
-                                                    console.log(e)  }  } 
-                                                alt="podcast" className='object-cover w-full rounded-xl '  
+                                                    console.log(e)  }  }
+                                                alt="podcast" className='object-cover w-full rounded-xl '
                                             />
                                         </div>
                                         {/* podcast category and soundTime */}
@@ -626,7 +626,7 @@ function Podcast(props) {
                                             {/* podcast sound */}
                                             <div className='h-fit w-full flex items-center justify-center md:p-4 mb-4'>
                                                 {/* <span style={{ marginLeft : '10px'}} >صوت فعلی :</span> */}
-                                                <audio id="player"  controls={true}  className='h-[60px]  w-[700px]  md:w-[500px]'  src={`${process.env.REACT_APP_API_URL}/${podcast.soundpath}`} />   
+                                                <audio id="player"  controls={true}  className='h-[60px]  w-[700px]  md:w-[500px]'  src={`${process.env.REACT_APP_API_URL}/${podcast.soundpath}`} />
                                             </div>
                                             {/* podcast statement */}
                                             <p id={podcast._id} className='h-fit whitespace-pre-line leading-7 text-lg font-[500] pb-4 ' style={{wordBreak : 'normal' , wordSpacing : '2px'}} >
@@ -638,7 +638,7 @@ function Podcast(props) {
                                                     {/* created at time  */}
                                                     <TimesAgo date={podcast.createdAt} icon={true} />
                                                     {/* podcast tags */}
-                                                    <div className='flex items-center' >
+                                                    <div className='flex items-center gap-3' >
                                                         {
                                                             podcast.tags.map(tag => {
                                                                 return <ButtonTag key={`${tag._id}`} tag={tag} />
@@ -650,22 +650,22 @@ function Podcast(props) {
                                                 <div className='flex flex-col gap-6 md:flex-row items-center w-full justify-between mt-10' >
                                                     <div className='flex items-center gap-3 text-sm ' >
                                                         {/* Comments link */}
-                                                        <a href={`#comments`} className='flex items-center gap-1 py-1 px-2 rounded-md border border-solid border-gray-100 bg-gray-100 text-gray-500 hover:bg-gray-500 hover:text-white dark:bg-gray-200  dark:border-none cursor-pointer ' > 
+                                                        <a href={`#comments`} className='flex items-center gap-1 py-1 px-2 rounded-md border border-solid border-gray-100 bg-gray-100 text-gray-500 hover:bg-gray-500 hover:text-white dark:bg-gray-200  dark:border-none cursor-pointer ' >
                                                             <FontAwesomeIcon icon={faComment} />
                                                             {podcast.commentCount}
                                                         </a >
                                                         {/* Save Button */}
                                                         <button disabled={userstate.isAuthenticated || !buttonSaveLoading ? false : true} className={`flex items-center gap-1 py-1 px-2 rounded-md  border border-solid border-blue-50  hover:bg-opacity-90 hover:text-blue-400 dark:hover:text-white dark:border-none cursor-pointer
                                                                 ${ userstate.isAuthenticated ?
-                                                                    podcast.savedByThisUser ? 'bg-blue-500 text-white hover:bg-opacity-30 dark:shadow-md dark:shadow-blue-500/50' : 'bg-blue-50 text-blue-200 dark:bg-blue-200 dark:text-blue-400  ' 
+                                                                    podcast.savedByThisUser ? 'bg-blue-500 text-white hover:bg-opacity-30 dark:shadow-md dark:shadow-blue-500/50' : 'bg-blue-50 text-blue-200 dark:bg-blue-200 dark:text-blue-400  '
                                                                 : ''
                                                             }`} onClick={e => saveHandler(e, podcast._id , podcast.savedByThisUser , 'podcast')} >
                                                             {
-                                                                buttonSaveLoading ? <ButtonSpinner /> : 
+                                                                buttonSaveLoading ? <ButtonSpinner /> :
                                                                 <>
-                                                                    <FontAwesomeIcon icon={ 
+                                                                    <FontAwesomeIcon icon={
                                                                         userstate.isAuthenticated ?
-                                                                        podcast.savedByThisUser ? faBookmarkSolid : faBookmark  
+                                                                        podcast.savedByThisUser ? faBookmarkSolid : faBookmark
                                                                         : faBookmark
                                                                     }  />
                                                                     {podcast.saveCount}
@@ -673,17 +673,17 @@ function Podcast(props) {
                                                             }
                                                         </button>
                                                         {/* Like Button */}
-                                                        <button id={`likeOf-${podcast._id}`} disabled={userstate.isAuthenticated || !buttonLikeLoading ? false : true} className={`flex items-center gap-1  py-1 px-2 rounded-md  border border-solid border-red-50 hover:bg-opacity-90  hover:text-red-400 dark:hover:text-white dark:border-none cursor-pointer 
+                                                        <button id={`likeOf-${podcast._id}`} disabled={userstate.isAuthenticated || !buttonLikeLoading ? false : true} className={`flex items-center gap-1  py-1 px-2 rounded-md  border border-solid border-red-50 hover:bg-opacity-90  hover:text-red-400 dark:hover:text-white dark:border-none cursor-pointer
                                                             ${ userstate.isAuthenticated ?
                                                                 podcast.likedByThisUser ? 'bg-red-500 text-white hover:bg-opacity-30 dark:shadow-md dark:shadow-red-400/50' : 'bg-red-50 text-red-200 dark:bg-red-200 dark:text-red-400 '
 
                                                                 : ''
                                                             } `} onClick={e => likeHandler(e, podcast._id , podcast.likedByThisUser , 'podcast')} >
-                                                            {buttonLikeLoading ? <ButtonSpinner /> : 
+                                                            {buttonLikeLoading ? <ButtonSpinner /> :
                                                             <>
-                                                                <FontAwesomeIcon icon={ 
+                                                                <FontAwesomeIcon icon={
                                                                     userstate.isAuthenticated ?
-                                                                    podcast.likedByThisUser ? faheartSolid : faHeart  
+                                                                    podcast.likedByThisUser ? faheartSolid : faHeart
                                                                     : faHeart
                                                                 }  />
                                                                 {podcast.likeCount}
@@ -695,28 +695,28 @@ function Podcast(props) {
                                             </div>
 
                                         </div>
-    
+
                                         </>
                                         )
                                     }
                                 </div>
                             )
-                            }       
+                            }
                             <CardUserBio followUserHandler={followUserHandler} buttonLoading={buttonLoading} user={podcast.user} authenticatedUser={userstate} sidebar={false} />
 
                             {/* similarPodcasts */}
                             {
-                                similarPodcasts.length === 0 ? '' : 
-                                <div className='flex flex-col items-start' >
-                                    
+                                similarPodcasts.length === 0 ? '' :
+                                <div className='flex flex-col items-start w-full' >
+
                                     <h2 className='text-gray-800 text-3xl whitespace-nowrap pr-8 py-4 font-[600] flex items-center justify-center lg:justify-start gap-2 w-full  rounded-md mt-10 mb-4 dark:text-gray-50' >
                                         <FontAwesomeIcon icon={faRectangleList} />
                                         <span className='ml-2' >Similar Podcasts</span>
                                     </h2>
-            
+
                                     <div className='grid justify-items-center grid-rows-1 grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 gap-x-4 gap-y-4 w-full '  >
                                         {/* cards */}
-                                        {   
+                                        {
                                             similarPodcasts.map(podcast => {
                                                 return (
                                                 // Card
@@ -740,7 +740,7 @@ function Podcast(props) {
                 ) : (
                 <div className='flex items-center justify-center w-full h-full font-["Vazir"] text-8xl text-gray-500 ' >
                     { success.message }
-                    <FontAwesomeIcon icon={faExclamationCircle} />    
+                    <FontAwesomeIcon icon={faExclamationCircle} />
                 </div>
             )
         }

@@ -4,42 +4,49 @@
 
 ### Server
 
+- timeout error when trying to login
+
 ### Client
 
-- this project needs a big code refactoring for implementing (DRY , ...)
+- this project needs a big code refactoring for implementing (DRY , connvert to generic components ...)
+- code is worst
 
 #### Visual Bugs (Demo feedback)
 
-- [] Home => Podcast cards overflowing texts
-- [] Home => Too much empty space on posts cards
+<!-- - [] Home => Podcast cards overflowing texts -->
+<!-- - [] Home => Too much empty space on posts cards -->
 
-- [] Blog => filter messages are only persian
-- [] Blog => loading state is not look good
+- [] Blog => filter messages are only persian (backend)
+- [] Blog => loading state is not look good (enhancement to skeleton loading)
 
-- [] Podcasts and forum => followed tags in not true
+<!-- - [] Podcasts and forum => followed tags in not true -->
 
-- [] Single article page => content backround color in not good
-- [] Single article page => content section codes is not showed well
+- [] Single article page => content backround color in not good (need a redesign enhancement)
+- [] Single article page => content section codes is not showed well (admin panel)
 
-- [] Single podcast page => space between tags
+<!-- - [] Single podcast page => space between tags -->
 
-- [] Single post page => it is all messed up and teribble
-- [] Single post page => loading is not good
+<!-- - [] Single post page => it is all messed up and teribble -->
+- [] Single post page => loading is not good (skeleton loading enhancement)
 
-- [] user dashboard => loading is not right
-- [] user dashboard => followed tags section tags shouldn't have follow button when logged out (and all tag cards)
+- [] user dashboard => loading is not right (big code refactoring)
+<!-- - [] user dashboard => followed tags section tags shouldn't have follow button when logged out (and all tag cards) -->
 
-- [] user Panel  => sidebar visual bug
+<!-- - [] user Panel  => sidebar visual bug -->
 
-- [] saves , likes , following  => loading is not set right
+- [] saves , likes , following  => loading is not set right (some has disabled some has loading need redesign)
+
+- [] user panel create post => select box visual bugs
 
 #### Functional UI Bugs
 
 - [] Header => change theme resets after refresh
-- [] blog page => when not logined there shouldn't be followed tags
-- [] Header => about us and Contact links doesn't exist
+
+- [] Header => about us and Contact links doesn't exist (enhancement ?)
 
 - [] Single article page => save and like button should be disable when loged out
+
+- [] card post => need an update in user part (enhancement ?)
 
 #### Responsive & Cross-Browser Bugs
 
@@ -66,3 +73,4 @@
 16 . update to typescript
 17 . Rerendering optimization
 18 . cahching feature
+19 . set better animation for ui elements
